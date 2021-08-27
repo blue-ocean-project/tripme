@@ -1,0 +1,51 @@
+.eventPage-container {
+  height: 100%;
+  display: flex;
+}
+
+.eventPage-details {
+  height: 100%;
+  border: 2px dotted grey;
+}
+
+.eventPage-activity-selector {
+  height: 100%;
+  padding: 1%;
+  border: 2px dotted grey;
+}
+
+.eventPage-trip {
+  height: 23%;
+  margin: 1%;
+  border: 2px dotted grey;
+}
+
+.eventPage-weather {
+  height: 23%;
+  margin: 1%;
+  border: 2px dotted grey;
+}
+
+.eventPage-event-calendar {
+  height: 48%;
+  margin: 1%;
+  padding: 1%;
+  border: 2px dotted grey;
+}
+
+.eventPage-events {
+  height: 100%;
+  border: 2px dotted grey;
+}
+
+.eventPage-calendar {
+  height: 100%;
+  border: 2px dotted grey;
+}
+
+.eventPage-activity {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border: 2px dotted grey;
+}
