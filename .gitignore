@@ -1,6 +1,7 @@
 #Project
 DS_Store
 config.*.js
+*.pem
 
 # Logs
 logs
