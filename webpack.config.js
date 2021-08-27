@@ -1,13 +1,13 @@
-const path = require('path');
+const path = require("path");
 
-const SRC_DIR = path.join(__dirname, './client/src');
-const DIST_DIR = path.join(__dirname, '/client/public');
+const SRC_DIR = path.join(__dirname, "./client/src");
+const DIST_DIR = path.join(__dirname, "/client/public");
 
 module.exports = {
   entry: `${SRC_DIR}/index.js`,
   output: {
-    filename: 'bundle.js',
-    ath: DIST_DIR,
+    filename: "bundle.js",
+    path: DIST_DIR,
   },
   watchOptions: {
     aggregateTimeout: 200,
@@ -20,14 +20,11 @@ module.exports = {
         test: /\.(js|jsx)?/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
-            ],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
             plugins: [
-              ['@babel/plugin-transform-runtime', { regenerator: true }],
+              ["@babel/plugin-transform-runtime", { regenerator: true }],
             ],
           },
         },

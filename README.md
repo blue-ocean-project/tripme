@@ -9,4 +9,4 @@ Kenneth Hsu
 Jooyoung Kim
 Sean Lawlor
 Gulina Tayier
-Chris Wongs
+Chris Wong
