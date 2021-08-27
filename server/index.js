@@ -14,4 +14,4 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 app.use('/api', router);
 app.use('/hello', (req, res) => res.status(200).json('Wingardium, leviosa!\n'));
 
-app.listen(PORT, HOST, () => console.log(`Server listening on http://${HOST}:${PORT}`))
+app.listen(PORT, HOST, () => console.log(`Server listening on http://${HOST}:${PORT}`));

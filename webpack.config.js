@@ -7,7 +7,7 @@ module.exports = {
   entry: `${SRC_DIR}/index.js`,
   output: {
     filename: 'bundle.js',
-    ath: DIST_DIR,
+    path: DIST_DIR,
   },
   watchOptions: {
     aggregateTimeout: 200,
@@ -22,15 +22,15 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
-            ],
-            plugins: [
-              ['@babel/plugin-transform-runtime', { regenerator: true }],
-            ],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [['@babel/plugin-transform-runtime', { regenerator: true }]],
           },
         },
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
     ],
   },
