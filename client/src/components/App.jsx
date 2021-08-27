@@ -1,7 +1,7 @@
-import React from "react";
-import NavBar from "./NavBar.jsx";
-import Dashboard from "./Dashboard.jsx";
-import EventPage from "./EventPage.jsx";
+import React from 'react';
+import NavBar from './NavBar.jsx';
+// import Dashboard from './Dashboard.jsx';
+import EventPage from './EventPage.jsx';
 
 const App = () => (
   <div className="container-fluid">
