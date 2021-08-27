@@ -1,4 +1,5 @@
 # tripme
+
 Centralized event planning for families
 
 Contributors:
@@ -8,5 +9,4 @@ Kenneth Hsu
 Jooyoung Kim
 Sean Lawlor
 Gulina Tayier
-Chris Wong
-
+Chris Wongs
