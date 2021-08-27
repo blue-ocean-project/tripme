@@ -1,0 +1,78 @@
+.container-fluid {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+}
+
+.Navbar {
+  background-color: lightgray;
+  border: 4px dotted grey;
+  height: 10%;
+}
+
+.Dashboard {
+  background-color: lightgray;
+  border: 4px dotted grey;
+  height: 90%;
+  padding: 0 20px;
+}
+
+.Eventpage {
+  background-color: lightgray;
+  border: 4px dotted grey;
+  height: 90%;
+  margin: 0 4%;
+}
+
+/* EventPage */
+.eventPage-container {
+  height: 100%;
+  display: flex;
+}
+
+.details {
+  height: 100%;
+  border: 2px dotted grey;
+}
+
+.activity-selector {
+  height: 100%;
+  padding: 1%;
+  border: 2px dotted grey;
+}
+
+.trip {
+  height: 23%;
+  margin: 1%;
+  border: 2px dotted grey;
+}
+
+.weather {
+  height: 23%;
+  margin: 1%;
+  border: 2px dotted grey;
+}
+
+.event-calendar {
+  height: 48%;
+  margin: 1%;
+  padding: 1%;
+  border: 2px dotted grey;
+}
+
+.events {
+  height: 100%;
+  border: 2px dotted grey;
+}
+
+.calendar {
+  height: 100%;
+  border: 2px dotted grey;
+}
+
+.activity {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border: 2px dotted grey;
+}
