@@ -1,4 +1,10 @@
 #!/bin/bash
+# example use:
+#
+# $ sh login.sh db
+#
+# logs into the database ec2 instance
+
 DIRECTORY='ssh -i "'$PWD'/trip-me.pem"'
 
 USER='ubuntu@'
