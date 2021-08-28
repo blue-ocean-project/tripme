@@ -1,0 +1,29 @@
+.dashboard-container {
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard-search {
+  height: 10%;
+  border: 2px dotted grey;
+}
+
+.dashboard-title {
+  height: 8%;
+  border: 2px dotted grey;
+}
+
+.dashboard-title > span {
+  margin-left: 1%;
+  font-size: 4vh;
+}
+
+.dashboard-upcoming {
+  height: 41%;
+  border: 2px dotted grey;
+}
+
+.dashboard-past {
+  height: 41%;
+  border: 2px dotted grey;
+}
