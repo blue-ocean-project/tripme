@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack --config ./webpack.config.js --mode development -w",
-    "server": "nodemon ./server/index.js",
+    "start": "nodemon ./server/index.js & npx webpack --config ./webpack.config.js --mode development -w",
     "prettier:format": "prettier --write .",
     "prettier:check:": "prettier --check .",
     "prepare": "husky install"
@@ -36,22 +35,18 @@
     "husky": "^7.0.2",
     "jest": "^27.0.6",
     "lint-staged": "^11.1.2",
+    "nodemon": "^2.0.12",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "css-loader": "^6.2.0",
-    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "node": "^16.6.1",
-    "nodemon": "^2.0.12",
     "path": "^0.12.7",
-    "pg": "^8.7.1",
-    "postgres": "^1.0.2",
     "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
@@ -60,7 +55,6 @@
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^6.6.5",
     "style-loader": "^3.2.1"
   }
 }

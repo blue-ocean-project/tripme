@@ -1,5 +1,5 @@
 #Project
-DS_Store
+*DS_Store
 config.*.js
 *.pem
 *bundle.js
