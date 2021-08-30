@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from './DashboardComponents/Search.jsx';
-import Upcoming from './DashboardComponents/Upcoming.jsx';
-import Past from './DashboardComponents/Past.jsx';
+import UpcomingTripsList from './DashboardComponents/UpcomingTripsList.jsx';
+import PastTripsList from './DashboardComponents/PastTripsList.jsx';
 import './Dashboard.css';
 
 const Dashboard = () => (
@@ -13,10 +13,12 @@ const Dashboard = () => (
       <span>Dashboard</span>
     </div>
     <div className="dashboard-upcoming">
-      <Upcoming />
+      <div>Upcoming</div>
+      <UpcomingTripsList />
     </div>
     <div className="dashboard-past">
-      <Past />
+      <span>Past</span>
+      <PastTripsList />
     </div>
   </div>
 );
