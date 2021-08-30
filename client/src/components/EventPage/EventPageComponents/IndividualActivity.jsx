@@ -6,8 +6,13 @@ import SmsIcon from '@material-ui/icons/Sms';
 import sightseeing from './img/sightseeing.jpg';
 import concert from './img/concert.jpeg';
 import shopping from './img/shopping.png';
-import './Activity.css';
+import amusement from './img/amusement.png';
+import museum from './img/museum.jpeg';
+import movie from './img/movie.jpeg';
+import workout from './img/workout.png';
+import dining from './img/dining.jpeg';
 import other from './img/other.png';
+import './Activity.css';
 import AddActivityForm from './AddActivityForm.jsx';
 
 const IndividualActivity = ({ item }) => {
@@ -53,6 +58,21 @@ const IndividualActivity = ({ item }) => {
             ) : null}
             {item.type === 'shopping' ? (
               <Card.Img src={shopping} className="cardHeaderImg" alt="shopping image" />
+            ) : null}
+            {item.type === 'amusement' ? (
+              <Card.Img className="cardHeaderImg" src={amusement} alt="amusement image" />
+            ) : null}
+            {item.type === 'dining' ? (
+              <Card.Img className="cardHeaderImg" src={dining} alt="dining image" />
+            ) : null}
+            {item.type === 'museum' ? (
+              <Card.Img className="cardHeaderImg" src={museum} alt="museum image" />
+            ) : null}
+            {item.type === 'workout' ? (
+              <Card.Img className="cardHeaderImg" src={workout} alt="workout image" />
+            ) : null}
+            {item.type === 'movie' ? (
+              <Card.Img className="cardHeaderImg" src={movie} alt="movie image" />
             ) : null}
             {item.type === 'other' ? (
               <Card.Img className="cardHeaderImg" src={other} alt="other image" />
