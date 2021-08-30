@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
+import changePageReducer from './changePageReducer';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  changePage: changePageReducer,
+});
 
 export default rootReducer;

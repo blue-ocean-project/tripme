@@ -1,5 +1,5 @@
 .container-fluid {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   padding: 0;
 }
@@ -7,19 +7,19 @@
 .Navbar {
   background-color: lightgray;
   border: 4px dotted grey;
-  height: 5%;
+  height: 5vh;
 }
 
 .Dashboard {
   background-color: lightgray;
   border: 4px dotted grey;
-  height: 95%;
+  height: 95vh;
   margin: 0;
 }
 
 .Eventpage {
   background-color: lightgray;
   border: 4px dotted grey;
-  height: 95%;
+  height: 150vh;
   margin: 0;
 }

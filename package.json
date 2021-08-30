@@ -40,6 +40,10 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
+    "@fullcalendar/core": "^5.9.0",
+    "@fullcalendar/daygrid": "^5.9.0",
+    "@fullcalendar/react": "^5.9.0",
+    "@fullcalendar/resource-timegrid": "^5.9.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "css-loader": "^6.2.0",
