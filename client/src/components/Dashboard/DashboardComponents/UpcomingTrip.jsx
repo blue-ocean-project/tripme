@@ -3,12 +3,13 @@ import './Upcoming.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
+import yellowstone from '../../../../public/img/Yellowstone.png';
 
 const UpcomingTrip = (props) => {
   return (
     <div className="dashboard-upcoming-trip">
       <Card style={{ width: '20rem', height: '20rem' }}>
-        <Card.Img variant="top" src={'../../../../public/img/Yellowstone.png'} />
+        <Card.Img variant="top" src={yellowstone} />
         <Card.Body>
           <Card.Title>{props.trip.destination}</Card.Title>
           <Card.Text>
