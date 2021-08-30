@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Upcoming.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import moment from 'moment';
 
 const PastTrip = (props) => {
   return (
@@ -20,6 +21,11 @@ const PastTrip = (props) => {
                   return <span key={index}>{member.first_name}</span>;
                 }
               })}
+              <div>
+                {moment(props.trip.start_date).format('MMM Do YYYY') +
+                  ' - ' +
+                  moment(props.trip.end_date).format('MMM Do YYYY')}
+              </div>
             </div>
           </Card.Text>
           <Button variant="primary">See plan</Button>

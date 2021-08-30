@@ -50,7 +50,7 @@ const data = {
   past: [
     {
       id: 1,
-      destination: 'Mars, Universe',
+      destination: 'Mars, Solar System',
       start_date: '2018-01-11T00:00:00.000Z',
       end_date: '2018-01-18T00:00:00.000Z',
       members: [
