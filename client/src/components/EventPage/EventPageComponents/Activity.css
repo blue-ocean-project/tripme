@@ -15,12 +15,18 @@
   display: flexbox;
   height: 15rem;
   width: auto;
-  border: 2px solid gray;
-  margin-bottom: 0.5rem;
+  border: 1px solid rgb(84, 116, 138);
+  margin-bottom: 1rem;
 }
 
 .individualActivityCard:hover .cardHeaderImg {
   opacity: 100%;
+}
+
+.individualActivityCardImgDiv {
+  margin-left: 0;
+  border: 0;
+  padding: 0;
 }
 
 .cardHeaderImg {
@@ -34,9 +40,26 @@
   cursor: pointer;
 }
 
+.mappingActivities {
+  margin: 0.2rem;
+}
+.mappingActivities :hover {
+  transform: scale(1.005);
+  transition: 0.5s;
+}
+
 .activityListItem {
   padding: 0.15rem;
-  font-size: small;
+  font-size: clamp(10px, 2vw, 15px);
+}
+
+.activityListItemType {
+  margin-right: 1rem;
+  padding-right: 1rem;
+  border-right: 1px solid rgb(153, 176, 219);
+}
+.activityListItemText {
+  margin-left: 1rem;
 }
 
 .activityFooter {
@@ -50,10 +73,16 @@
 .activityClickToSeeMore {
   display: flex;
   align-items: 'center';
-  margin-bottom: 0.15rem;
+  text-align: center;
+  /* margin-bottom: 0.15rem; */
   font-size: clamp(8px, 2vw, 12px);
   border: none;
   background: none;
+}
+.activityClickToSeeMore:hover {
+  color: #022b55;
+  /* transform: scale(1.03);
+  transition: 0.5s; */
 }
 .smsIcon {
   display: flex;
@@ -65,13 +94,11 @@
 
 .smsIcon:hover {
   color: #022b55;
+  /* transform: scale(1.03);
+  transition: 0.5s; */
 }
 .activityFooterCommentText {
   margin-left: 0.2rems;
-}
-
-.activityClickToSeeMore:hover {
-  color: #022b55;
 }
 
 .tooltip.show {
@@ -86,5 +113,7 @@
 }
 
 .addActivityButton {
+  margin-left: 5%;
   margin-bottom: 2rem;
+  width: 90%;
 }
