@@ -28,7 +28,7 @@ const IndividualActivity = ({ item }) => {
           <Tooltip
             // id="tooltip-activity"
             // className="activityTooltip"
-            placement="auto"
+            placement="top"
             delay={{ show: 250, hide: 400 }}
           >
             click to see more
@@ -60,6 +60,7 @@ const IndividualActivity = ({ item }) => {
           </div>
           <Card.Body>
             <ListGroup
+              className="activityListGroup"
               variant="flush"
               onClick={(e) => {
                 openAddActivityModal(e);
@@ -78,7 +79,7 @@ const IndividualActivity = ({ item }) => {
           <div className="activityFooter">
             <button type="button" className="smsIcon">
               <SmsIcon fontSize="small" color="primary" />
-              Comment
+              <span className="commentActivity">Comment</span>
             </button>
             <button
               type="button"

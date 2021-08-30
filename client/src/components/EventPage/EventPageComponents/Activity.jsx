@@ -16,7 +16,7 @@ const Activity = () => {
       <Container fluid className="activityCards">
         <Row>
           <Col>
-            <CardColumns className="mappingActivities">
+            <CardColumns className="mappingActivity">
               {activities.map((item) => (
                 <IndividualActivity className="overflow-auto" item={item} key={item.id} />
               ))}

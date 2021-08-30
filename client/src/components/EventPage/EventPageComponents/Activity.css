@@ -21,31 +21,31 @@
 
 .individualActivityCard:hover .cardHeaderImg {
   opacity: 100%;
+  transform: scale(1.01);
 }
 
 .individualActivityCardImgDiv {
   margin-left: 0;
   border: 0;
   padding: 0;
+  align-self: center;
+  transition: 5;
 }
 
 .cardHeaderImg {
   max-width: 32rem;
   height: auto;
-  align-self: center;
   opacity: 70%;
+  transition: 0.2s ease-in-out;
 }
 
 .individualActivityCard :hover {
   cursor: pointer;
 }
 
-.mappingActivities {
-  margin: 0.2rem;
-}
-.mappingActivities :hover {
-  transform: scale(1.005);
-  transition: 0.5s;
+.activityListGroup {
+  align-content: center;
+  margin-left: 3%;
 }
 
 .activityListItem {
@@ -56,10 +56,10 @@
 .activityListItemType {
   margin-right: 1rem;
   padding-right: 1rem;
-  border-right: 1px solid rgb(153, 176, 219);
+  border-right: 1px solid rgb(66, 114, 248);
 }
 .activityListItemText {
-  margin-left: 1rem;
+  margin-left: 0.4rem;
 }
 
 .activityFooter {
@@ -78,11 +78,11 @@
   font-size: clamp(8px, 2vw, 12px);
   border: none;
   background: none;
+  transition: 0.1s ease-in-out;
 }
 .activityClickToSeeMore:hover {
   color: #022b55;
-  /* transform: scale(1.03);
-  transition: 0.5s; */
+  transform: scale(1.1);
 }
 .smsIcon {
   display: flex;
@@ -90,15 +90,12 @@
   font-size: clamp(8px, 2vw, 12px);
   border: none;
   background: none;
+  transition: 0.1s ease-in-out;
 }
 
 .smsIcon:hover {
   color: #022b55;
-  /* transform: scale(1.03);
-  transition: 0.5s; */
-}
-.activityFooterCommentText {
-  margin-left: 0.2rems;
+  transform: scale(1.1);
 }
 
 .tooltip.show {
@@ -106,8 +103,9 @@
 }
 
 .tooltip-inner {
-  position: relative;
-  background-color: #82858a;
+  position: absolute;
+  width: 10rem;
+  background-color: #9a9b9c;
   box-shadow: 0px 0px 2px rgb(250, 246, 246);
   opacity: 1 !important;
 }
@@ -116,4 +114,8 @@
   margin-left: 5%;
   margin-bottom: 2rem;
   width: 90%;
+}
+
+.commentActivity {
+  padding-left: 0.5rem;
 }

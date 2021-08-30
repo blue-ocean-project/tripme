@@ -19,6 +19,10 @@
 }
 
 .dashboard-upcoming {
+  display: grid;
+  grid-template-columns: 333px 333px 333px;
+  width: 100%;
+  margin: auto;
   height: 41%;
   border: 2px dotted grey;
 }
