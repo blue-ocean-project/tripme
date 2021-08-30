@@ -6,15 +6,15 @@ import './App.css';
 
 const App = () => (
   <div className="container-fluid">
-    <div className="Navbar">
+    {/* <div className="Navbar">
       <NavBar />
     </div>
     <div className="Dashboard">
       <Dashboard />
-    </div>
-    {/* <div className="Eventpage">
-      <EventPage />
     </div> */}
+    <div className="Eventpage">
+      <EventPage />
+    </div>
   </div>
 );
 
