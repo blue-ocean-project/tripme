@@ -7,7 +7,7 @@ import IndividualActivity from './IndividualActivity.jsx';
 const Activity = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities);
-  // const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
+
   const handleAddActivityButtonClick = (e) => {
     e.preventDefault();
     dispatch({ type: 'TOGGLE_ACTIVITY_MODAL' });

@@ -3,7 +3,7 @@ const sampleActivityList = [
     id: 1,
     type: 'concert',
     name: 'Coldplay Tour Concert',
-    duration: 120,
+    State: 120,
     trip_id: 1,
   },
   {
@@ -91,9 +91,27 @@ export const createNewActivityReducer = (state = {}, action) => {
   }
 };
 
+export const leaveNewCommentReducer = (state = '', action) => {
+  switch (action.type) {
+    case 'LEAVE_NEW_COMMENT':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const isActivityDetailModalOpenReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_ACTIVITY_DETAIL_MODAL':
+      return !state;
+    default:
+      return state;
+  }
+};
+
+export const isLeaveNewCommentModalOpenReducer = (state = false, action) => {
+  switch (action.type) {
+    case 'TOGGLE_LEAVE_COMMENT_MODAL':
       return !state;
     default:
       return state;

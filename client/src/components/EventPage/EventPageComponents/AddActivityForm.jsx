@@ -10,8 +10,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 const AddActivityForm = () => {
   const [type, setType] = useState({});
   const [name, setName] = useState('');
-  const [date, setDate] = useState(new Date());
-  const [duration, setDuration] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   // const trip_id = useSelector((state) => { state.trip_id });
   const tripId = 0;
   const option = [
@@ -33,7 +33,7 @@ const AddActivityForm = () => {
   const handleSubmit = () => {
     dispatch({
       type: 'CREATE_NEW_ACTIVITY',
-      payload: { type: type.value, name, date, duration, trip_id: tripId },
+      payload: { type: type.value, name, startDate, endDate, trip_id: tripId },
     });
     dispatch({ type: 'TOGGLE_ACTIVITY_MODAL' });
   };
@@ -61,26 +61,23 @@ const AddActivityForm = () => {
         />
       </Form.Group>
       <Form.Group>
-        <div className="addActivityFormInput">Choose Date: </div>
+        <div className="addActivityFormInput">Start At: </div>
         <DatePicker
           className="chooseActivityDate"
-          selected={date}
+          selected={startDate}
           showTimeSelect
           dateFormat="Pp"
-          onChange={(d) => setDate(d)}
+          onChange={(d) => setStartDate(d)}
         />
       </Form.Group>
-      <Form.Group controlId="enterActivityDuration">
-        <div className="addActivityFormInput">Activity Duration: (mins)</div>
-        <Form.Control
-          type="number"
-          min="10"
-          max="720"
-          step="10"
-          placeholder="Enter Activity Duration"
-          onChange={(e) => {
-            setDuration(e.target.value);
-          }}
+      <Form.Group>
+        <div className="addActivityFormInput">End At: </div>
+        <DatePicker
+          className="chooseActivityDate"
+          selected={endDate}
+          showTimeSelect
+          dateFormat="Pp"
+          onChange={(d) => setEndDate(d)}
         />
       </Form.Group>
       <Button className="addActivityModalSubmitButton" onClick={handleSubmit}>

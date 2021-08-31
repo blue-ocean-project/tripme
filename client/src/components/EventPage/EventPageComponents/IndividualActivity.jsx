@@ -15,8 +15,9 @@ import other from './img/other.png';
 import './Activity.css';
 import AddActivityForm from './AddActivityForm.jsx';
 import ActivityDetailModal from './ActivityDetailModal.jsx';
+import LeaveCommentModal from './LeaveCommentModal.jsx';
 
-const IndividualActivity = ({ item, key }) => {
+const IndividualActivity = ({ item }) => {
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
   // const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
   const dispatch = useDispatch();
@@ -28,20 +29,27 @@ const IndividualActivity = ({ item, key }) => {
     dispatch({ type: 'TOGGLE_ACTIVITY_DETAIL_MODAL' });
   };
 
+  const openLeaveCommentModal = () => {
+    dispatch({ type: 'TOGGLE_LEAVE_COMMENT_MODAL' });
+  };
+
   const handleClickToToggleAddActivityModal = (e) => {
     e.preventDefault();
     openAddActivityModal();
-    console.log('this is add activity ');
   };
 
   const handleClickToToggleActivityDetailModal = (e) => {
     e.preventDefault();
     openActivityDetailModal();
-    console.log('this is activity detail');
+  };
+
+  const handleClickToTogglehandleLeaveCommentModal = (e) => {
+    e.preventDefault();
+    openLeaveCommentModal();
   };
 
   return (
-    <div role="presentation" key={key}>
+    <div role="presentation">
       <OverlayTrigger
         overlay={
           <Tooltip
@@ -111,7 +119,13 @@ const IndividualActivity = ({ item, key }) => {
             </ListGroup>
           </Card.Body>
           <div className="activityFooter">
-            <button type="button" className="smsIcon">
+            <button
+              type="button"
+              className="smsIcon"
+              onClick={(e) => {
+                handleClickToTogglehandleLeaveCommentModal(e);
+              }}
+            >
               <SmsIcon fontSize="small" color="primary" />
               <span className="commentActivity">Comment</span>
             </button>
@@ -155,8 +169,10 @@ const IndividualActivity = ({ item, key }) => {
         </Modal>
       </div>
       <ActivityDetailModal
-        key={key}
         handleClickToToggleActivityDetailModal={handleClickToToggleActivityDetailModal}
+      />
+      <LeaveCommentModal
+        handleClickToTogglehandleLeaveCommentModal={handleClickToTogglehandleLeaveCommentModal}
       />
     </div>
   );

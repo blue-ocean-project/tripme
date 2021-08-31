@@ -21,7 +21,7 @@ const ActivityDetailModal = ({ handleClickToToggleActivityDetailModal, key }) =>
       <Modal.Header>
         <Modal.Title> Activity detail</Modal.Title>
       </Modal.Header>
-      <div>{activityIdClicked.id} hello</div>
+      <div>{activityIdClicked.id}</div>
       <Button
         className="activityModalCloseButton"
         onClick={(e) => {
