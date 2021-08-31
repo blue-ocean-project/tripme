@@ -27,6 +27,8 @@ div[class^='trip-bot-col'] {
   background: yellow;
 }
 
+/*///////////////////////DESTINATION & DATE COUNTS COLUMN ////////////*/
+
 .trip-bot-col-first {
   display: flex;
   align-items: center;
@@ -40,3 +42,24 @@ div[class^='trip-bot-col'] {
   height: 50%;
   align-items: center;
 }
+
+/*///////////////////////PARTICIPANTS COLUMN ////////////*/
+
+.trip-bot-col-second {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.participants-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.participant-box {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+/*///////////////////////CHECKLIST COLUMN ////////////*/
