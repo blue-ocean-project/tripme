@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Card, ListGroup, OverlayTrigger, Tooltip, Modal } from 'react-bootstrap';
+import { Card, ListGroup, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import SmsIcon from '@material-ui/icons/Sms';
 import sightseeing from './img/sightseeing.jpg';
@@ -115,6 +115,7 @@ const IndividualActivity = ({ item }) => {
       </OverlayTrigger>
       <div>
         <Modal
+          contentClassName="addActivityModal"
           centered
           animation
           show={isAddActivityModalOpen}
@@ -122,16 +123,21 @@ const IndividualActivity = ({ item }) => {
             openAddActivityModal(e);
           }}
         >
-          <Modal.Header closeButton>
-            <Modal.Title>
-              Add Activity
-              <div>
-                <AddActivityForm />
-              </div>
-            </Modal.Title>
+          <Modal.Header>
+            <Modal.Title> Add New Activity</Modal.Title>
           </Modal.Header>
+          <div>
+            <AddActivityForm />
+          </div>
+          <Button
+            className="addActivityModalCloseButton"
+            onClick={(e) => {
+              handleClickToToggleModal(e);
+            }}
+          >
+            close
+          </Button>
           <Modal.Body />
-          <Modal.Footer />
         </Modal>
       </div>
     </div>

@@ -81,3 +81,12 @@ export const isAddActivityModalOpenReducer = (state = false, action) => {
       return state;
   }
 };
+
+export const createNewActivityReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'CREATE_NEW_ACTIVITY':
+      return action.payload;
+    default:
+      return state;
+  }
+};
