@@ -8,14 +8,11 @@ import actions from '../state/actions/index';
 import './App.css';
 
 const App = () => {
-  const state = useSelector((states) => states.changePage);
+  const state = useSelector((states) => states);
   const dispatch = useDispatch();
-
-  // const { changePage } = bindActionCreators(actions, dispatch);
 
   return (
     <div className="container-fluid">
-      {/* <button onClick={() => changePage(state)}>Change Page</button> */}
       <div className="Navbar">
         <NavBar />
       </div>
