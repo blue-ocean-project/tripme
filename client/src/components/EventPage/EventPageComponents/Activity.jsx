@@ -7,10 +7,20 @@ import IndividualActivity from './IndividualActivity.jsx';
 const Activity = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities);
+  // const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
+  const handleAddActivityButtonClick = (e) => {
+    e.preventDefault();
+    dispatch({ type: 'TOGGLE_ACTIVITY_MODAL' });
+  };
+
   return (
     <>
       <div className="activityComponentHeader">Activity</div>
-      <Button variant="outline-primary" className="addActivityButton">
+      <Button
+        variant="outline-primary"
+        className="addActivityButton"
+        onClick={(e) => handleAddActivityButtonClick(e)}
+      >
         Add Activity
       </Button>
       <Container fluid className="activityCards">

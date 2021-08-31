@@ -29,6 +29,7 @@ const AddActivityForm = () => {
   const dispatch = useDispatch();
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
   const createNewActivity = useSelector((state) => state.createNewActivity);
+
   const handleSubmit = () => {
     dispatch({
       type: 'CREATE_NEW_ACTIVITY',
@@ -61,7 +62,6 @@ const AddActivityForm = () => {
       </Form.Group>
       <Form.Group>
         <div className="addActivityFormInput">Choose Date: </div>
-        {/* <Form.Label className="addActivityFormInput">Choose Date</Form.Label> */}
         <DatePicker
           className="chooseActivityDate"
           selected={date}
@@ -71,7 +71,7 @@ const AddActivityForm = () => {
         />
       </Form.Group>
       <Form.Group controlId="enterActivityDuration">
-        <div className="addActivityFormInput">Activity Duration:</div>
+        <div className="addActivityFormInput">Activity Duration: (mins)</div>
         <Form.Control
           type="number"
           min="10"

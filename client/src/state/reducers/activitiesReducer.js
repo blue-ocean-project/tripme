@@ -90,3 +90,12 @@ export const createNewActivityReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const isActivityDetailModalOpenReducer = (state = false, action) => {
+  switch (action.type) {
+    case 'TOGGLE_ACTIVITY_DETAIL_MODAL':
+      return !state;
+    default:
+      return state;
+  }
+};

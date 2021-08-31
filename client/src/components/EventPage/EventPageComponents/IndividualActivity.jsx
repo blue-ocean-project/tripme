@@ -14,20 +14,34 @@ import dining from './img/dining.jpeg';
 import other from './img/other.png';
 import './Activity.css';
 import AddActivityForm from './AddActivityForm.jsx';
+import ActivityDetailModal from './ActivityDetailModal.jsx';
 
-const IndividualActivity = ({ item }) => {
+const IndividualActivity = ({ item, key }) => {
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
+  // const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
   const dispatch = useDispatch();
   const openAddActivityModal = () => {
     dispatch({ type: 'TOGGLE_ACTIVITY_MODAL' });
   };
-  const handleClickToToggleModal = (e) => {
+
+  const openActivityDetailModal = () => {
+    dispatch({ type: 'TOGGLE_ACTIVITY_DETAIL_MODAL' });
+  };
+
+  const handleClickToToggleAddActivityModal = (e) => {
     e.preventDefault();
     openAddActivityModal();
+    console.log('this is add activity ');
+  };
+
+  const handleClickToToggleActivityDetailModal = (e) => {
+    e.preventDefault();
+    openActivityDetailModal();
+    console.log('this is activity detail');
   };
 
   return (
-    <div role="presentation">
+    <div role="presentation" key={key}>
       <OverlayTrigger
         overlay={
           <Tooltip
@@ -44,10 +58,10 @@ const IndividualActivity = ({ item }) => {
           <div
             role="button"
             tabIndex={0}
-            onKeyPress={handleClickToToggleModal}
+            onKeyPress={handleClickToToggleActivityDetailModal}
             className="individualActivityCardImgDiv"
             onClick={(e) => {
-              handleClickToToggleModal(e);
+              handleClickToToggleActivityDetailModal(e);
             }}
           >
             {item.type === 'sightseeing' ? (
@@ -83,7 +97,7 @@ const IndividualActivity = ({ item }) => {
               className="activityListGroup"
               variant="flush"
               onClick={(e) => {
-                openAddActivityModal(e);
+                handleClickToToggleActivityDetailModal(e);
               }}
             >
               <ListGroup.Item className="activityListItem">
@@ -105,7 +119,7 @@ const IndividualActivity = ({ item }) => {
               type="button"
               className="activityClickToSeeMore"
               onClick={(e) => {
-                openAddActivityModal(e);
+                handleClickToToggleActivityDetailModal(e);
               }}
             >
               Click to see more
@@ -120,7 +134,7 @@ const IndividualActivity = ({ item }) => {
           animation
           show={isAddActivityModalOpen}
           onHide={(e) => {
-            openAddActivityModal(e);
+            handleClickToToggleActivityDetailModal(e);
           }}
         >
           <Modal.Header>
@@ -132,7 +146,7 @@ const IndividualActivity = ({ item }) => {
           <Button
             className="addActivityModalCloseButton"
             onClick={(e) => {
-              handleClickToToggleModal(e);
+              handleClickToToggleAddActivityModal(e);
             }}
           >
             close
@@ -140,6 +154,10 @@ const IndividualActivity = ({ item }) => {
           <Modal.Body />
         </Modal>
       </div>
+      <ActivityDetailModal
+        key={key}
+        handleClickToToggleActivityDetailModal={handleClickToToggleActivityDetailModal}
+      />
     </div>
   );
 };
