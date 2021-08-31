@@ -11,11 +11,11 @@ const App = () => {
   const state = useSelector((states) => states.changePage);
   const dispatch = useDispatch();
 
-  const { changePage } = bindActionCreators(actions, dispatch);
+  // const { changePage } = bindActionCreators(actions, dispatch);
 
   return (
     <div className="container-fluid">
-      <button onClick={() => changePage(state)}>Change Page</button>
+      {/* <button onClick={() => changePage(state)}>Change Page</button> */}
       <div className="Navbar">
         <NavBar />
       </div>
