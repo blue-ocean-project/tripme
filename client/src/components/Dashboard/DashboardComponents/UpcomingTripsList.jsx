@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Upcoming.css';
 import Data from '../../../../../SampleData/Dashboard.js';
 import UpcomingTrip from './UpcomingTrip.jsx';
