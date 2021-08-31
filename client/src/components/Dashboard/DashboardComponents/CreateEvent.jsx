@@ -74,7 +74,7 @@ function CreateEvent() {
                 .then((results) => console.log(results))
                 .catch((error) => console.log(error));
             }}
-            class="button"
+            className="button"
           >
             Let's Go!
           </button>
