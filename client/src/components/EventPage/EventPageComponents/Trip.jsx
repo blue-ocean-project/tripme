@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import './Trip.css';
 
-const destination = 'hawaii';
+const destination = 'HAWAII';
 const days = '5';
 const participants = ['Justin', 'Mom', 'Uncle-J'];
 const checkList = ['passport', 'cellphone'];
