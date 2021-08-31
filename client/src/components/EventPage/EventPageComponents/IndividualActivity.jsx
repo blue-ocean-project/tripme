@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Card, ListGroup, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import Moment from 'react-moment';
 import SmsIcon from '@material-ui/icons/Sms';
 import sightseeing from './img/sightseeing.jpg';
 import concert from './img/concert.jpeg';
@@ -48,6 +49,37 @@ const IndividualActivity = ({ item }) => {
     openLeaveCommentModal();
   };
 
+  const image = (itemType) => {
+    if (item.type === 'sightseeing') {
+      return <Card.Img className="cardHeaderImg" src={sightseeing} alt="sightseeing image" />;
+    }
+    if (item.type === 'concert') {
+      return <Card.Img className="cardHeaderImg" src={concert} alt="concert image" />;
+    }
+    if (item.type === 'shopping') {
+      return <Card.Img src={shopping} className="cardHeaderImg" alt="shopping image" />;
+    }
+    if (item.type === 'amusement') {
+      return <Card.Img className="cardHeaderImg" src={amusement} alt="amusement image" />;
+    }
+    if (item.type === 'shopping') {
+      return <Card.Img src={shopping} className="cardHeaderImg" alt="shopping image" />;
+    }
+    if (item.type === 'dining') {
+      return <Card.Img className="cardHeaderImg" src={dining} alt="dining image" />;
+    }
+    if (item.type === 'museum') {
+      return <Card.Img className="cardHeaderImg" src={museum} alt="museum image" />;
+    }
+    if (item.type === 'workout') {
+      return <Card.Img className="cardHeaderImg" src={workout} alt="workout image" />;
+    }
+    if (item.type === 'movie') {
+      return <Card.Img className="cardHeaderImg" src={movie} alt="movie image" />;
+    }
+    return <Card.Img className="cardHeaderImg" src={other} alt="other image" />;
+  };
+
   return (
     <div role="presentation">
       <OverlayTrigger
@@ -72,33 +104,7 @@ const IndividualActivity = ({ item }) => {
               handleClickToToggleActivityDetailModal(e);
             }}
           >
-            {item.type === 'sightseeing' ? (
-              <Card.Img className="cardHeaderImg" src={sightseeing} alt="sightseeing image" />
-            ) : null}
-            {item.type === 'concert' ? (
-              <Card.Img className="cardHeaderImg" src={concert} alt="concert image" />
-            ) : null}
-            {item.type === 'shopping' ? (
-              <Card.Img src={shopping} className="cardHeaderImg" alt="shopping image" />
-            ) : null}
-            {item.type === 'amusement' ? (
-              <Card.Img className="cardHeaderImg" src={amusement} alt="amusement image" />
-            ) : null}
-            {item.type === 'dining' ? (
-              <Card.Img className="cardHeaderImg" src={dining} alt="dining image" />
-            ) : null}
-            {item.type === 'museum' ? (
-              <Card.Img className="cardHeaderImg" src={museum} alt="museum image" />
-            ) : null}
-            {item.type === 'workout' ? (
-              <Card.Img className="cardHeaderImg" src={workout} alt="workout image" />
-            ) : null}
-            {item.type === 'movie' ? (
-              <Card.Img className="cardHeaderImg" src={movie} alt="movie image" />
-            ) : null}
-            {item.type === 'other' ? (
-              <Card.Img className="cardHeaderImg" src={other} alt="other image" />
-            ) : null}
+            {image(item)}
           </div>
           <Card.Body>
             <ListGroup
@@ -114,7 +120,8 @@ const IndividualActivity = ({ item }) => {
               </ListGroup.Item>
               <ListGroup.Item className="activityListItem">
                 <span className="activityListItemType">Duration </span>
-                <span className="activityListItemText">{item.duration} mins</span>
+                <span className="activityListItemText">{item.start_time}</span>
+                <span className="activityListItemText">{item.end_time}</span>
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
