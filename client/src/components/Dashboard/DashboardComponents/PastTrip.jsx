@@ -12,14 +12,6 @@ const PastTrip = (props) => {
       <Card.Body>
         <Card.Title>{props.trip.destination}</Card.Title>
         <Card.Text as="div">
-          {/* <h6>Trip Members:</h6>
-          {props.trip.members.map((member, index) => {
-            if (index !== props.trip.members.length - 1) {
-              return <span key={index}>{member.first_name + ', '}</span>;
-            } else {
-              return <span key={index}>{member.first_name}</span>;
-            }
-          })} */}
           <div>
             {moment(props.trip.start_date).format('MMM Do YYYY') +
               ' - ' +
@@ -33,3 +25,14 @@ const PastTrip = (props) => {
 };
 
 export default PastTrip;
+
+{
+  /* <h6>Trip Members:</h6>
+{props.trip.members.map((member, index) => {
+  if (index !== props.trip.members.length - 1) {
+    return <span key={index}>{member.first_name + ', '}</span>;
+  } else {
+    return <span key={index}>{member.first_name}</span>;
+  }
+})} */
+}
