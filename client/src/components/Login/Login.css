@@ -1,0 +1,30 @@
+.login-button {
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.login-email {
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.login-field {
+  text-align: center;
+}
+
+.login-password {
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.login-step {
+  font-size: 20px;
+  text-align: center;
+}
+
+.login-welcome {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
