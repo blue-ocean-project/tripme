@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import Comments from './Comments.jsx';
 import AddActivityForm from './AddActivityForm.jsx';
 import Comments from './Comments.jsx';
 import Select from 'react-select';
@@ -136,7 +137,6 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
     <Modal
       contentClassName="activityDetailModal"
       centered
-      animation
       scrollable
       show={isActivityDetailModalOpen}
       onHide={openActivityDetailModal}
