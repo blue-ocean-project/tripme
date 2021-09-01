@@ -5,6 +5,7 @@ import NavBar from './NavBar/NavBar.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import EventPage from './EventPage/EventPage.jsx';
 // import actions from '../state/actions/index';
+import Login from './Login/Login.jsx';
 import './App.css';
 
 const App = () => {
@@ -14,9 +15,9 @@ const App = () => {
   return (
     <div className="container-fluid">
       <div className="Navbar">
-        <NavBar />
+        <Login />
       </div>
-      {state ? (
+      {/* {false ? (
         <div className="Dashboard">
           <Dashboard />
         </div>
@@ -24,7 +25,7 @@ const App = () => {
         <div className="Eventpage">
           <EventPage />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

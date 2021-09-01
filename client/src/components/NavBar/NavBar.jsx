@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import actions from '../../state/actions/index';
 import './NavBar.css';
-import { Navbar, Nav, Container } from 'react-bootstrap';
 import logo from './TripMe.png';
 
 const NavBar = () => {

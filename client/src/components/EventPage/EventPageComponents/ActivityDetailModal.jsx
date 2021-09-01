@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import Comments from './Comments.jsx';
 import AddActivityForm from './AddActivityForm.jsx';
 
 const ActivityDetailModal = ({ item, handleClickToToggleActivityDetailModal }) => {
