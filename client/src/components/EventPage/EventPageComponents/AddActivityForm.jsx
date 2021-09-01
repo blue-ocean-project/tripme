@@ -67,7 +67,7 @@ const AddActivityForm = () => {
           }}
         />
       </Form.Group>
-      <Form.Group>
+      {/* <Form.Group>
         <div className="addActivityFormInput">Start At: </div>
         <DatePicker
           className="chooseActivityDate"
@@ -86,7 +86,7 @@ const AddActivityForm = () => {
           dateFormat="Pp"
           onChange={(d) => setEndTime(d)}
         />
-      </Form.Group>
+      </Form.Group> */}
       <Button className="addActivityModalSubmitButton" onClick={handleSubmit}>
         Submit
       </Button>

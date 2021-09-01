@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Comments from './Comments.jsx';
 import AddActivityForm from './AddActivityForm.jsx';
-import Comments from './Comments.jsx';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';

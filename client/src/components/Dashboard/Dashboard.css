@@ -8,6 +8,7 @@
   width: auto;
   overflow: auto;
   margin-left: 0;
+  border: 1px solid gray;
 }
 
 /* .dashboard-title {
