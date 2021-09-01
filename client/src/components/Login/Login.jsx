@@ -1,6 +1,7 @@
 /* eslint-disable object-shorthand */
 import './Login.css';
 import React, { useState } from 'react';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
@@ -45,11 +46,10 @@ const Login = () => {
               password: password,
             };
             Server.post('/auth/login', verifyUser)
-              .then((result) => {
-                console.log(result);
-                // login(result);
+              .then(() => {
+                window.location.reload();
               })
-              .catch((err) => console.log('err.response.data: ', err.response.data));
+              .catch((err) => console.log('Error: ', err.response.data));
           }}
         >
           Login
