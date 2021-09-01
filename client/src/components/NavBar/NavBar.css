@@ -1,0 +1,17 @@
+.navbar-logo {
+  width: 150px;
+  top: 15px;
+}
+
+.navbar-logout {
+  position: absolute;
+  right: 30px;
+  top: 15px;
+}
+
+.navbar-signed-in-as {
+  position: absolute;
+  font-size: 12px;
+  top: 5px;
+  right: 75px;
+}
