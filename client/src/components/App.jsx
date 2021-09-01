@@ -1,23 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import NavBar from './NavBar/NavBar.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import EventPage from './EventPage/EventPage.jsx';
-import actions from '../state/actions/index';
+// import actions from '../state/actions/index';
 import './App.css';
 
 const App = () => {
   const state = useSelector((states) => states.changePage);
-  const dispatch = useDispatch();
-
-  const { changePage } = bindActionCreators(actions, dispatch);
+  // const dispatch = useDispatch();
 
   return (
     <div className="container-fluid">
-      <button type="button" onClick={() => changePage(state)}>
-        Change Page
-      </button>
       <div className="Navbar">
         <NavBar />
       </div>
