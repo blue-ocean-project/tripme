@@ -19,6 +19,7 @@ import './Activity.css';
 import AddActivityForm from './AddActivityForm.jsx';
 import ActivityDetailModal from './ActivityDetailModal.jsx';
 import LeaveCommentModal from './LeaveCommentModal.jsx';
+import AddToCalendarModal from './AddToCalendarModal.jsx';
 
 const IndividualActivity = ({ item }) => {
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
@@ -36,6 +37,10 @@ const IndividualActivity = ({ item }) => {
     dispatch({ type: 'TOGGLE_LEAVE_COMMENT_MODAL' });
   };
 
+  const openAddToCalendarModal = () => {
+    dispatch({ type: 'TOGGLE_ADD_TO_CALENDAR_MODAL' });
+  };
+
   const handleClickToToggleAddActivityModal = (e) => {
     e.preventDefault();
     openAddActivityModal();
@@ -49,6 +54,10 @@ const IndividualActivity = ({ item }) => {
   const handleClickToTogglehandleLeaveCommentModal = (e) => {
     e.preventDefault();
     openLeaveCommentModal();
+  };
+  const handleClickToToggleAddToCalendarCommentModal = (e) => {
+    e.preventDefault();
+    openAddToCalendarModal();
   };
 
   const image = (itemType) => {
@@ -127,9 +136,6 @@ const IndividualActivity = ({ item }) => {
                 <span className="activityListItemType">Title </span>
                 <span className="activityListItemText">{`${item.title}`}</span>
               </ListGroup.Item>
-              <div>
-                <AddIcon className="addToCalendarIcon" />
-              </div>
             </ListGroup>
           </Card.Body>
           <div className="activityFooter">
@@ -151,6 +157,16 @@ const IndividualActivity = ({ item }) => {
               }}
             >
               Click to see more
+            </button>
+            <button
+              type="button"
+              className="addToCalendarIcon"
+              onClick={(e) => {
+                handleClickToToggleAddToCalendarCommentModal(e);
+              }}
+            >
+              <AddIcon fontSize="small" color="primary" className="addIconAlone" />
+              <span className="addToCalendarText">Add to Calendar</span>
             </button>
           </div>
         </Card>
@@ -182,13 +198,9 @@ const IndividualActivity = ({ item }) => {
           <Modal.Body />
         </Modal>
       </div>
-      <ActivityDetailModal
-        item={item}
-        handleClickToToggleActivityDetailModal={handleClickToToggleActivityDetailModal}
-      />
-      <LeaveCommentModal
-        handleClickToTogglehandleLeaveCommentModal={handleClickToTogglehandleLeaveCommentModal}
-      />
+      <ActivityDetailModal item={item} openActivityDetailModal={openActivityDetailModal} />
+      <LeaveCommentModal openLeaveCommentModal={openLeaveCommentModal} />
+      <AddToCalendarModal openAddToCalendarModal={openAddToCalendarModal} />
     </div>
   );
 };

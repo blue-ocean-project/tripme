@@ -4,11 +4,11 @@
 }
 
 .activityCards {
-  display: flexbox;
+  display: flex;
   flex-direction: column;
   overflow: auto;
-  max-height: 88%;
-  width: auto;
+  max-height: 90%;
+  width: 100%;
 }
 
 .individualActivityCard {
@@ -22,6 +22,7 @@
 .individualActivityCard:hover .cardHeaderImg {
   opacity: 80%;
   transform: scale(1.01);
+  overflow: auto;
 }
 
 .individualActivityCardImgDiv {
@@ -52,7 +53,7 @@
 
 .activityListItem {
   padding: 0.15rem;
-  font-size: clamp(8px, 2vw, 12px);
+  font-size: clamp(7px, 2vw, 14px);
 }
 
 .activityListItemType {
@@ -71,7 +72,7 @@
 .activityFooter {
   display: flex;
   align-items: flex-end;
-  flex: 2;
+  flex: 3;
   justify-content: space-around;
   margin-bottom: 0.5rem;
 }
@@ -80,20 +81,19 @@
   display: flex;
   align-items: 'center';
   text-align: center;
-  /* margin-bottom: 0.15rem; */
-  font-size: clamp(8px, 2vw, 12px);
+  font-size: clamp(5px, 2vw, 12px);
   border: none;
   background: none;
   transition: 0.3s ease-in-out;
+  padding-bottom: 4px;
 }
 .activityClickToSeeMore:hover {
-  color: #022b55;
   transform: scale(1.1);
 }
 .smsIcon {
   display: flex;
   align-items: 'center';
-  font-size: clamp(8px, 2vw, 12px);
+  font-size: clamp(5px, 2vw, 12px);
   border: none;
   background: none;
   transition: 0.3s ease-in-out;
@@ -167,6 +167,53 @@
 }
 
 .addToCalendarIcon {
-  display: flexbox;
-  justify-content: end;
+  display: flex;
+  /* align-items: 'center'; */
+  font-size: clamp(8px, 2vw, 12px);
+  border: none;
+  background: none;
+  transition: 0.3s ease-in-out;
+}
+
+.addToCalendarIcon:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+}
+
+.addIconAlone {
+  padding-bottom: 3px;
+}
+
+.addToCalendarModal {
+  height: 10rem;
+  width: 20rem;
+}
+
+.modalCloseButton button {
+  outline: none;
+  background-color: Transparent;
+  border: 0.5px solid rgb(31, 112, 218);
+}
+.addedToCalendar {
+  padding-left: 22%;
+}
+
+.activityDetailTitle {
+  margin-bottom: 1rem;
+}
+
+.Eachcomment {
+  margin-top: 0.5rem;
+}
+
+.commentBody {
+  color: rgb(61, 85, 112);
+  font-weight: 200;
+  text-decoration: underline;
+}
+
+.leaveCommentButtonsContainer {
+  margin-top: 2rem;
+  justify-items: center;
+  align-items: center;
 }
