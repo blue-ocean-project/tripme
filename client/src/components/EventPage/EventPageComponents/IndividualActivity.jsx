@@ -161,7 +161,6 @@ const IndividualActivity = ({ item }) => {
         <Modal
           contentClassName="addActivityModal"
           centered
-          animation
           show={isAddActivityModalOpen}
           onHide={(e) => {
             handleClickToToggleActivityDetailModal(e);

@@ -43,7 +43,6 @@ const ActivityDetailModal = ({ item, handleClickToToggleActivityDetailModal }) =
     <Modal
       contentClassName="activityDetailModal"
       centered
-      animation
       scrollable
       show={isActivityDetailModalOpen}
       onHide={(e) => {

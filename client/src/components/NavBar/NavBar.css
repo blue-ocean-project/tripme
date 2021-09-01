@@ -1,3 +1,17 @@
+.navbar {
+  padding: 0;
+  height: 100%;
+  display: flex;
+}
+
+.navbar-brand {
+  flex: 85%;
+}
+
+.navbar-buttons {
+  flex: 15%;
+}
+
 .navbar-logo {
   width: 150px;
   top: 1%;
@@ -12,6 +26,7 @@
 .navbar-signed-in-as {
   position: absolute;
   font-size: 12px;
-  top: 5px;
-  right: 75px;
+  top: 1%;
+  right: 5%;
+  padding: 0;
 }

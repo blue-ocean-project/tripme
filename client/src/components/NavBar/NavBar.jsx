@@ -1,9 +1,10 @@
 import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../../state/actions/index';
 import './NavBar.css';
-import { Navbar, Nav, Container } from 'react-bootstrap';
 import logo from './TripMe.png';
 
 const NavBar = () => {
@@ -13,19 +14,19 @@ const NavBar = () => {
   const { changePage } = bindActionCreators(actions, dispatch);
   return (
     <>
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand className="navbar-brand" href="#home">
-            <img className="navbar-logo" src={logo} alt="brand logo" />
-          </Navbar.Brand>
-          <Nav className="">
-            <Nav.Link href="#home">Dashboard</Nav.Link>
-            <Nav.Link href="#features">Logout</Nav.Link>
-            <Navbar.Text className="navbar-signed-in-as">
-              Signed in as: <a href="#login">Mark Otto</a>
-            </Navbar.Text>
-          </Nav>
-        </Container>
+      <Navbar>
+        <Navbar.Brand className="navbar-brand">
+          <img className="navbar-logo" src={logo} alt="brand logo" />
+        </Navbar.Brand>
+        <Nav className="navbar-buttons">
+          <Nav.Link href="/">Dashboard</Nav.Link>
+          <Nav.Link as={Link} to="/login">
+            Login
+          </Nav.Link>
+          <Navbar.Text className="navbar-signed-in-as">
+            Signed in as: <a href="#login">Mark Otto</a>
+          </Navbar.Text>
+        </Nav>
       </Navbar>
     </>
   );
