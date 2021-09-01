@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Past.css';
 import Data from '../../../../../SampleData/Dashboard.js';
+import getTrips from '../../../state/actions/getTrips.js';
 import PastTrip from './PastTrip.jsx';
 
 const PastTripList = () => {
-  const [past, updateState] = useState(Data.past);
+  const [past, updateState] = useState([]);
+
+  useEffect(() => {
+    getTrips(6)
+      .then((results) => {
+        updateState(results.data.past);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return past.map((trip, index) => <PastTrip trip={trip} key={index} />);
 };
