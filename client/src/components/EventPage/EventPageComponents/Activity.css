@@ -20,7 +20,7 @@
 }
 
 .individualActivityCard:hover .cardHeaderImg {
-  opacity: 100%;
+  opacity: 80%;
   transform: scale(1.01);
 }
 
@@ -29,14 +29,15 @@
   border: 0;
   padding: 0;
   align-self: center;
-  transition: 5;
+  transition: 0.2s;
 }
 
 .cardHeaderImg {
-  max-width: 32rem;
-  height: auto;
-  opacity: 70%;
+  width: clamp(500px, 10vw, 1000px);
+  height: 80px;
+  opacity: 50%;
   transition: 0.2s ease-in-out;
+  margin-top: 1rem;
 }
 
 .individualActivityCard :hover {
@@ -51,7 +52,7 @@
 
 .activityListItem {
   padding: 0.15rem;
-  font-size: clamp(10px, 2vw, 15px);
+  font-size: clamp(8px, 2vw, 12px);
 }
 
 .activityListItemType {

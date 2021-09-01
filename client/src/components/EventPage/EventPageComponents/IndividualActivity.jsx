@@ -12,6 +12,7 @@ import museum from './img/museum.jpeg';
 import movie from './img/movie.jpeg';
 import workout from './img/workout.png';
 import dining from './img/dining.jpeg';
+import seltCare from './img/selfCare.png';
 import other from './img/other.png';
 import './Activity.css';
 import AddActivityForm from './AddActivityForm.jsx';
@@ -77,6 +78,9 @@ const IndividualActivity = ({ item }) => {
     if (item.type === 'movie') {
       return <Card.Img className="cardHeaderImg" src={movie} alt="movie image" />;
     }
+    if (item.type === 'self care') {
+      return <Card.Img className="cardHeaderImg" src={seltCare} alt="selt care image" />;
+    }
     return <Card.Img className="cardHeaderImg" src={other} alt="other image" />;
   };
 
@@ -119,10 +123,15 @@ const IndividualActivity = ({ item }) => {
                 <span className="activityListItemText">{`${item.type}`}</span>
               </ListGroup.Item>
               <ListGroup.Item className="activityListItem">
-                <span className="activityListItemType">Duration </span>
-                <span className="activityListItemText">{item.start_time}</span>
-                <span className="activityListItemText">{item.end_time}</span>
+                <span className="activityListItemType">Title </span>
+                <span className="activityListItemText">{`${item.title}`}</span>
               </ListGroup.Item>
+              {/* <ListGroup.Item className="activityListItem">
+                <span className="activityListItemType">Duration </span>
+                <span className="activityListItemText">
+                  <Moment duration={item.start_time} date="2018-11-1T12:59-0500" />
+                </span>
+              </ListGroup.Item> */}
             </ListGroup>
           </Card.Body>
           <div className="activityFooter">
@@ -176,6 +185,7 @@ const IndividualActivity = ({ item }) => {
         </Modal>
       </div>
       <ActivityDetailModal
+        item={item}
         handleClickToToggleActivityDetailModal={handleClickToToggleActivityDetailModal}
       />
       <LeaveCommentModal

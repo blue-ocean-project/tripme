@@ -9,9 +9,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const AddActivityForm = () => {
   const [type, setType] = useState({});
-  const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [title, setTitle] = useState('');
+  const [startTime, setStarTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
   // const trip_id = useSelector((state) => { state.trip_id });
   const tripId = 0;
   const option = [
@@ -23,6 +23,7 @@ const AddActivityForm = () => {
     { value: 'dining', label: 'dining' },
     { value: 'workout', label: 'workout' },
     { value: 'amusement', label: 'amusement' },
+    { value: 'self care', label: 'self care' },
     { value: 'other', label: 'other' },
   ];
 
@@ -33,7 +34,13 @@ const AddActivityForm = () => {
   const handleSubmit = () => {
     dispatch({
       type: 'CREATE_NEW_ACTIVITY',
-      payload: { type: type.value, name, startDate, endDate, trip_id: tripId },
+      payload: {
+        type: type.value,
+        title,
+        start_time: startTime,
+        end_time: endTime,
+        trip_id: tripId,
+      },
     });
     dispatch({ type: 'TOGGLE_ACTIVITY_MODAL' });
   };
@@ -50,13 +57,13 @@ const AddActivityForm = () => {
         options={option}
       />
       <Form.Group controlId="enterActivityName">
-        <div className="addActivityFormInput">Activity Name:</div>
+        <div className="addActivityFormInput">Activity Title:</div>
         {/* <Form.Label className="mb-3 addActivityFormInput">Activity Name</Form.Label> */}
         <Form.Control
           type="text"
-          placeholder="Enter Activity Name"
+          placeholder="Enter Activity Title"
           onChange={(e) => {
-            setName(e.target.value);
+            setTitle(e.target.value);
           }}
         />
       </Form.Group>
@@ -64,20 +71,20 @@ const AddActivityForm = () => {
         <div className="addActivityFormInput">Start At: </div>
         <DatePicker
           className="chooseActivityDate"
-          selected={startDate}
+          selected={startTime}
           showTimeSelect
           dateFormat="Pp"
-          onChange={(d) => setStartDate(d)}
+          onChange={(d) => setStarTime(d)}
         />
       </Form.Group>
       <Form.Group>
         <div className="addActivityFormInput">End At: </div>
         <DatePicker
           className="chooseActivityDate"
-          selected={endDate}
+          selected={endTime}
           showTimeSelect
           dateFormat="Pp"
-          onChange={(d) => setEndDate(d)}
+          onChange={(d) => setEndTime(d)}
         />
       </Form.Group>
       <Button className="addActivityModalSubmitButton" onClick={handleSubmit}>
