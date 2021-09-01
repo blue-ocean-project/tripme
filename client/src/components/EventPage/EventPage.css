@@ -6,12 +6,13 @@
 
 .eventPage-details {
   height: 100%;
+  border: 2px dotted blue;
 }
 
 .eventPage-activity-selector {
   height: 100%;
   padding: 1%;
-  border: 2px dotted grey;
+  border: 2px dotted blue;
 }
 
 .eventPage-trip {
