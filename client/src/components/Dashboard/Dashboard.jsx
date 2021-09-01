@@ -1,26 +1,27 @@
-import React from 'react';
-import Search from './DashboardComponents/Search.jsx';
+import React, { useState, useEffect } from 'react';
 import UpcomingTripsList from './DashboardComponents/UpcomingTripsList.jsx';
 import PastTripsList from './DashboardComponents/PastTripsList.jsx';
+
+import CreateEvent from './DashboardComponents/CreateEvent.jsx';
 import './Dashboard.css';
 
-const Dashboard = () => (
-  <div className="dashboard-container">
-    <div className="dashboard-search">
-      <Search />
-    </div>
-    <div className="dashboard-title">
-      <span>Dashboard</span>
-    </div>
-    <div className="dashboard-upcoming">
+const Dashboard = () => {
+  return (
+    <div className="dashboard-container">
+      <CreateEvent />
+      <div className="dashboard-title">
+        <span>Dashboard</span>
+      </div>
       <div>Upcoming</div>
-      <UpcomingTripsList />
-    </div>
-    <div className="dashboard-past">
+      <div className="dashboard-upcoming">
+        <UpcomingTripsList />
+      </div>
       <span>Past</span>
-      <PastTripsList />
+      <div className="dashboard-past">
+        <PastTripsList />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Dashboard;
