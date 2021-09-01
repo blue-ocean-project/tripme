@@ -63,3 +63,22 @@ div[class^='trip-bot-col'] {
 }
 
 /*///////////////////////CHECKLIST COLUMN ////////////*/
+
+.trip-bot-col-third {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/*///////////////////////MODAL ////////////*/
+
+.event-trip-modal {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: 50%;
+  transform: translate(50%, 50%);
+  padding: 80px;
+  background-color: papayawhip;
+}
