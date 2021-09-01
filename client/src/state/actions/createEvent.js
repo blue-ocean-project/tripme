@@ -1,9 +1,8 @@
 import axios from 'axios';
-import URL from '../../../../config.js';
+import Server from '../../lib/Server';
 
 export default (name, destination, start_date, end_date) => {
-  const url = URL;
-  return axios.post(`${url}/trips`, {
+  return Server.post('/trips', {
     name: name,
     destination: destination,
     start_date: start_date,
