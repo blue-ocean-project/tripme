@@ -33,7 +33,13 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
     { value: 'self care', label: 'self care' },
     { value: 'other', label: 'other' },
   ];
-  const handleUpdateDetail = (e) => {
+  const toggleUpdateDetail = (e) => {
+    e.preventDefault();
+    setEditMode(!editMode);
+    console.log(editMode);
+  };
+
+  const handleSubmitChanges = (e) => {
     e.preventDefault();
     setEditMode(!editMode);
     console.log(editMode);
@@ -93,8 +99,17 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
         </Col>
       </Row>
       <Row>
-        <Button className="updateActivityDetailSubmitButton">Submit</Button>
-        <Button className="updateActivityDetailCancelButton">Cancel</Button>
+        <Button
+          className="updateActivityDetailSubmitButton"
+          onClick={(e) => {
+            handleSubmitChanges(e);
+          }}
+        >
+          Submit
+        </Button>
+        <Button className="updateActivityDetailCancelButton" onClick={(e) => toggleUpdateDetail(e)}>
+          Cancel
+        </Button>
       </Row>
     </Container>
   );
@@ -103,27 +118,31 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
     <Container>
       <Row className="activityDetailTitle">
         <Col>Type: </Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => handleUpdateDetail(e)}>
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
           {item.type}{' '}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Titile: </Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => handleUpdateDetail(e)}>
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
           {item.title}{' '}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Date: </Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => handleUpdateDetail(e)}>
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
           {moment(item.start_time).calendar()}{' '}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Duration:</Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => handleUpdateDetail(e)}>
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
           {moment(end).diff(moment(start), 'minutes')} mins
         </Col>
+      </Row>
+      <Row className="activityDetailTitle">
+        <Col>Description:</Col>
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)} />
       </Row>
       <Row className="activityDetailTitle">
         Comments:
