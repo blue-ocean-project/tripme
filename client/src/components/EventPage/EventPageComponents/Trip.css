@@ -72,15 +72,7 @@ div[class^='trip-bot-col'] {
 
 /*///////////////////////MODAL ////////////*/
 
-.event-trip-modal {
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  margin-right: 50%;
-  transform: translate(50%, 50%);
-  z-index: 1000;
-  padding: 80px;
-  background-color: white;
-  opacity: 1;
+.trip-modal-close-btn {
+  display: flex;
+  justify-content: center;
 }

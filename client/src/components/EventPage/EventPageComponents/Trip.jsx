@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Col, Row, Card, Button, Form } from 'react-bootstrap';
+import { Container, Col, Row, Card, Button, Form, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import './Trip.css';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 
 const destination = 'HAWAII';
 const days = '5';
@@ -21,8 +21,7 @@ const participantDisplay = function (participantsList) {
 
 const Trip = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [inviteEmail, setInviteEmail] = useState('');
-  const [inviteFullName, setinviteFullName] = useState('');
+  const [inviteContacts, setInviteContacts] = useState('');
 
   const openModal = function () {
     setModalIsOpen(true);
@@ -68,49 +67,36 @@ const Trip = () => {
 
       <Modal
         className="event-trip-modal"
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        ariaHideApp={false}
+        show={modalIsOpen}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={closeModal}
       >
         <h2>Invite people</h2>
         <form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="">
             <Row className="event-trip-modal-row-1 align-items-end">
               <Col>
-                <Form.Label>Type your trip mate email or phone numbers</Form.Label>
+                <Form.Label>Type your trip mate email or phone numbers.</Form.Label>
+                <p>Commas can be used to separate multiple message recipients.</p>
                 <Form.Control
-                  required
-                  value={inviteEmail}
-                  type="mail"
-                  placeholder="e.g. trip@gmail.com or 2138084444"
+                  value={inviteContacts}
+                  type="text"
+                  placeholder="e.g. trip@gmail.com, 2138084444"
                   onChange={(e) => {
-                    setInviteEmail(e.target.value);
+                    setInviteContacts(e.target.value);
                   }}
                 />
-                <Form.Label>Type trip mate's name</Form.Label>
-                <Form.Control
-                  required
-                  value={inviteFullName}
-                  type="name"
-                  placeholder="e.g. Tom Holland"
-                  onChange={(e) => {
-                    setinviteFullName(e.target.value);
-                  }}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid name
-                </Form.Control.Feedback>
               </Col>
-              <Col>
+              <Col xs={3}>
                 <Button type="submit">ADD</Button>
               </Col>
             </Row>
           </Form.Group>
         </form>
         <p>let them join trip.me and you all can plan your trip together</p>
-        <div>
+        <div className="trip-modal-close-btn">
           <button onClick={() => setModalIsOpen(false)}>Close</button>
         </div>
       </Modal>
@@ -119,3 +105,16 @@ const Trip = () => {
 };
 
 export default Trip;
+
+// <Form.Label>Type trip mate's name</Form.Label>
+// <Form.Control
+//   value={inviteFullName}
+//   type="text"
+//   placeholder="e.g. Tom Holland"
+//   onChange={(e) => {
+//     setinviteFullName(e.target.value);
+//   }}
+// />
+// <Form.Control.Feedback type="invalid">
+//   Please provide a valid name
+// </Form.Control.Feedback>
