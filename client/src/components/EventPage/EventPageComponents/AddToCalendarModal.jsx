@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Modal, Form, Button, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -8,6 +8,10 @@ const addToCalendarModal = ({ openAddToCalendarModal }) => {
   const isAddToCalendarModalOpen = useSelector((state) => state.isAddToCalendarModalOpen);
   const [startTime, setStarTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
+
+  const handleAddToCalendar = (e) => {
+    openAddToCalendarModal();
+  };
 
   return (
     <Modal
@@ -44,8 +48,16 @@ const addToCalendarModal = ({ openAddToCalendarModal }) => {
             />
           </Form.Group>
         </Form>
-        <Button>Add To calendar</Button>
-        <Button>Cancel</Button>
+        <Container>
+          <Row>
+            <Button className="addToCalendarButtons" onClick={(e) => handleAddToCalendar(e)}>
+              Add To calendar
+            </Button>
+            <Button className="addToCalendarButtons" onClick={(e) => handleAddToCalendar(e)}>
+              Cancel
+            </Button>
+          </Row>
+        </Container>
       </Modal.Body>
     </Modal>
   );

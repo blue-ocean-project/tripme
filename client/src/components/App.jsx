@@ -20,7 +20,7 @@ const App = () => {
           <div className="Navbar">
             <NavBar />
           </div>
-          {true ? (
+          {false ? (
             <div className="Dashboard">
               <Dashboard />
             </div>
