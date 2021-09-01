@@ -7,7 +7,7 @@ import Yellowstone from '../../../../public/img/Yellowstone.png';
 
 const PastTrip = (props) => {
   return (
-    <Card className="test" style={{ width: '20rem' }}>
+    <Card className="tripCard" style={{ width: '20rem' }}>
       <Card.Img variant="top" src={Yellowstone} />
       <Card.Body>
         <Card.Title>{props.trip.destination}</Card.Title>
