@@ -165,3 +165,8 @@
   width: 8rem;
   height: 2.5rem;
 }
+
+.addToCalendarIcon {
+  display: flexbox;
+  justify-content: end;
+}

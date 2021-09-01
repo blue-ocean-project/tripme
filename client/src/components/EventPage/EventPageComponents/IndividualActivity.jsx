@@ -4,6 +4,7 @@ import { Card, ListGroup, OverlayTrigger, Tooltip, Modal, Button } from 'react-b
 import { useSelector, useDispatch } from 'react-redux';
 import Moment from 'react-moment';
 import SmsIcon from '@material-ui/icons/Sms';
+import AddIcon from '@material-ui/icons/Add';
 import sightseeing from './img/sightseeing.jpg';
 import concert from './img/concert.jpeg';
 import shopping from './img/shopping.png';
@@ -126,12 +127,9 @@ const IndividualActivity = ({ item }) => {
                 <span className="activityListItemType">Title </span>
                 <span className="activityListItemText">{`${item.title}`}</span>
               </ListGroup.Item>
-              {/* <ListGroup.Item className="activityListItem">
-                <span className="activityListItemType">Duration </span>
-                <span className="activityListItemText">
-                  <Moment duration={item.start_time} date="2018-11-1T12:59-0500" />
-                </span>
-              </ListGroup.Item> */}
+              <div>
+                <AddIcon className="addToCalendarIcon" />
+              </div>
             </ListGroup>
           </Card.Body>
           <div className="activityFooter">

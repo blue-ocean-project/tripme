@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import AddActivityForm from './AddActivityForm.jsx';
+import Comments from './Comments.jsx';
 
 const ActivityDetailModal = ({ item, handleClickToToggleActivityDetailModal }) => {
   const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
