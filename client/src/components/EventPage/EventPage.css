@@ -1,11 +1,11 @@
 .eventPage-container {
   height: 100%;
+  width: 100%;
   display: flex;
 }
 
 .eventPage-details {
   height: 100%;
-  border: 2px dotted grey;
 }
 
 .eventPage-activity-selector {
@@ -15,16 +15,17 @@
 }
 
 .eventPage-trip {
-  height: 33%;
+  height: 23%;
   margin: 1%;
   border: 2px dotted grey;
 }
 
 .eventPage-calendar {
-  height: 63%;
+  height: 73%;
   margin: 1%;
   padding: 1%;
-  border: 2px dotted grey;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 .eventPage-activity {

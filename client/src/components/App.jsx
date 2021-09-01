@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import NavBar from './NavBar/NavBar.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import EventPage from './EventPage/EventPage.jsx';

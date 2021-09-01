@@ -1,47 +1,65 @@
+/* eslint-disable object-shorthand */
 import './Login.css';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import SignupModal from './SignupModal.jsx';
+import actions from '../../state/actions';
+import Server from '../../lib/Server';
+// import Form from 'react-bootstrap/Form';
 
 const Login = () => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const { openModal, login } = bindActionCreators(actions, dispatch);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <div>
       <div className="login-welcome">Welcome to Trip.Me!</div>
       <form className="login-field">
-        <label>
-          <input className="login-email" type="text" placeholder="Email" />
-          <div />
-          <input className="login-password" type="password" placeholder="Password" />
-        </label>
+        <input
+          className="login-email"
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <div />
-        <Button className="login-button" variant="outline-info">
+        <input
+          className="login-password"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <div />
+        <Button
+          className="login-button"
+          variant="outline-info"
+          onClick={() => {
+            const verifyUser = {
+              email: email,
+              password: password,
+            };
+            Server.post('/auth/login', verifyUser)
+              .then((result) => {
+                console.log(result);
+                // login(result);
+              })
+              .catch((err) => console.log('err.response.data: ', err.response.data));
+          }}
+        >
           Login
         </Button>
         <div />
-        <Button className="login-button" variant="outline-danger" onClick={handleShow}>
+        <Button className="login-button" variant="outline-danger" onClick={() => openModal()}>
           Signup
         </Button>
       </form>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Body>
-          <div className="login-step">Step 1: How do you want to sign up?</div>
-          <Form.Group>
-            <Form.Label />
-            <Form.Control as="textarea" type="button" name="Email" placeholder="Email" />
-            {/* <Form.Control.Feedback type="invalid">Please write a question.</Form.Control.Feedback> */}
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <SignupModal />
     </div>
   );
 };

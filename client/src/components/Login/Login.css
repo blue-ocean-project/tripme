@@ -1,9 +1,6 @@
+.login-email,
+.login-password,
 .login-button {
-  width: 250px;
-  margin-bottom: 10px;
-}
-
-.login-email {
   width: 250px;
   margin-bottom: 10px;
 }
@@ -12,14 +9,10 @@
   text-align: center;
 }
 
-.login-password {
-  width: 250px;
-  margin-bottom: 10px;
-}
-
 .login-step {
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .login-welcome {
@@ -27,4 +20,20 @@
   font-size: 50px;
   margin-bottom: 100px;
   margin-top: 100px;
+}
+
+.signup-choices {
+  width: 250px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 60px;
+}
+
+.signup-email {
+  text-align: center;
+}
+
+.signup-status {
+  color: red;
+  margin-bottom: 10px;
 }
