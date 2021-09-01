@@ -37,6 +37,7 @@
     "jest": "^27.0.6",
     "lint-staged": "^11.1.2",
     "nodemon": "^2.0.12",
+    "url-loader": "^4.1.1",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },
