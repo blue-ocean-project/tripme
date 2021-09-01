@@ -8,7 +8,6 @@
   width: auto;
   overflow: auto;
   margin-left: 0;
-  border: 1px solid gray;
 }
 
 /* .dashboard-title {
@@ -71,7 +70,7 @@
 
 .tripCard:hover {
   opacity: 1;
-  border: 2px;
+  /* border: 2px; */
 }
 
 .tripCard img {
