@@ -15,7 +15,7 @@ function CreateEvent() {
 
   return (
     <>
-      <button className="button" onClick={handleShow}>
+      <button className="createTripButton" onClick={handleShow}>
         Create Trip
       </button>
 
