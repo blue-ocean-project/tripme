@@ -3,11 +3,6 @@
   width: 100%;
 }
 
-.dashboard-search {
-  height: 10%;
-  border: 2px dotted grey;
-}
-
 .dashboard-title {
   height: 8%;
   border: 2px dotted grey;
@@ -19,11 +14,22 @@
 }
 
 .dashboard-upcoming {
+  display: grid;
+  grid-template-columns: 333px 333px 333px;
+  width: 100%;
+  margin: auto;
   height: 41%;
+  background-color: red;
   border: 2px dotted grey;
 }
 
 .dashboard-past {
   height: 41%;
+  background-color: purple;
   border: 2px dotted grey;
+}
+
+.dashboard-create {
+  background-color: yellow;
+  height: 5%;
 }
