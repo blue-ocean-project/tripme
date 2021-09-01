@@ -1,0 +1,167 @@
+.activityComponentHeader {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.activityCards {
+  display: flexbox;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 88%;
+  width: auto;
+}
+
+.individualActivityCard {
+  display: flexbox;
+  height: 15rem;
+  width: auto;
+  border: 1px solid rgb(84, 116, 138);
+  margin-bottom: 1rem;
+}
+
+.individualActivityCard:hover .cardHeaderImg {
+  opacity: 80%;
+  transform: scale(1.01);
+}
+
+.individualActivityCardImgDiv {
+  margin-left: 0;
+  border: 0;
+  padding: 0;
+  align-self: center;
+  transition: 0.2s;
+}
+
+.cardHeaderImg {
+  width: clamp(500px, 10vw, 1000px);
+  height: 80px;
+  opacity: 50%;
+  transition: 0.2s ease-in-out;
+  margin-top: 1rem;
+}
+
+.individualActivityCard :hover {
+  cursor: pointer;
+}
+
+.activityListGroup {
+  align-content: center;
+  margin-left: 2%;
+  transition: 0.3s ease-in-out;
+}
+
+.activityListItem {
+  padding: 0.15rem;
+  font-size: clamp(8px, 2vw, 12px);
+}
+
+.activityListItemType {
+  margin-right: 1rem;
+  padding-right: 1rem;
+  border-right: 1px solid rgb(66, 114, 248);
+}
+.activityListItemType,
+.activityListItem :hover {
+  color: #022b55;
+}
+.activityListItemText {
+  margin-left: 0.1rem;
+}
+
+.activityFooter {
+  display: flex;
+  align-items: flex-end;
+  flex: 2;
+  justify-content: space-around;
+  margin-bottom: 0.5rem;
+}
+
+.activityClickToSeeMore {
+  display: flex;
+  align-items: 'center';
+  text-align: center;
+  /* margin-bottom: 0.15rem; */
+  font-size: clamp(8px, 2vw, 12px);
+  border: none;
+  background: none;
+  transition: 0.3s ease-in-out;
+}
+.activityClickToSeeMore:hover {
+  color: #022b55;
+  transform: scale(1.1);
+}
+.smsIcon {
+  display: flex;
+  align-items: 'center';
+  font-size: clamp(8px, 2vw, 12px);
+  border: none;
+  background: none;
+  transition: 0.3s ease-in-out;
+}
+
+.smsIcon:hover {
+  color: #022b55;
+  transform: scale(1.1);
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.tooltip-inner {
+  position: absolute;
+  font-size: 10px;
+  padding: 0;
+  width: 6rem;
+  background-color: #9a9b9c;
+  box-shadow: 0px 0px 2px rgb(250, 246, 246);
+  opacity: 1 !important;
+}
+
+.addActivityButton {
+  margin-left: 5%;
+  margin-bottom: 2rem;
+  width: 90%;
+}
+
+.commentActivity {
+  padding-left: 0.5rem;
+}
+
+.chooseActicityType {
+  font-size: clamp(14px, 2vw, 15px);
+}
+
+.addActivityModal {
+  width: 897px;
+  height: 600px;
+}
+
+.addActivityModalCloseButton {
+  margin-top: 2rem;
+  margin-left: 11rem;
+  width: 8rem;
+  height: 2.5rem;
+}
+
+.addActivityForm {
+  margin-left: 10%;
+  width: 80%;
+}
+
+.addActivityFormInput {
+  margin-top: 1rem;
+}
+
+.chooseDuration {
+  width: 80%;
+}
+.chooseActivityDate {
+  width: 100%;
+}
+.addActivityModalSubmitButton {
+  margin-top: 2rem;
+  margin-left: 8rem;
+  width: 8rem;
+  height: 2.5rem;
+}
