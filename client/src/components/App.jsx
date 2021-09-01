@@ -30,9 +30,6 @@ const App = () => {
             </div>
           )}
         </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
         <Route path="/login">
           <div className="Login">
             <Login />

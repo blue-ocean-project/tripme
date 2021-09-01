@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   createNewActivity: createNewActivityReducer,
   leaveNewComment: leaveNewCommentReducer,
 
+  //Login Reducers
   changePage: changePageReducer,
   viewModal: viewModalReducer,
   modalStep: modalStepReducer,
