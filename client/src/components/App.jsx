@@ -9,9 +9,9 @@ const App = () => (
     <div className="Navbar">
       <NavBar />
     </div>
-    {/* <div className="Dashboard">
+    <div className="Dashboard">
       <Dashboard />
-    </div> */}
+    </div>
     <div className="Eventpage">
       <EventPage />
     </div>
