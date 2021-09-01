@@ -20,7 +20,7 @@ const App = () => {
           <div className="Navbar">
             <NavBar />
           </div>
-          {true ? (
+          {false ? (
             <div className="Dashboard">
               <Dashboard />
             </div>
@@ -29,9 +29,6 @@ const App = () => {
               <EventPage />
             </div>
           )}
-        </Route>
-        <Route path="/dashboard">
-          <Dashboard />
         </Route>
         <Route path="/login">
           <div className="Login">
