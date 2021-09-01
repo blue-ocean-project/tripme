@@ -16,12 +16,12 @@
   background-color: lightgray;
   border: 4px dotted grey;
   width: 100%;
-  height: 5vh;
+  height: 10vh;
 }
 
 .Dashboard {
   background-color: lightgray;
-  height: 95vh;
+  height: 130vh;
   width: 100%;
   margin: 0;
 }
