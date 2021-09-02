@@ -7,18 +7,24 @@ import { useDispatch } from 'react-redux';
 import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
-// import Form from 'react-bootstrap/Form';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { openModal, login } = bindActionCreators(actions, dispatch);
+  const { openModal } = bindActionCreators(actions, dispatch);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [invalid, setInvalidStatus] = useState(true);
+  const [hasError, setError] = useState(false);
 
   return (
-    <div>
+    <>
       <div className="login-welcome">Welcome to Trip.Me!</div>
+      {hasError ? (
+        <div className="login-errors">
+          {invalid ? <span>Invalid Username/Password</span> : <span>Please verify your email</span>}
+        </div>
+      ) : null}
       <form className="login-field">
         <input
           className="login-email"
@@ -45,11 +51,16 @@ const Login = () => {
               password: password,
             };
             Server.post('/auth/login', verifyUser)
-              .then((result) => {
-                console.log(result);
-                // login(result);
+              .then(() => {
+                window.location.reload();
               })
-              .catch((err) => console.log('err.response.data: ', err.response.data));
+              .catch((err) => {
+                if (err.response.data === 'Login Failed: Invalid Syntax.') {
+                  setError(true);
+                } else {
+                  setInvalidStatus(false);
+                }
+              });
           }}
         >
           Login
@@ -60,7 +71,7 @@ const Login = () => {
         </Button>
       </form>
       <SignupModal />
-    </div>
+    </>
   );
 };
 

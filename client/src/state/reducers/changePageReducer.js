@@ -1,11 +1,9 @@
 const reducer = (state = true, action) => {
   switch (action.type) {
     case 'dashboard':
-      return true;
+      return action.payload;
     case 'eventpage':
-      return false;
-    case 'switch':
-      return !state;
+      return action.payload;
     default:
       return state;
   }

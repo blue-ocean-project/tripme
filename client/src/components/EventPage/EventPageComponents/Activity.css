@@ -198,6 +198,9 @@
 }
 .addedToCalendar {
 }
+.addToCalendarButtons {
+  margin-top: 1rem;
+}
 
 .activityDetailTitle {
   margin-bottom: 1rem;

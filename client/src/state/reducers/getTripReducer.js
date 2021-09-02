@@ -1,6 +1,6 @@
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case 'getTrips':
+    case 'getTrip':
       return action.payload;
     default:
       return state;

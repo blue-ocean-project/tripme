@@ -12,7 +12,7 @@ import changePageReducer from './changePageReducer';
 import viewModalReducer from './viewModalReducer';
 import modalStepReducer from './modalStepReducer';
 import currentUserReducer from './currentUserReducer';
-import getTripReducer from './getTripsReducer';
+import getTripReducer from './getTripReducer';
 
 const rootReducer = combineReducers({
   // Activity Reducers
@@ -24,13 +24,13 @@ const rootReducer = combineReducers({
   createNewActivity: createNewActivityReducer,
   leaveNewComment: leaveNewCommentReducer,
 
-  //Login Reducers
+  // Login Reducers
   changePage: changePageReducer,
   viewModal: viewModalReducer,
   modalStep: modalStepReducer,
   user: currentUserReducer,
 
-  //Dashboard Reducers
+  // Dashboard Reducers
   getTrip: getTripReducer,
 });
 
