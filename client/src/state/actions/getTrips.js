@@ -1,3 +1,8 @@
-import Server from '../../lib/Server';
+import axios from 'axios';
+import Server from '../../lib/Server.js';
 
-export default (user_id) => Server.get('/trips', { params: { user_id } });
+console.log('base url', Server);
+
+export default (user_id) => {
+  return Server.get('/trips', { params: { user_id } });
+};
