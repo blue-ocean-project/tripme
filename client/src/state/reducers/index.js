@@ -13,6 +13,7 @@ import viewModalReducer from './viewModalReducer';
 import modalStepReducer from './modalStepReducer';
 import currentUserReducer from './currentUserReducer';
 import getTripReducer from './getTripReducer';
+import changeTripIdReducer from './changeTripIdReducer';
 
 const rootReducer = combineReducers({
   // Activity Reducers
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
 
   // Dashboard Reducers
   getTrip: getTripReducer,
+  tripId: changeTripIdReducer,
 });
 
 export default rootReducer;

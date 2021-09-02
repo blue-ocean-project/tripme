@@ -76,9 +76,9 @@ function CreateEvent() {
           <button
             type="button"
             onClick={() => {
-              createEvents(6, name, destination, startDate, endDate)
+              createEvents(8, name, destination, startDate, endDate)
                 .then(() => {
-                  getTrips(6).then((results) => {
+                  getTrips(8).then((results) => {
                     dispatch(getTrip(results.data));
                   });
                 })
