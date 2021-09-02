@@ -10,7 +10,10 @@ import actions from '../../state/actions';
 const SignupModal = () => {
   const viewModal = useSelector((state) => state.viewModal);
   const dispatch = useDispatch();
-  const { closeModal, login } = bindActionCreators(actions, dispatch);
+  const { closeModal, login, openVerificationModal, closeVerificationModal } = bindActionCreators(
+    actions,
+    dispatch,
+  );
 
   const [step, setStep] = useState('step1');
   const [firstName, setFirstName] = useState('');
@@ -141,7 +144,8 @@ const SignupModal = () => {
                     .then((result) => {
                       console.log(result);
                       resetStep();
-                      verification();
+                      closeModal();
+                      openVerificationModal();
                     })
                     .catch((err) => {
                       setStatusMessage(err.response.data);

@@ -7,14 +7,16 @@ import { useDispatch } from 'react-redux';
 import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
+import EmailVerification from './EmailVerification.jsx';
 // import Form from 'react-bootstrap/Form';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { openModal, login } = bindActionCreators(actions, dispatch);
+  const { openModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
 
   return (
     <div>
@@ -36,6 +38,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div />
+        <div className="login-status">{statusMessage}</div>
         <Button
           className="login-button"
           variant="outline-info"
@@ -46,10 +49,13 @@ const Login = () => {
             };
             Server.post('/auth/login', verifyUser)
               .then((result) => {
-                console.log(result);
+                console.log('result: ', result, 'result status: ', result.status);
                 // login(result);
               })
-              .catch((err) => console.log('err.response.data: ', err.response.data));
+              .catch((err) => {
+                console.log('err.response.data: ', err.response.data);
+                setStatusMessage(err.response.data);
+              });
           }}
         >
           Login
@@ -60,6 +66,7 @@ const Login = () => {
         </Button>
       </form>
       <SignupModal />
+      <EmailVerification />
     </div>
   );
 };
