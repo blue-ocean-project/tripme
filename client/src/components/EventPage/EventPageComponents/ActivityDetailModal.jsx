@@ -9,6 +9,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
+  // console.log(item);
   const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
   const { start_time } = item;
   const { end_time } = item;
