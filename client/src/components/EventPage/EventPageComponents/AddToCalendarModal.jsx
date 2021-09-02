@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const AddToCalendarModal = ({ setReren }) => {
+const AddToCalendarModal = ({}) => {
   const dispatch = useDispatch();
   const { addActivityToCalendar, toggleAddToCalendarModal } = bindActionCreators(
     actionCreators,
@@ -17,17 +17,20 @@ const AddToCalendarModal = ({ setReren }) => {
   const activityIdAddToCalendar = useSelector((state) => state.activityIdAddToCalendar);
   const [startTime, setStarTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
+  const [validateTime, setValidateTime] = useState(false);
 
   const handleAddToCalendar = (e) => {
     // e.preventDefault();
-    // if (moment(starTime).isBefore(endTime)) {
-    const title = 'fgd';
-    addActivityToCalendar(activityIdAddToCalendar, startTime, endTime, title, setReren);
-    toggleAddToCalendarModal();
+    if (moment(startTime).isBefore(endTime)) {
+      const title = 'please work';
+      addActivityToCalendar(activityIdAddToCalendar, startTime, endTime, title);
+      toggleAddToCalendarModal();
+    } else {
+      setValidateTime(true);
+    }
   };
 
   const handleCancelButton = (e) => {
-    e.preventDefault();
     toggleAddToCalendarModal();
   };
 
@@ -64,6 +67,7 @@ const AddToCalendarModal = ({ setReren }) => {
               dateFormat="Pp"
               onChange={(d) => setEndTime(d)}
             />
+            {validateTime && <div className="validation">Start Time Must Before End Time!</div>}
           </Form.Group>
         </Form>
         <Container>

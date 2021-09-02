@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Activity.css';
 import { CardColumns, Container, Row, Col, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,9 +12,8 @@ import LeaveCommentModal from './LeaveCommentModal.jsx';
 
 const Activity = () => {
   const dispatch = useDispatch();
-  const activities = useSelector((state) => state.activities).sort((a, b) => b.id - a.id);
 
-  const [reren, setReren] = useState(true);
+  const activities = useSelector((state) => state.activities).sort((a, b) => b.id - a.id);
   const {
     toggleAddActivityModal,
     toggleActivityDetailModal,
@@ -57,12 +56,9 @@ const Activity = () => {
           </Col>
         </Row>
       </Container>
-      <AddActivityModal toggleAddActivityModal={toggleAddActivityModal} setReren={setReren} />
-      <ActivityDetailModal
-        toggleActivityDetailModal={toggleActivityDetailModal}
-        setReren={setReren}
-      />
-      <AddToCalendarModal toggleAddToCalendarModal={toggleAddToCalendarModal} setReren={setReren} />
+      <AddActivityModal toggleAddActivityModal={toggleAddActivityModal} />
+      <ActivityDetailModal toggleActivityDetailModal={toggleActivityDetailModal} />
+      <AddToCalendarModal toggleAddToCalendarModal={toggleAddToCalendarModal} />
       <LeaveCommentModal toggleLeaveCommentModal={toggleLeaveCommentModal} />
     </>
   );

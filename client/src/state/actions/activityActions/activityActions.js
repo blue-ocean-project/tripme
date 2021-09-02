@@ -47,14 +47,13 @@ export const addToCalendarId = (id) => ({
 });
 
 export const addActivityToCalendar =
-  (activityIdAddToCalendar, startTime, endTime, title, setReren) => async () => {
+  (activityIdAddToCalendar, startTime, endTime, title) => async () => {
     try {
       const addToCalendarActivity = await Server.patch(`activities/${activityIdAddToCalendar}`, {
         start_time: startTime,
         end_time: endTime,
         title: title,
       });
-      await setReren(false);
       console.log(activityIdAddToCalendar, startTime, endTime, title);
     } catch (e) {
       console.log(e);

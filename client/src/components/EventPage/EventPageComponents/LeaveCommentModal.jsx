@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import Comments from './Comments.jsx';
 
 const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
                 </Row>
               </Container>
             </Form>
+            <Row>{/* <Comments /> */}</Row>
           </div>
         </Modal.Body>
       </Modal>

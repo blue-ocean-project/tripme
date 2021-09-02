@@ -17,7 +17,6 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
   const [newStartTime, setNewStartTime] = useState('');
   const [newEndTime, setNewEndTime] = useState('');
   const currentActivity = useSelector((state) => state.currentActivity);
-  console.log(currentActivity);
   const option = [
     { value: 'shopping', label: 'shopping' },
     { value: 'sightseeing', label: 'sightseeing' },
