@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   isAddActivityModalOpen: isAddActivityModalOpenReducer,
   isActivityDetailModalOpen: isActivityDetailModalOpenReducer,
   isLeaveNewCommentModalOpen: isLeaveNewCommentModalOpenReducer,
-  // isAddToCalendarModalOpen: isAddToCalendarModalOpenReducer,
+  isAddToCalendarModalOpen: isAddToCalendarModalOpenReducer,
   createNewActivity: createNewActivityReducer,
   leaveNewComment: leaveNewCommentReducer,
 
@@ -31,7 +31,6 @@ const rootReducer = combineReducers({
   modalStep: modalStepReducer,
   user: currentUserReducer,
   viewVerificationModal: verificationModalReducer,
-
   // Dashboard Reducers
   getTrip: getTripReducer,
 });
