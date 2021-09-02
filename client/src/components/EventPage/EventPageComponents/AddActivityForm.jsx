@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-// import axios from 'axios';
-// import { useSelector, useDispatch } from 'react-redux';
+import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
+import { bindActionCreators } from 'redux';
 
 const AddActivityForm = () => {
+  const dispatch = useDispatch();
+  const { toggleAddActivityModal, createNewActivity } = bindActionCreators(
+    actionCreators,
+    dispatch,
+  );
   const [type, setType] = useState({});
   const [title, setTitle] = useState('');
   const [startTime, setStarTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   // const trip_id = useSelector((state) => { state.trip_id });
-  const tripId = 0;
   const option = [
     { value: 'shopping', label: 'shopping' },
     { value: 'sightseeing', label: 'sightseeing' },
@@ -27,22 +31,27 @@ const AddActivityForm = () => {
     { value: 'other', label: 'other' },
   ];
 
-  const dispatch = useDispatch();
+  const handleCloseAddActivityModal = (e) => {
+    e.preventDefault();
+    toggleAddActivityModal();
+  };
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
-  const createNewActivity = useSelector((state) => state.createNewActivity);
+  const newActivity = useSelector((state) => state.newActivity);
 
   const handleSubmit = () => {
-    dispatch({
-      type: 'CREATE_NEW_ACTIVITY',
-      payload: {
-        type: type.value,
-        title,
-        start_time: startTime,
-        end_time: endTime,
-        trip_id: tripId,
-      },
-    });
-    dispatch({ type: 'TOGGLE_ACTIVITY_MODAL' });
+    createNewActivity(1, type.value, title);
+    // dispatch({
+    //   type: 'CREATE_NEW_ACTIVITY',
+    //   payload: {
+    //     type: type.value,
+    //     title,
+    //     start_time: startTime,
+    //     end_time: endTime,
+    //     trip_id: tripId,
+    //   },
+    // });
+
+    toggleAddActivityModal();
   };
 
   return (
@@ -87,9 +96,23 @@ const AddActivityForm = () => {
           onChange={(d) => setEndTime(d)}
         />
       </Form.Group> */}
-      <Button className="addActivityModalSubmitButton" onClick={handleSubmit}>
-        Submit
-      </Button>
+      <Row>
+        <Col>
+          <Button className="addActivityModalSubmitButton" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Col>
+        <Col>
+          <Button
+            className="addActivityModalCloseButton"
+            onClick={(e) => {
+              toggleAddActivityModal(e);
+            }}
+          >
+            close
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 };

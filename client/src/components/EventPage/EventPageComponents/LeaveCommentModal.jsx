@@ -25,6 +25,7 @@ const LeaveCommentModal = ({ openLeaveCommentModal }) => {
           <Modal.Title> Thoughts about this activity </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <Container></Container>
           <div>
             <Form className="leaveCommentForm" onSubmit={handleSubmit}>
               <div>Comment:</div>

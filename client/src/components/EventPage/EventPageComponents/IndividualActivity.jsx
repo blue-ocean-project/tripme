@@ -16,7 +16,7 @@ import dining from './img/dining.jpeg';
 import seltCare from './img/selfCare.png';
 import other from './img/other.png';
 import './Activity.css';
-import AddActivityForm from './AddActivityForm.jsx';
+// import AddActivityForm from './AddActivityForm.jsx';
 import ActivityDetailModal from './ActivityDetailModal.jsx';
 import LeaveCommentModal from './LeaveCommentModal.jsx';
 import AddToCalendarModal from './AddToCalendarModal.jsx';
@@ -172,7 +172,7 @@ const IndividualActivity = ({ item }) => {
         </Card>
       </OverlayTrigger>
       <div>
-        <Modal
+        {/* <Modal
           contentClassName="addActivityModal"
           centered
           show={isAddActivityModalOpen}
@@ -195,9 +195,13 @@ const IndividualActivity = ({ item }) => {
             close
           </Button>
           <Modal.Body />
-        </Modal>
+        </Modal> */}
       </div>
-      <ActivityDetailModal item={item} openActivityDetailModal={openActivityDetailModal} />
+      <ActivityDetailModal
+        key={`activityDetailModal${item.key}}`}
+        item={item}
+        openActivityDetailModal={openActivityDetailModal}
+      />
       <LeaveCommentModal openLeaveCommentModal={openLeaveCommentModal} />
       <AddToCalendarModal openAddToCalendarModal={openAddToCalendarModal} />
     </div>

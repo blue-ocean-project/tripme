@@ -74,7 +74,7 @@ const sampleActivityList = [
 
 export const activitiesReducer = (state = sampleActivityList, action) => {
   switch (action.type) {
-    case 'FETCH_ACTIVITY':
+    case 'FETCH_ACTIVITIES':
       return action.payload;
     default:
       return state;
@@ -83,14 +83,14 @@ export const activitiesReducer = (state = sampleActivityList, action) => {
 
 export const isAddActivityModalOpenReducer = (state = false, action) => {
   switch (action.type) {
-    case 'TOGGLE_ACTIVITY_MODAL':
+    case 'TOGGLE_ADD_ACTIVITY_MODAL':
       return !state;
     default:
       return state;
   }
 };
 
-export const createNewActivityReducer = (state = {}, action) => {
+export const newActivityReducer = (state = {}, action) => {
   switch (action.type) {
     case 'CREATE_NEW_ACTIVITY':
       return action.payload;
