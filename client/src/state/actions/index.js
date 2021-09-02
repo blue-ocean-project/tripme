@@ -1,20 +1,66 @@
 const actions = {
-  changeToDashboard: (state) => (dispatch) => {
+  changeToDashboard: () => (dispatch) => {
     dispatch({
       type: 'dashboard',
-      payload: state,
+      payload: true,
     });
   },
-  changeToEventPage: (state) => (dispatch) => {
+  changeToEventPage: () => (dispatch) => {
     dispatch({
       type: 'eventpage',
+      payload: false,
+    });
+  },
+
+  // Login
+  openModal: (state) => (dispatch) => {
+    dispatch({
+      type: 'openModal',
       payload: state,
     });
   },
-  changePage: (state) => (dispatch) => {
+  closeModal: (state) => (dispatch) => {
     dispatch({
-      type: 'switch',
-      payload: !state,
+      type: 'closeModal',
+      payload: state,
+    });
+  },
+  signupNextStep: (state) => (dispatch) => {
+    dispatch({
+      type: 'step2',
+      payload: state,
+    });
+  },
+  resetStep: (state) => (dispatch) => {
+    dispatch({
+      type: 'step1',
+      payload: state,
+    });
+  },
+  login: (state) => (dispatch) => {
+    dispatch({
+      type: 'login',
+      payload: state,
+    });
+  },
+  logout: (state) => (dispatch) => {
+    dispatch({
+      type: 'logout',
+      payload: state,
+    });
+  },
+
+  // Dashboard
+  changeTripId: (state) => (dispatch) => {
+    dispatch({
+      type: 'tripId',
+      payload: state,
+    });
+  },
+  getTrip: (state) => (dispatch) => {
+    dispatch({
+      type: 'getTrip',
+      payload: state,
     });
   },
 };

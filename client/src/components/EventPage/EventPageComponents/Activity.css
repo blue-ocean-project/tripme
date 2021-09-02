@@ -4,11 +4,11 @@
 }
 
 .activityCards {
-  display: flexbox;
+  display: flex;
   flex-direction: column;
   overflow: auto;
-  max-height: 88%;
-  width: auto;
+  max-height: 90%;
+  width: 100%;
 }
 
 .individualActivityCard {
@@ -18,10 +18,13 @@
   border: 1px solid rgb(84, 116, 138);
   margin-bottom: 1rem;
 }
-
+.individualActivityCard:hover {
+  opacity: 1;
+}
 .individualActivityCard:hover .cardHeaderImg {
   opacity: 80%;
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
+  /* overflow: auto; */
 }
 
 .individualActivityCardImgDiv {
@@ -52,7 +55,7 @@
 
 .activityListItem {
   padding: 0.15rem;
-  font-size: clamp(8px, 2vw, 12px);
+  font-size: clamp(7px, 2vw, 14px);
 }
 
 .activityListItemType {
@@ -71,7 +74,7 @@
 .activityFooter {
   display: flex;
   align-items: flex-end;
-  flex: 2;
+  flex: 3;
   justify-content: space-around;
   margin-bottom: 0.5rem;
 }
@@ -80,20 +83,19 @@
   display: flex;
   align-items: 'center';
   text-align: center;
-  /* margin-bottom: 0.15rem; */
-  font-size: clamp(8px, 2vw, 12px);
+  font-size: clamp(5px, 2vw, 12px);
   border: none;
   background: none;
   transition: 0.3s ease-in-out;
+  padding-bottom: 4px;
 }
 .activityClickToSeeMore:hover {
-  color: #022b55;
   transform: scale(1.1);
 }
 .smsIcon {
   display: flex;
   align-items: 'center';
-  font-size: clamp(8px, 2vw, 12px);
+  font-size: clamp(5px, 2vw, 12px);
   border: none;
   background: none;
   transition: 0.3s ease-in-out;
@@ -164,4 +166,93 @@
   margin-left: 8rem;
   width: 8rem;
   height: 2.5rem;
+}
+
+.addToCalendarIcon {
+  display: flex;
+  /* align-items: 'center'; */
+  font-size: clamp(8px, 2vw, 12px);
+  border: none;
+  background: none;
+  transition: 0.3s ease-in-out;
+}
+
+.addToCalendarIcon:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+}
+
+.addIconAlone {
+  padding-bottom: 3px;
+}
+
+.addToCalendarModal {
+  height: 30rem;
+  width: 48rem;
+}
+
+.modalCloseButton button {
+  outline: none;
+  background-color: Transparent;
+  border: 0.5px solid rgb(31, 112, 218);
+}
+.addedToCalendar {
+}
+.addToCalendarButtons {
+  margin-top: 1rem;
+}
+
+.activityDetailTitle {
+  margin-bottom: 1rem;
+}
+.activityDetailInfo {
+  color: rgb(61, 85, 112);
+  font-weight: 200;
+}
+
+.Eachcomment {
+  margin-top: 0.5rem;
+}
+
+.commentBody {
+  color: rgb(61, 85, 112);
+  font-weight: 200;
+  text-decoration: underline;
+}
+
+.leaveCommentButtonsContainer {
+  margin-top: 2rem;
+  justify-items: center;
+  align-items: center;
+}
+
+.updateActivityDetailSubmitButton {
+  margin-top: 6rem;
+}
+
+.updateActivityDetailCancelButton {
+  margin-top: 1rem;
+}
+.activityDetailModal {
+  width: 30rem;
+  height: 35rem;
+  overflow-y: auto;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.modal-backdrop.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.modal-backdrop.fade {
+  opacity: 0.03;
+  filter: alpha(opacity=0);
+}
+.modal-backdrop.fade.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }

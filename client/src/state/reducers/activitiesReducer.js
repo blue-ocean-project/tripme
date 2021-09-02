@@ -8,8 +8,8 @@ const sampleActivityList = [
   },
   {
     id: 2,
-    type: 'sightseeing',
-    title: 'Central Musume',
+    type: 'self care',
+    title: 'Thai Message',
     start_time: '2019-01-13T00:00:00.000Z',
     end_time: '2019-01-13T00:00:00.000Z',
     trip_id: 1,
@@ -120,6 +120,15 @@ export const isActivityDetailModalOpenReducer = (state = false, action) => {
 export const isLeaveNewCommentModalOpenReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_LEAVE_COMMENT_MODAL':
+      return !state;
+    default:
+      return state;
+  }
+};
+
+export const isAddToCalendarModalOpenReducer = (state = false, action) => {
+  switch (action.type) {
+    case 'TOGGLE_ADD_TO_CALENDAR_MODAL':
       return !state;
     default:
       return state;

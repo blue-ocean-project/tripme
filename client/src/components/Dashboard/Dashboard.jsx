@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import UpcomingTripsList from './DashboardComponents/UpcomingTripsList.jsx';
 import PastTripsList from './DashboardComponents/PastTripsList.jsx';
 
 import CreateEvent from './DashboardComponents/CreateEvent.jsx';
 import './Dashboard.css';
 
-const Dashboard = () => {
-  return (
-    <div className="dashboard-container">
-      <CreateEvent />
-      <div className="dashboard-title">
-        <span>Dashboard</span>
-      </div>
-      <div>Upcoming</div>
-      <div className="dashboard-upcoming">
-        <UpcomingTripsList />
-      </div>
-      <span>Past</span>
-      <div className="dashboard-past">
-        <PastTripsList />
-      </div>
-    </div>
-  );
-};
+const Dashboard = () => (
+  <>
+    <CreateEvent />
+    {/* <Container className="dashboard-container"> */}
+    <Row className="dashboard-title">
+      <span className="dashboard-title">Dashboard</span>
+    </Row>
+    <Row className="dashboard-Title-text">Upcoming</Row>
+    <Row className="dashboard-upcoming">
+      <UpcomingTripsList />
+    </Row>
+    <Row className="dashboard-Title-text">Past</Row>
+    <Row className="dashboard-past">
+      <PastTripsList />
+    </Row>
+    {/* </Container> */}
+  </>
+);
 
 export default Dashboard;

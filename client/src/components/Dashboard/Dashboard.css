@@ -1,35 +1,82 @@
-.dashboard-container {
+/* .dashboard-container {
   height: 100%;
   width: 100%;
+} */
+
+.dashboard-container {
+  height: 90vh;
+  width: auto;
+  overflow: auto;
+  margin-left: 0;
+}
+
+/* .dashboard-title {
+  height: 8%;
+  border: 2px dotted grey;
+} */
+
+/* .dashboard-title > span {
+  margin-left: 1%;
+  font-size: 4vh;
+} */
+.createTripButton {
+  margin-left: 0.3rem;
 }
 
 .dashboard-title {
-  height: 8%;
-  border: 2px dotted grey;
+  margin-left: 0.4rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
 }
-
-.dashboard-title > span {
-  margin-left: 1%;
-  font-size: 4vh;
+.dashboard-title span {
+  margin-left: 0;
+}
+.dashboard-Title-text {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .dashboard-upcoming {
-  display: grid;
-  grid-template-columns: 333px 333px 333px;
-  width: 100%;
-  margin: auto;
-  height: 41%;
-  background-color: red;
-  border: 2px dotted grey;
+  /* display: grid;
+  grid-template-columns: 333px 333px 333px; */
+  width: 100 vw;
+  height: auto;
+  /* margin: auto; */
+  /* height: 41%; */
+  /* background-color: red; */
+  /* border: 2px dotted grey; */
 }
 
 .dashboard-past {
   height: 41%;
-  background-color: purple;
-  border: 2px dotted grey;
+  /* background-color: purple; */
+  /* border: 2px dotted grey; */
 }
 
 .dashboard-create {
   background-color: yellow;
   height: 5%;
+}
+
+.tripCard {
+  margin-bottom: 0.2rem;
+  margin-left: 1rem;
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
+  border: 1px solid rgb(21, 116, 204);
+}
+
+.tripCard:hover {
+  opacity: 1;
+  /* border: 2px; */
+}
+
+.tripCard img {
+  margin-top: 0.5rem;
+}
+
+.tripCard button {
+  margin-top: 1rem;
 }

@@ -3,12 +3,12 @@ import './Upcoming.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
-import Yellowstone from '../../../../public/img/Yellowstone.png';
 
 const PastTrip = (props) => {
+  const query = 'camping';
   return (
-    <Card className="test" style={{ width: '20rem' }}>
-      <Card.Img variant="top" src={Yellowstone} />
+    <Card className="tripCard" style={{ width: '20rem' }}>
+      <Card.Img variant="top" src={`https://source.unsplash.com/1600x900/?${props.query}`} />
       <Card.Body>
         <Card.Title>{props.trip.destination}</Card.Title>
         <Card.Text as="div">
