@@ -1,7 +1,7 @@
 const reducer = (state = null, action) => {
   switch (action.type) {
     case 'login':
-      return state;
+      return action.payload;
     case 'logout':
       return null;
     default:

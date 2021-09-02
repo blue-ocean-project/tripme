@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 // import { bindActionCreators } from 'redux';
 import NavBar from './NavBar/NavBar.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
@@ -11,9 +11,13 @@ import './App.css';
 
 const App = () => {
   const state = useSelector((states) => states.changePage);
+  const user = useSelector((states) => states.user);
+  const query = new URLSearchParams(useLocation().search);
 
+  console.log(user);
   return (
     <div className="container-fluid">
+      {/* {query.get('verified') ? <Redirect to="/login" /> : null} */}
       <Switch>
         <Route exact path="/">
           <div className="Navbar">
