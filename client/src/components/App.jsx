@@ -11,6 +11,7 @@ import './App.css';
 
 const App = () => {
   const state = useSelector((states) => states.changePage);
+
   // const dispatch = useDispatch();
 
   return (
@@ -20,7 +21,7 @@ const App = () => {
           <div className="Navbar">
             <NavBar />
           </div>
-          {false ? (
+          {state ? (
             <div className="Dashboard">
               <Dashboard />
             </div>

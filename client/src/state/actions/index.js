@@ -53,6 +53,18 @@ const actions = {
       payload: state,
     });
   },
+  changeTripId: (state) => (dispatch) => {
+    dispatch({
+      type: 'tripId',
+      payload: state,
+    });
+  },
+  getTrip: (state) => (dispatch) => {
+    dispatch({
+      type: 'getTrips',
+      payload: state,
+    });
+  },
 };
 
 module.exports = actions;

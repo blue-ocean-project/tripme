@@ -12,6 +12,7 @@ import changePageReducer from './changePageReducer';
 import viewModalReducer from './viewModalReducer';
 import modalStepReducer from './modalStepReducer';
 import currentUserReducer from './currentUserReducer';
+import getTripReducer from './getTripsReducer';
 
 const rootReducer = combineReducers({
   // Activity Reducers
@@ -28,6 +29,9 @@ const rootReducer = combineReducers({
   viewModal: viewModalReducer,
   modalStep: modalStepReducer,
   user: currentUserReducer,
+
+  //Dashboard Reducers
+  getTrip: getTripReducer,
 });
 
 export default rootReducer;
