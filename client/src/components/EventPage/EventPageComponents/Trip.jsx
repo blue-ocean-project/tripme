@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { Container, Col, Row, Card, Button, Form, Modal } from 'react-bootstrap';
+import {
+  Container,
+  Col,
+  Row,
+  Card,
+  Button,
+  Form,
+  Modal,
+  InputGroup,
+  FormControl,
+  ListGroup,
+  Checkbox,
+} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import './Trip.css';
@@ -22,6 +34,7 @@ const participantDisplay = function (participantsList) {
 const Trip = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [inviteContacts, setInviteContacts] = useState('');
+  const [checkBoxOn, setCheckBoxOn] = useState(false);
 
   const openModal = function () {
     setModalIsOpen(true);
@@ -31,7 +44,14 @@ const Trip = () => {
   };
 
   const handleSubmit = function (event) {
-    e.preventDefault;
+    event.preventDefault;
+    console.log('GGGGG');
+    setModalIsOpen(false);
+  };
+
+  const handleCheckBox = function (event) {
+    setCheckBoxOn(!checkBoxOn);
+    console.log(event.target.value);
   };
 
   return (
@@ -61,6 +81,35 @@ const Trip = () => {
           </Col>
           <Col sm={4} className="trip-bot-col-third">
             <div>Checklist</div>
+            <InputGroup className="mb-3">
+              <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+              <ListGroup.Item>Hello world</ListGroup.Item>
+            </InputGroup>
+            <InputGroup className="mb-4">
+              <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+              <ListGroup.Item>cancel movie</ListGroup.Item>
+            </InputGroup>
+            <InputGroup className="mb-4">
+              <InputGroup.Checkbox aria-label="Checkbox for following text input2" />
+              <ListGroup.Item>개새끼야</ListGroup.Item>
+            </InputGroup>
+            <InputGroup className="mb-4">
+              <InputGroup.Checkbox
+                checked={checkBoxOn}
+                value="213"
+                aria-label="Checkbox for following text input "
+                onChange={(e) => handleCheckBox(e)}
+              />
+              <ListGroup.Item>소새끼야</ListGroup.Item>
+            </InputGroup>
+            <InputGroup className="mb-4">
+              <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+              <ListGroup.Item>말새끼야</ListGroup.Item>
+            </InputGroup>
+            <InputGroup className="mb-4">
+              <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+              <ListGroup.Item>닭새끼야</ListGroup.Item>
+            </InputGroup>
           </Col>
         </Row>
       </Container>
@@ -105,16 +154,3 @@ const Trip = () => {
 };
 
 export default Trip;
-
-// <Form.Label>Type trip mate's name</Form.Label>
-// <Form.Control
-//   value={inviteFullName}
-//   type="text"
-//   placeholder="e.g. Tom Holland"
-//   onChange={(e) => {
-//     setinviteFullName(e.target.value);
-//   }}
-// />
-// <Form.Control.Feedback type="invalid">
-//   Please provide a valid name
-// </Form.Control.Feedback>
