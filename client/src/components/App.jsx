@@ -19,7 +19,7 @@ const App = () => {
           <div className="Navbar">
             <NavBar />
           </div>
-          {true ? (
+          {state ? (
             <div className="Dashboard">
               <Dashboard />
             </div>

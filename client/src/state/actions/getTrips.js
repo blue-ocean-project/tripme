@@ -1,7 +1,8 @@
 import axios from 'axios';
-import URL from '../../../../config.js';
+import Server from '../../lib/Server.js';
+
+console.log('base url', Server);
 
 export default (user_id) => {
-  const url = URL;
-  return axios.get(`${url}/trips`, { params: { user_id } });
+  return Server.get('/trips', { params: { user_id } });
 };

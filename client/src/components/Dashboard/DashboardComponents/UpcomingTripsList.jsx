@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './Upcoming.css';
 import Data from '../../../../../SampleData/Dashboard.js';
 import getTrips from '../../../state/actions/getTrips.js';
 import UpcomingTrip from './UpcomingTrip.jsx';
 
 const UpcomingTripsList = () => {
+  const localState = useSelector((states) => states.getTrip);
+  console.log(localState);
+
   const [upcoming, updateState] = useState([]);
 
   useEffect(() => {
