@@ -7,7 +7,6 @@ import UpcomingTrip from './UpcomingTrip.jsx';
 
 const UpcomingTripsList = () => {
   const localState = useSelector((states) => states.getTrip);
-  console.log(localState);
 
   const [upcoming, updateState] = useState([]);
 
