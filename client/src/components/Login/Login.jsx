@@ -4,27 +4,27 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
+// import { useParams } from 'react-router-dom';
 import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
+import EmailVerification from './EmailVerification.jsx';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { openModal } = bindActionCreators(actions, dispatch);
+  const { openModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
 
+  const trip = 'abc';
+  const key = '123';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [invalid, setInvalidStatus] = useState(true);
-  const [hasError, setError] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [verifyType, setVerifyType] = useState('');
+  // console.log('trip: ', trip, 'key: ', key);
 
   return (
-    <>
+    <div>
       <div className="login-welcome">Welcome to Trip.Me!</div>
-      {hasError ? (
-        <div className="login-errors">
-          {invalid ? <span>Invalid Username/Password</span> : <span>Please verify your email</span>}
-        </div>
-      ) : null}
       <form className="login-field">
         <input
           className="login-email"
@@ -42,36 +42,50 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div />
+        <div className="login-status">{statusMessage}</div>
         <Button
           className="login-button"
           variant="outline-info"
           onClick={() => {
+            setVerifyType('login');
             const verifyUser = {
               email: email,
               password: password,
             };
             Server.post('/auth/login', verifyUser)
-              .then(() => {
-                window.location.reload();
+              .then((result) => {
+                console.log('result.data: ', result.data);
+                login(result.data);
+                // if (trip && key) {
+                //   Server.post(`/invite/${trip}`, { params: { key: key } });
+                // }
+                if (result.data.verified === 'pending') {
+                  openVerificationModal();
+                }
               })
               .catch((err) => {
-                if (err.response.data === 'Login Failed: Invalid Syntax.') {
-                  setError(true);
-                } else {
-                  setInvalidStatus(false);
-                }
+                // console.log('err: ', err, 'err.response.data: ', err.response.data);
+                setStatusMessage(err.response.data);
               });
           }}
         >
           Login
         </Button>
         <div />
-        <Button className="login-button" variant="outline-danger" onClick={() => openModal()}>
+        <Button
+          className="login-button"
+          variant="outline-danger"
+          onClick={() => {
+            setVerifyType('signup');
+            openModal();
+          }}
+        >
           Signup
         </Button>
       </form>
-      <SignupModal />
-    </>
+      <SignupModal trip={trip} inviteCode={key} />
+      <EmailVerification verifyType={verifyType} />
+    </div>
   );
 };
 

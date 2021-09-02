@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 // import { bindActionCreators } from 'redux';
 import NavBar from './NavBar/NavBar.jsx';

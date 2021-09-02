@@ -12,6 +12,7 @@ import changePageReducer from './changePageReducer';
 import viewModalReducer from './viewModalReducer';
 import modalStepReducer from './modalStepReducer';
 import currentUserReducer from './currentUserReducer';
+import verificationModalReducer from './verificationModalReducer';
 import getTripReducer from './getTripReducer';
 
 const rootReducer = combineReducers({
@@ -29,7 +30,7 @@ const rootReducer = combineReducers({
   viewModal: viewModalReducer,
   modalStep: modalStepReducer,
   user: currentUserReducer,
-
+  viewVerificationModal: verificationModalReducer,
   // Dashboard Reducers
   getTrip: getTripReducer,
 });
