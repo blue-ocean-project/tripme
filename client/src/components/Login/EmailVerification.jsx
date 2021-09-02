@@ -5,12 +5,14 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../../state/actions';
+import Server from '../../lib/Server';
 
-const EmailVerification = () => {
+const EmailVerification = (props) => {
   const viewVerificationModal = useSelector((state) => state.viewVerificationModal);
   const currentUser = useSelector((state) => state.user);
 
   const [statusMessage, setStatusMessage] = useState('');
+  const [verifyMethod, setVerifyMethod] = useState('email');
 
   const dispatch = useDispatch();
   const { closeVerificationModal } = bindActionCreators(actions, dispatch);
@@ -18,7 +20,12 @@ const EmailVerification = () => {
   return (
     <Modal centered show={viewVerificationModal} onHide={closeVerificationModal}>
       <Modal.Body>
-        <div className="login-step">A verification email has been sent!</div>
+        {props.verifyType === 'login' && (
+          <div className="login-step">A verification link has already been sent to your email</div>
+        )}
+        {props.verifyType === 'signup' && (
+          <div className="login-step">A verification email has been sent!</div>
+        )}
         <div className="login-verification-subtext">
           Please click the link in your email to activate your account
         </div>
@@ -28,7 +35,9 @@ const EmailVerification = () => {
             variant="outline-info"
             onClick={() => {
               setStatusMessage('Email has been sent!');
-              console.log(currentUser);
+              Server.get('/signup/verify/sendCode', {
+                params: { user_id: currentUser.user_id, method: verifyMethod },
+              });
             }}
           >
             Resend email
@@ -39,5 +48,4 @@ const EmailVerification = () => {
     </Modal>
   );
 };
-
 export default EmailVerification;

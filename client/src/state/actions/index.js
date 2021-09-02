@@ -42,7 +42,6 @@ const actions = {
     });
   },
   login: (state) => (dispatch) => {
-    console.log('state from action creater: ', state);
     dispatch({
       type: 'login',
       payload: state,

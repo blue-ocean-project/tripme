@@ -1,15 +1,11 @@
-const reducer = (state, action) => {
-  console.log('state before switch: ', state);
+const reducer = (state = null, action) => {
   switch (action.type) {
     case 'login':
-      console.log('state from reducer: ', state);
-      return state;
+      return action.payload;
     case 'logout':
-      console.log('logout reducer: ', state);
       return null;
     default:
-      console.log('default reducer: ', state);
-      return null;
+      return state;
   }
 };
 

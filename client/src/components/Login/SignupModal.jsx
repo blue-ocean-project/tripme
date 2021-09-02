@@ -7,13 +7,10 @@ import { bindActionCreators } from 'redux';
 import Server from '../../lib/Server';
 import actions from '../../state/actions';
 
-const SignupModal = () => {
+const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
   const dispatch = useDispatch();
-  const { closeModal, login, openVerificationModal, closeVerificationModal } = bindActionCreators(
-    actions,
-    dispatch,
-  );
+  const { closeModal, openVerificationModal } = bindActionCreators(actions, dispatch);
 
   const [step, setStep] = useState('step1');
   const [firstName, setFirstName] = useState('');
@@ -23,6 +20,7 @@ const SignupModal = () => {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
+  const [verifyMethod, setVerifyMethod] = useState('email');
 
   const resetStep = () => {
     setStep('step1');
@@ -73,7 +71,6 @@ const SignupModal = () => {
         <Modal.Body>
           <div className="login-step">Step 2</div>
           <div className="signup-email">
-            {/* <label> */}
             <input
               className="login-email"
               type="text"
@@ -135,16 +132,17 @@ const SignupModal = () => {
                     password: password,
                   };
                   Server.post('/signup', newUser)
-                    .then((result) => {
-                      // console.log(result);
-                      login(result);
-                      return Server.get('/signup/verify/sendCode', {
-                        params: { user_id: result.data.user_id, method: 'email' },
-                      });
-                    })
-                    .then((result) => {
+                    .then((result) =>
+                      Server.get('/signup/verify/sendCode', {
+                        params: { user_id: result.data.user_id, method: verifyMethod },
+                      }),
+                    )
+                    .then(() => {
                       resetStep();
                       closeModal();
+                      if (props.trip && props.inviteCode) {
+                        Server.post(`/invite/${props.trip}`, { params: { key: props.inviteCode } });
+                      }
                       openVerificationModal();
                     })
                     .catch((err) => {

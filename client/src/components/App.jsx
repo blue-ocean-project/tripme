@@ -11,6 +11,8 @@ import './App.css';
 const App = () => {
   const state = useSelector((states) => states.changePage);
   // const dispatch = useDispatch();
+  const user = useSelector((states) => states.user);
+  console.log('current user state from app: ', user);
 
   return (
     <div className="container-fluid">
