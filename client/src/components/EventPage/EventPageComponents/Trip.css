@@ -24,7 +24,7 @@
 div[class^='trip-bot-col'] {
   display: flex;
   flex-direction: column;
-  background: yellow;
+  background: white;
 }
 
 /*///////////////////////DESTINATION & DATE COUNTS COLUMN ////////////*/

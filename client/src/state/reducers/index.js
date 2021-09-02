@@ -14,6 +14,8 @@ import changePageReducer from './changePageReducer';
 import viewModalReducer from './viewModalReducer';
 import modalStepReducer from './modalStepReducer';
 import currentUserReducer from './currentUserReducer';
+import verificationModalReducer from './verificationModalReducer';
+import getTripReducer from './getTripReducer';
 
 const rootReducer = combineReducers({
   // Activity Reducers
@@ -27,11 +29,14 @@ const rootReducer = combineReducers({
   newActivity: newActivityReducer,
   leaveNewComment: leaveNewCommentReducer,
 
-  //Login Reducers
+  // Login Reducers
   changePage: changePageReducer,
   viewModal: viewModalReducer,
   modalStep: modalStepReducer,
   user: currentUserReducer,
+  viewVerificationModal: verificationModalReducer,
+  // Dashboard Reducers
+  getTrip: getTripReducer,
 });
 
 export default rootReducer;

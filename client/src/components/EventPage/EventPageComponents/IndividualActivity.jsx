@@ -23,6 +23,7 @@ import LeaveCommentModal from './LeaveCommentModal.jsx';
 import AddToCalendarModal from './AddToCalendarModal.jsx';
 
 const IndividualActivity = ({ item }) => {
+  console.log(item);
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
   const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
   const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);

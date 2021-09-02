@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 // import { bindActionCreators } from 'redux';
 import NavBar from './NavBar/NavBar.jsx';
@@ -11,7 +11,6 @@ import './App.css';
 
 const App = () => {
   const state = useSelector((states) => states.changePage);
-  // const dispatch = useDispatch();
 
   return (
     <div className="container-fluid">
@@ -20,7 +19,7 @@ const App = () => {
           <div className="Navbar">
             <NavBar />
           </div>
-          {false ? (
+          {state ? (
             <div className="Dashboard">
               <Dashboard />
             </div>
