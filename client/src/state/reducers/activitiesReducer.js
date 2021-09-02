@@ -134,3 +134,21 @@ export const isAddToCalendarModalOpenReducer = (state = false, action) => {
       return state;
   }
 };
+
+export const currentActivityReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_ACTIVITY':
+      return action.item;
+    default:
+      return state;
+  }
+};
+
+export const activityIdAddToCalendarReducer = (state = '', action) => {
+  switch (action.type) {
+    case 'ACTIVITY_ID_ADD_TO_CALENDAR':
+      return action.id;
+    default:
+      return state;
+  }
+};

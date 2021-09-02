@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import {
   isAddActivityModalOpenReducer,
   activitiesReducer,
+  currentActivityReducer,
+  activityIdAddToCalendarReducer,
   newActivityReducer,
   isActivityDetailModalOpenReducer,
   leaveNewCommentReducer,
@@ -16,6 +18,8 @@ import currentUserReducer from './currentUserReducer';
 const rootReducer = combineReducers({
   // Activity Reducers
   activities: activitiesReducer,
+  currentActivity: currentActivityReducer,
+  activityIdAddToCalendar: activityIdAddToCalendarReducer,
   isAddActivityModalOpen: isAddActivityModalOpenReducer,
   isActivityDetailModalOpen: isActivityDetailModalOpenReducer,
   isLeaveNewCommentModalOpen: isLeaveNewCommentModalOpenReducer,

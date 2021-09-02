@@ -186,17 +186,15 @@
   padding-bottom: 3px;
 }
 
-.addToCalendarModal {
+/* .addToCalendarModal {
   height: 30rem;
   width: 48rem;
-}
+} */
 
 .modalCloseButton button {
   outline: none;
   background-color: Transparent;
   border: 0.5px solid rgb(31, 112, 218);
-}
-.addedToCalendar {
 }
 .addToCalendarButtons {
   margin-top: 1rem;
@@ -239,7 +237,7 @@
   overflow-y: auto;
 }
 
-.modal-backdrop.fade {
+/* .modal-backdrop.fade {
   opacity: 0;
   filter: alpha(opacity=0);
 }
@@ -255,4 +253,4 @@
 .modal-backdrop.fade.in {
   opacity: 0.5;
   filter: alpha(opacity=50);
-}
+} */

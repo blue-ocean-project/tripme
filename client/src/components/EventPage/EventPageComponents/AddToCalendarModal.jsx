@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
+import { bindActionCreators } from 'redux';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const addToCalendarModal = ({ openAddToCalendarModal }) => {
+const AddToCalendarModal = ({ setReren }) => {
+  const dispatch = useDispatch();
+  const { addActivityToCalendar, toggleAddToCalendarModal } = bindActionCreators(
+    actionCreators,
+    dispatch,
+  );
   const isAddToCalendarModalOpen = useSelector((state) => state.isAddToCalendarModalOpen);
+  const activityIdAddToCalendar = useSelector((state) => state.activityIdAddToCalendar);
   const [startTime, setStarTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
 
   const handleAddToCalendar = (e) => {
-    openAddToCalendarModal();
+    // e.preventDefault();
+    // if (moment(starTime).isBefore(endTime)) {
+    const title = 'fgd';
+    addActivityToCalendar(activityIdAddToCalendar, startTime, endTime, title, setReren);
+    toggleAddToCalendarModal();
+  };
+
+  const handleCancelButton = (e) => {
+    e.preventDefault();
+    toggleAddToCalendarModal();
   };
 
   return (
@@ -19,7 +37,7 @@ const addToCalendarModal = ({ openAddToCalendarModal }) => {
       centered
       animation
       contentClassName="addToCalendarModal"
-      onHide={openAddToCalendarModal}
+      onHide={toggleAddToCalendarModal}
     >
       {' '}
       <Modal.Header closeButton className="modalCloseButton">
@@ -53,7 +71,7 @@ const addToCalendarModal = ({ openAddToCalendarModal }) => {
             <Button className="addToCalendarButtons" onClick={(e) => handleAddToCalendar(e)}>
               Add To calendar
             </Button>
-            <Button className="addToCalendarButtons" onClick={(e) => handleAddToCalendar(e)}>
+            <Button className="addToCalendarButtons" onClick={(e) => toggleAddToCalendarModal(e)}>
               Cancel
             </Button>
           </Row>
@@ -63,4 +81,4 @@ const addToCalendarModal = ({ openAddToCalendarModal }) => {
   );
 };
 
-export default addToCalendarModal;
+export default AddToCalendarModal;

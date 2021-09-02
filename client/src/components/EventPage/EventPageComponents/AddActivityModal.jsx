@@ -1,14 +1,12 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import AddActivityForm from './AddActivityForm.jsx';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
+// import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
 
-const AddActivityModal = () => {
+const AddActivityModal = ({ toggleActivityModal }) => {
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
-  const dispatch = useDispatch();
-  const { toggleActivityModal } = bindActionCreators(actionCreators, dispatch);
 
   const handleAddActivityButtonClick = (e) => {
     e.preventDefault();
@@ -30,14 +28,6 @@ const AddActivityModal = () => {
       <div>
         <AddActivityForm />
       </div>
-      {/* <Button
-        className="addActivityModalCloseButton"
-        onClick={(e) => {
-          handleAddActivityButtonClick(e);
-        }}
-      >
-        close
-      </Button> */}
       <Modal.Body />
     </Modal>
   );

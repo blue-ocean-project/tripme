@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
-const LeaveCommentModal = ({ openLeaveCommentModal }) => {
+const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
   const dispatch = useDispatch();
   const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
   const [commentBody, setCommentBody] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    openLeaveCommentModal(e);
+    toggleLeaveCommentModal(e);
     dispatch({ type: 'LEAVE_NEW_COMMENT', payload: commentBody });
   };
 
@@ -19,13 +19,12 @@ const LeaveCommentModal = ({ openLeaveCommentModal }) => {
         centered
         animation
         show={isLeaveNewCommentModalOpen}
-        onHide={openLeaveCommentModal}
+        onHide={toggleLeaveCommentModal}
       >
         <Modal.Header>
           <Modal.Title> Thoughts about this activity </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Container></Container>
           <div>
             <Form className="leaveCommentForm" onSubmit={handleSubmit}>
               <div>Comment:</div>
@@ -42,13 +41,7 @@ const LeaveCommentModal = ({ openLeaveCommentModal }) => {
                     <Button onClick={(e) => handleSubmit(e)}>Submit</Button>
                   </Col>
                   <Col>
-                    <Button
-                      onClick={(e) => {
-                        openLeaveCommentModal(e);
-                      }}
-                    >
-                      close
-                    </Button>
+                    <Button onClick={toggleLeaveCommentModal}>close</Button>
                   </Col>
                 </Row>
               </Container>

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Card, ListGroup, OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Moment from 'react-moment';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
 import SmsIcon from '@material-ui/icons/Sms';
 import AddIcon from '@material-ui/icons/Add';
 import sightseeing from './img/sightseeing.jpg';
@@ -16,48 +18,39 @@ import dining from './img/dining.jpeg';
 import seltCare from './img/selfCare.png';
 import other from './img/other.png';
 import './Activity.css';
-// import AddActivityForm from './AddActivityForm.jsx';
 import ActivityDetailModal from './ActivityDetailModal.jsx';
 import LeaveCommentModal from './LeaveCommentModal.jsx';
 import AddToCalendarModal from './AddToCalendarModal.jsx';
 
 const IndividualActivity = ({ item }) => {
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
-  // const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
+  const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
+  const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
+
   const dispatch = useDispatch();
-  const openAddActivityModal = () => {
-    dispatch({ type: 'TOGGLE_ACTIVITY_MODAL' });
-  };
-
-  const openActivityDetailModal = () => {
-    dispatch({ type: 'TOGGLE_ACTIVITY_DETAIL_MODAL' });
-  };
-
-  const openLeaveCommentModal = () => {
-    dispatch({ type: 'TOGGLE_LEAVE_COMMENT_MODAL' });
-  };
-
-  const openAddToCalendarModal = () => {
-    dispatch({ type: 'TOGGLE_ADD_TO_CALENDAR_MODAL' });
-  };
-
-  const handleClickToToggleAddActivityModal = (e) => {
-    e.preventDefault();
-    openAddActivityModal();
-  };
+  const {
+    toggleActivityDetailModal,
+    toggleAddToCalendarModal,
+    toggleLeaveCommentModal,
+    setCurrentActivity,
+    addToCalendarId,
+    addActivityToCalendar,
+  } = bindActionCreators(actionCreators, dispatch);
 
   const handleClickToToggleActivityDetailModal = (e) => {
     e.preventDefault();
-    openActivityDetailModal();
+    toggleActivityDetailModal();
+    setCurrentActivity(item);
   };
 
   const handleClickToTogglehandleLeaveCommentModal = (e) => {
     e.preventDefault();
-    openLeaveCommentModal();
+    toggleLeaveCommentModal();
   };
-  const handleClickToToggleAddToCalendarCommentModal = (e) => {
+  const handleClickToToggleAddToCalendarModal = (e) => {
     e.preventDefault();
-    openAddToCalendarModal();
+    toggleAddToCalendarModal();
+    addToCalendarId(item.id);
   };
 
   const image = (itemType) => {
@@ -99,8 +92,8 @@ const IndividualActivity = ({ item }) => {
       <OverlayTrigger
         overlay={
           <Tooltip
-            // id="tooltip-activity"
-            // className="activityTooltip"
+            id="tooltip-activity"
+            className="activityTooltip"
             placement="top"
             delay={{ show: 250, hide: 400 }}
           >
@@ -110,6 +103,7 @@ const IndividualActivity = ({ item }) => {
       >
         <Card className="individualActivityCard">
           <div
+            key={item.id}
             role="button"
             tabIndex={0}
             onKeyPress={handleClickToToggleActivityDetailModal}
@@ -162,7 +156,7 @@ const IndividualActivity = ({ item }) => {
               type="button"
               className="addToCalendarIcon"
               onClick={(e) => {
-                handleClickToToggleAddToCalendarCommentModal(e);
+                handleClickToToggleAddToCalendarModal(e);
               }}
             >
               <AddIcon fontSize="small" color="primary" className="addIconAlone" />
@@ -171,39 +165,6 @@ const IndividualActivity = ({ item }) => {
           </div>
         </Card>
       </OverlayTrigger>
-      <div>
-        {/* <Modal
-          contentClassName="addActivityModal"
-          centered
-          show={isAddActivityModalOpen}
-          onHide={(e) => {
-            handleClickToToggleActivityDetailModal(e);
-          }}
-        >
-          <Modal.Header>
-            <Modal.Title> Add New Activity</Modal.Title>
-          </Modal.Header>
-          <div>
-            <AddActivityForm />
-          </div>
-          <Button
-            className="addActivityModalCloseButton"
-            onClick={(e) => {
-              handleClickToToggleAddActivityModal(e);
-            }}
-          >
-            close
-          </Button>
-          <Modal.Body />
-        </Modal> */}
-      </div>
-      <ActivityDetailModal
-        key={`activityDetailModal${item.key}}`}
-        item={item}
-        openActivityDetailModal={openActivityDetailModal}
-      />
-      <LeaveCommentModal openLeaveCommentModal={openLeaveCommentModal} />
-      <AddToCalendarModal openAddToCalendarModal={openAddToCalendarModal} />
     </div>
   );
 };

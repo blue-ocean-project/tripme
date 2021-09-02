@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Activity.css';
 import { CardColumns, Container, Row, Col, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,12 +6,23 @@ import { bindActionCreators } from 'redux';
 import IndividualActivity from './IndividualActivity.jsx';
 import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
 import AddActivityModal from './AddActivityModal.jsx';
-// import ActivityDetailModal from './ActivityDetailModal.jsx';
+import ActivityDetailModal from './ActivityDetailModal.jsx';
+import AddToCalendarModal from './AddToCalendarModal.jsx';
+import LeaveCommentModal from './LeaveCommentModal.jsx';
 
 const Activity = () => {
   const dispatch = useDispatch();
-  const activities = useSelector((state) => state.activities);
-  const { toggleAddActivityModal, fetchActivities } = bindActionCreators(actionCreators, dispatch);
+  const activities = useSelector((state) => state.activities).sort((a, b) => b.id - a.id);
+
+  const [reren, setReren] = useState(true);
+  const {
+    toggleAddActivityModal,
+    toggleActivityDetailModal,
+    toggleAddToCalendarModal,
+    toggleLeaveCommentModal,
+    fetchActivities,
+    setCurrentActivity,
+  } = bindActionCreators(actionCreators, dispatch);
 
   const handleAddActivityButtonClick = (e) => {
     e.preventDefault();
@@ -35,13 +46,24 @@ const Activity = () => {
           <Col>
             <CardColumns className="mappingActivity">
               {activities.map((item) => (
-                <IndividualActivity className="overflow-auto" item={item} key={item.id} />
+                <IndividualActivity
+                  className="overflow-auto"
+                  item={item}
+                  key={item.id}
+                  setCurrentActivity={setCurrentActivity}
+                />
               ))}
             </CardColumns>
           </Col>
         </Row>
       </Container>
-      <AddActivityModal />
+      <AddActivityModal toggleAddActivityModal={toggleAddActivityModal} setReren={setReren} />
+      <ActivityDetailModal
+        toggleActivityDetailModal={toggleActivityDetailModal}
+        setReren={setReren}
+      />
+      <AddToCalendarModal toggleAddToCalendarModal={toggleAddToCalendarModal} setReren={setReren} />
+      <LeaveCommentModal toggleLeaveCommentModal={toggleLeaveCommentModal} />
     </>
   );
 };

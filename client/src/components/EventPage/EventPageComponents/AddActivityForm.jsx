@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 const AddActivityForm = () => {
   const dispatch = useDispatch();
-  const { toggleAddActivityModal, createNewActivity } = bindActionCreators(
+  const { toggleAddActivityModal, createNewActivity, fetchActivities } = bindActionCreators(
     actionCreators,
     dispatch,
   );
@@ -50,7 +50,7 @@ const AddActivityForm = () => {
     //     trip_id: tripId,
     //   },
     // });
-
+    fetchActivities(1);
     toggleAddActivityModal();
   };
 

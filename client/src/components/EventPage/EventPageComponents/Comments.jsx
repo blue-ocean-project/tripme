@@ -1,18 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Comments = () => {
-  const comments = [
-    {
-      id: 1,
-      body: 'This is a comment!',
-      userFirst: 'Julian',
-    },
-    {
-      id: 2,
-      body: 'Sushi is so good! ',
-      userFirst: 'Josh',
-    },
-  ];
+  const comments = useSelector((state) => state.currentActivity.comments);
 
   const commentsView = comments.map((comment) => (
     <div className="Eachcomment" key={comment.id}>
