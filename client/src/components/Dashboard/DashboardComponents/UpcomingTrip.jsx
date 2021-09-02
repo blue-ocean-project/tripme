@@ -3,10 +3,12 @@ import './Upcoming.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
-import { changeToEventPage } from '../../../state/actions/index';
+import { changeToEventPage, changeTripId } from '../../../state/actions/index';
+import { useDispatch } from 'react-redux';
 import yellowstone from '../../../../public/img/Yellowstone.png';
 
 const UpcomingTrip = (props) => {
+  var dispatch = useDispatch();
   return (
     <Card className="tripCard" style={{ width: '20rem' }}>
       <Card.Img variant="top" src={'https://source.unsplash.com/1600x900/?camping'} />
@@ -30,6 +32,7 @@ const UpcomingTrip = (props) => {
         <Button
           onClick={() => {
             dispatch(changeToEventPage(false));
+            dispatch(changeTripId({ tripId: props.trip.id }));
           }}
           variant="primary"
         >

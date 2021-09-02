@@ -12,7 +12,7 @@ const UpcomingTripsList = () => {
   const [upcoming, updateState] = useState([]);
 
   useEffect(() => {
-    getTrips(6)
+    getTrips(8)
       .then((results) => {
         updateState(results.data.upcoming);
       })

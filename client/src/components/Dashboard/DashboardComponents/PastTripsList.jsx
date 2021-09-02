@@ -8,7 +8,7 @@ const PastTripList = () => {
   const [past, updateState] = useState([]);
 
   useEffect(() => {
-    getTrips(6)
+    getTrips(8)
       .then((results) => {
         updateState(results.data.past);
       })
