@@ -49,11 +49,12 @@ const Login = () => {
             };
             Server.post('/auth/login', verifyUser)
               .then((result) => {
-                console.log('result: ', result, 'result status: ', result.status);
-                // login(result);
+                console.log('result.data: ', result.data);
+                login('testing if state changes');
               })
+              .then(() => openVerificationModal())
               .catch((err) => {
-                console.log('err.response.data: ', err.response.data);
+                console.log('err: ', err, 'err.response.data: ', err.response.data);
                 setStatusMessage(err.response.data);
               });
           }}

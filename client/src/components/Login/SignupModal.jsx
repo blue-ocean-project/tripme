@@ -136,13 +136,13 @@ const SignupModal = () => {
                   };
                   Server.post('/signup', newUser)
                     .then((result) => {
-                      console.log(result);
+                      // console.log(result);
+                      login(result);
                       return Server.get('/signup/verify/sendCode', {
                         params: { user_id: result.data.user_id, method: 'email' },
                       });
                     })
                     .then((result) => {
-                      console.log(result);
                       resetStep();
                       closeModal();
                       openVerificationModal();
