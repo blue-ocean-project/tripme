@@ -19,7 +19,7 @@ const NavBar = () => {
           <img className="navbar-logo" src={logo} alt="brand logo" />
         </Navbar.Brand>
         <Nav className="navbar-buttons">
-          <Nav.Link href="/">Dashboard</Nav.Link>
+          <Nav.Link>Dashboard</Nav.Link>
           <Nav.Link as={Link} to="/login">
             Login
           </Nav.Link>

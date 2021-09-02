@@ -68,9 +68,8 @@ const SignupModal = () => {
         }}
       >
         <Modal.Body>
-          <div className="login-step">Step 2</div>
+          <div className="login-step">Create Account</div>
           <div className="signup-email">
-            {/* <label> */}
             <input
               className="login-email"
               type="text"
