@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../../state/actions/index';
@@ -8,10 +8,10 @@ import './NavBar.css';
 import logo from './TripMe.png';
 
 const NavBar = () => {
-  const state = useSelector((states) => states.changePage);
+  const currentUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { logout } = bindActionCreators(actions, dispatch);
 
-  const { changePage } = bindActionCreators(actions, dispatch);
   return (
     <>
       <Navbar>
@@ -20,9 +20,21 @@ const NavBar = () => {
         </Navbar.Brand>
         <Nav className="navbar-buttons">
           <Nav.Link>Dashboard</Nav.Link>
-          <Nav.Link as={Link} to="/login">
-            Login
-          </Nav.Link>
+          {currentUser === null && (
+            <Nav.Link as={Link} to="/login">
+              Login
+            </Nav.Link>
+          )}
+          {currentUser && (
+            <Nav.Link
+              onClick={() => {
+                logout();
+                console.log(currentUser);
+              }}
+            >
+              Logout
+            </Nav.Link>
+          )}
           <Navbar.Text className="navbar-signed-in-as">
             Signed in as: <a href="#login">Mark Otto</a>
           </Navbar.Text>

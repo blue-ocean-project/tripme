@@ -1,7 +1,7 @@
 const actions = {
-  checkqueryParams: (state) => (dispatch) => {
+  storequeryParams: (state) => (dispatch) => {
     dispatch({
-      type: 'checkParams',
+      type: 'storeParams',
       payload: state,
     });
   },

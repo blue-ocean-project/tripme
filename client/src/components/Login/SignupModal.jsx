@@ -7,14 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Server from '../../lib/Server';
 import actions from '../../state/actions';
-import config from '../../../config/config';
-import { GoogleLogin } from 'react-google-login';
 
 const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
+  const queryParams = useSelector((state) => state.queryParams);
   const dispatch = useDispatch();
   const { closeModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
-
   const [step, setStep] = useState('step1');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -23,6 +21,8 @@ const SignupModal = (props) => {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
+
+  console.log(queryParams);
 
   const resetStep = () => {
     setStep('step1');
@@ -35,13 +35,6 @@ const SignupModal = (props) => {
     setStatusMessage('');
   };
 
-  const onSuccess = (res) => {
-    console.log('[Login Success] currentUser:', res.profileObj);
-  };
-
-  const onFailure = (res) => {
-    console.log('[Login failed] res:', res);
-  };
   const nextStepEmail = () => setStep('step2email');
   const nextStepFacebook = () => setStep('step2facebook');
 
@@ -59,16 +52,6 @@ const SignupModal = (props) => {
               Facebook
             </Button>
             <div />
-            <GoogleLogin
-              className="google-login-button"
-              clientId={config.GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={'single_host_origin'}
-              style={{ marginTop: '100px' }}
-              isSignedIn={true}
-            />
           </div>
         </Modal.Body>
       </Modal>
@@ -179,7 +162,12 @@ const SignupModal = (props) => {
                   Server.post('/signup', newUser)
                     .then((result) => {
                       login(result.data);
-
+                      Server.post(`/invite/${props.trip}`, {
+                        params: {
+                          key: props.inviteCode,
+                        },
+                        user_id: result.data.user_id,
+                      });
                       return Server.get('/signup/verify/sendCode', {
                         params: { user_id: result.data.user_id, method: props.verifyMethod },
                       });

@@ -8,17 +8,25 @@ import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
 import EmailVerification from './EmailVerification.jsx';
+import config from '../../../config/config';
+import { GoogleLogin } from 'react-google-login';
 
-const Login = () => {
+const Login = (props) => {
   const dispatch = useDispatch();
   const { openModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
-
-  const trip = 'abc';
-  const key = '123';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
   const [verifyType, setVerifyType] = useState('');
+  const [verifyMethod, setVerifyMethod] = useState('email');
+
+  const onSuccess = (res) => {
+    console.log('[Login Success] currentUser:', res.profileObj);
+  };
+
+  const onFailure = (res) => {
+    console.log('[Login failed] res:', res);
+  };
 
   return (
     <div>
@@ -39,6 +47,16 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <GoogleLogin
+          className="google-login-button"
+          clientId={config.GOOGLE_CLIENT_ID}
+          buttonText="Sign in with Google"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={'single_host_origin'}
+          style={{ marginTop: '100px' }}
+          isSignedIn={true}
+        />
         <div />
         <div className="login-status">{statusMessage}</div>
         <Button
@@ -53,10 +71,16 @@ const Login = () => {
             Server.post('/auth/login', verifyUser)
               .then((result) => {
                 login(result.data);
+                Server.post(`/invite/${trip}`, {
+                  params: {
+                    key: key,
+                  },
+                  user_id: result.data.user_id,
+                });
                 if (result.data.verified === 'pending') {
                   openVerificationModal();
                 } else {
-                  window.location.reload();
+                  // window.location.reload();
                 }
               })
               .catch((err) => {
@@ -79,8 +103,12 @@ const Login = () => {
           Signup
         </Button>
       </form>
-      <SignupModal trip={trip} inviteCode={key} />
-      <EmailVerification verifyType={verifyType} />
+      <SignupModal verifyMethod={verifyMethod} setVerifyMethod={setVerifyMethod} />
+      <EmailVerification
+        verifyType={verifyType}
+        verifyMethod={verifyMethod}
+        setVerifyMethod={setVerifyMethod}
+      />
     </div>
   );
 };
