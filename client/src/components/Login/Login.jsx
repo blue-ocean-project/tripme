@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable object-shorthand */
 import './Login.css';
 import React, { useState } from 'react';
@@ -13,6 +14,8 @@ import EmailVerification from './EmailVerification.jsx';
 import config from '../../../config/config';
 
 const Login = () => {
+  console.log('tripId: ', window.localStorage.getItem('tripId'));
+  console.log('key: ', window.localStorage.getItem('key'));
   const dispatch = useDispatch();
   const { openModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
 
@@ -24,18 +27,26 @@ const Login = () => {
   const history = useHistory();
 
   const onSuccess = (res) => {
-    console.log('[Login Success] currentUser:', res.profileObj);
-    console.log('console log from onSuccess');
     Server.post('/auth/login', {
       email: res.profileObj.email,
       password: res.profileObj.googleId,
     })
       .then((result) => {
-        console.log(result);
         login(result.data);
+        if (window.localStorage.getItem('tripId') && window.localStorage.getItem('key')) {
+          Server.post(
+            `/invite/${window.localStorage.getItem('tripId')}?key=${window.localStorage.getItem(
+              'key',
+            )}`,
+            {
+              user_id: result.data.user_id,
+            },
+          );
+          window.localStorage.removeItem('tripId');
+          window.localStorage.removeItem('key');
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         const newUser = {
           first_name: res.profileObj.givenName,
           last_name: res.profileObj.familyName,
@@ -45,7 +56,21 @@ const Login = () => {
         };
         return Server.post('/signup', newUser);
       })
-      .then((result) => login(result.data))
+      .then((result) => {
+        login(result.data);
+        if (window.localStorage.getItem('tripId') && window.localStorage.getItem('key')) {
+          Server.post(
+            `/invite/${window.localStorage.getItem('tripId')}?key=${window.localStorage.getItem(
+              'key',
+            )}`,
+            {
+              user_id: result.data.user_id,
+            },
+          );
+          window.localStorage.removeItem('tripId');
+          window.localStorage.removeItem('key');
+        }
+      })
       .finally(() => history.push('/'));
   };
 
@@ -97,6 +122,18 @@ const Login = () => {
             Server.post('/auth/login', verifyUser)
               .then((result) => {
                 login(result.data);
+                if (window.localStorage.getItem('tripId') && window.localStorage.getItem('key')) {
+                  Server.post(
+                    `/invite/${window.localStorage.getItem(
+                      'tripId',
+                    )}?key=${window.localStorage.getItem('key')}`,
+                    {
+                      user_id: result.data.user_id,
+                    },
+                  );
+                  window.localStorage.removeItem('tripId');
+                  window.localStorage.removeItem('key');
+                }
                 if (result.data.verified === 'pending') {
                   openVerificationModal();
                 } else {
@@ -125,8 +162,6 @@ const Login = () => {
       <SignupModal
         verifyMethod={verifyMethod}
         setVerifyMethod={(method) => setVerifyMethod(method)}
-        // trip={trip}
-        // inviteCode={key}
       />
       <EmailVerification
         verifyMethod={verifyMethod}
