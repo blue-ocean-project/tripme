@@ -1,8 +1,6 @@
-const reducer = (state = false, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
-    case 'dashboard':
-      return action.payload;
-    case 'eventpage':
+    case 'getTrip':
       return action.payload;
     default:
       return state;

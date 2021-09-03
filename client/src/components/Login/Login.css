@@ -22,6 +22,11 @@
   margin-top: 100px;
 }
 
+.login-errors {
+  text-align: center;
+  color: red;
+}
+
 .signup-choices {
   width: 250px;
   margin-bottom: 10px;

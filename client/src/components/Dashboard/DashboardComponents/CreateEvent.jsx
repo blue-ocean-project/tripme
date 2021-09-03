@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import createEvents from '../../../state/actions/createEvent.js';
+import React, { useState } from 'react';
+import { Modal, Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import createEvents from '../../../state/actions/createEvent';
+import getTrips from '../../../state/actions/getTrips';
+import { getTrip } from '../../../state/actions/index';
 
 function CreateEvent() {
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
 
   const [name, setName] = useState('');
@@ -15,7 +20,7 @@ function CreateEvent() {
 
   return (
     <>
-      <button className="button" onClick={handleShow}>
+      <button className="createTripButton" onClick={handleShow}>
         Create Trip
       </button>
 
@@ -69,9 +74,14 @@ function CreateEvent() {
         </Modal.Body>
         <Modal.Footer>
           <button
-            onClick={(e) => {
-              createEvents(name, destination, startDate, endDate)
-                .then((results) => console.log(results))
+            type="button"
+            onClick={() => {
+              createEvents(6, name, destination, startDate, endDate)
+                .then(() => {
+                  getTrips(6).then((results) => {
+                    dispatch(getTrip(results.data));
+                  });
+                })
                 .catch((error) => console.log(error));
             }}
             className="button"

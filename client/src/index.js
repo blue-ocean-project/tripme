@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import App from './components/App.jsx';
@@ -10,7 +11,9 @@ const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={Store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   rootElement,
 );
