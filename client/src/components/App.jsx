@@ -10,36 +10,43 @@ import Login from './Login/Login.jsx';
 import './App.css';
 
 const App = () => {
-  const state = useSelector((states) => states.changePage);
-  const user = useSelector((states) => states.user);
+  const state = useSelector((states) => states);
   const query = new URLSearchParams(useLocation().search);
+  // console.log(state.queryParams);
+  const trip_id = query.get('trip');
+  const key = query.get('key');
+  // query.get('verified');
 
-  console.log(user);
   return (
-    <div className="container-fluid">
-      {/* {query.get('verified') ? <Redirect to="/login" /> : null} */}
-      <Switch>
-        <Route exact path="/">
-          <div className="Navbar">
-            <NavBar />
-          </div>
-          {state ? (
-            <div className="Dashboard">
-              <Dashboard />
-            </div>
-          ) : (
-            <div className="Eventpage">
-              <EventPage />
-            </div>
-          )}
-        </Route>
-        <Route path="/login">
-          <div className="Login">
-            <Login />
-          </div>
-        </Route>
-      </Switch>
-    </div>
+    <>
+      {query.get('verified') ? (
+        <Redirect to="/login" />
+      ) : (
+        <div className="container-fluid">
+          <Switch>
+            <Route exact path="/">
+              <div className="Navbar">
+                <NavBar />
+              </div>
+              {state.changePage ? (
+                <div className="Dashboard">
+                  <Dashboard />
+                </div>
+              ) : (
+                <div className="Eventpage">
+                  <EventPage />
+                </div>
+              )}
+            </Route>
+            <Route path="/login">
+              <div className="Login">
+                <Login />
+              </div>
+            </Route>
+          </Switch>
+        </div>
+      )}
+    </>
   );
 };
 

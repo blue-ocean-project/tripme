@@ -1,4 +1,10 @@
 const actions = {
+  checkqueryParams: (state) => (dispatch) => {
+    dispatch({
+      type: 'checkParams',
+      payload: state,
+    });
+  },
   changeToDashboard: () => (dispatch) => {
     dispatch({
       type: 'dashboard',
@@ -46,6 +52,18 @@ const actions = {
   logout: (state) => (dispatch) => {
     dispatch({
       type: 'logout',
+      payload: state,
+    });
+  },
+  openVerificationModal: (state) => (dispatch) => {
+    dispatch({
+      type: 'openVerifyModal',
+      payload: state,
+    });
+  },
+  closeVerificationModal: (state) => (dispatch) => {
+    dispatch({
+      type: 'closeVerifyModal',
       payload: state,
     });
   },
