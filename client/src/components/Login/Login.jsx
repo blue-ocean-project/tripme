@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
+import { GoogleLogin } from 'react-google-login';
+import { useHistory } from 'react-router-dom';
 import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
 import EmailVerification from './EmailVerification.jsx';
 import config from '../../../config/config';
-import { GoogleLogin } from 'react-google-login';
-import { useHistory } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
