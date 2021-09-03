@@ -23,7 +23,6 @@ const App = () => {
       user_id: currentUser.user_id,
     })
       .then((result) => {
-        console.log(result);
         window.localStorage.removeItem('tripId');
         window.localStorage.removeItem('key');
       })
