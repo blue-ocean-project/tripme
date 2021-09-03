@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-// import { useParams } from 'react-router-dom';
 import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
@@ -14,13 +13,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const { openModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
 
-  const trip = 'abc';
-  const key = '123';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
   const [verifyType, setVerifyType] = useState('');
-  // console.log('trip: ', trip, 'key: ', key);
+  const [verifyMethod, setVerifyMethod] = useState('email');
 
   return (
     <div>
@@ -54,17 +51,14 @@ const Login = () => {
             };
             Server.post('/auth/login', verifyUser)
               .then((result) => {
-                console.log('result.data: ', result.data);
                 login(result.data);
-                // if (trip && key) {
-                //   Server.post(`/invite/${trip}`, { params: { key: key } });
-                // }
                 if (result.data.verified === 'pending') {
                   openVerificationModal();
+                } else {
+                  window.location.reload();
                 }
               })
               .catch((err) => {
-                // console.log('err: ', err, 'err.response.data: ', err.response.data);
                 setStatusMessage(err.response.data);
               });
           }}
@@ -83,8 +77,17 @@ const Login = () => {
           Signup
         </Button>
       </form>
-      <SignupModal trip={trip} inviteCode={key} />
-      <EmailVerification verifyType={verifyType} />
+      <SignupModal
+        verifyMethod={verifyMethod}
+        setVerifyMethod={(method) => setVerifyMethod(method)}
+        // trip={trip}
+        // inviteCode={key}
+      />
+      <EmailVerification
+        verifyMethod={verifyMethod}
+        setVerifyMethod={(method) => setVerifyMethod(method)}
+        verifyType={verifyType}
+      />
     </div>
   );
 };
