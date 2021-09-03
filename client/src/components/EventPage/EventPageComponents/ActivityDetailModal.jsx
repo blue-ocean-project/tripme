@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
@@ -7,21 +7,19 @@ import AddActivityForm from './AddActivityForm.jsx';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { updateActivity } from '../../../state/actions/activityActions/activityActions.js';
 
-const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
-  // console.log(item);
+const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
   const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
-  const { start_time } = item;
-  const { end_time } = item;
-  const { type } = item;
-  const { title } = item;
-  const { comment } = item;
+  const item = useSelector((state) => state.currentActivity);
+  const activityId = useSelector((state) => state.currentActivity.id);
   const [editMode, setEditMode] = useState(false);
   const [newType, setNewType] = useState('');
   const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
   const [newStartTime, setNewStartTime] = useState('');
   const [newEndTime, setNewEndTime] = useState('');
-
+  const currentActivity = useSelector((state) => state.currentActivity);
   const option = [
     { value: 'shopping', label: 'shopping' },
     { value: 'sightseeing', label: 'sightseeing' },
@@ -37,22 +35,18 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
   const toggleUpdateDetail = (e) => {
     e.preventDefault();
     setEditMode(!editMode);
-    console.log(editMode);
   };
 
-  const handleSubmitChanges = (e) => {
+  const handleSubmitChanges = () => {
+    updateActivity(activityId, newType, newTitle, newDescription);
+    console.log(newTitle, newTitle, newDescription);
+    toggleActivityDetailModal();
+  };
+
+  const handleCLickToCloseDetailModal = (e) => {
     e.preventDefault();
-    setEditMode(!editMode);
-    console.log(editMode);
+    toggleActivityDetailModal();
   };
-
-  const handleUpdateChange = (e) => {
-    e.preventDefault();
-    console.log(`${newType}`);
-  };
-
-  const start = '2021-09-01T01:28:33.457Z';
-  const end = '2021-09-01T02:30:00.457Z';
 
   const editModeView = () => (
     <Container>
@@ -62,7 +56,7 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
           <Select
             value={option.value}
             onChange={setNewType}
-            className="chooseActicityType"
+            className="activityDetailInfoInput"
             defaultValue={option[8]}
             label="Single select"
             options={option}
@@ -71,41 +65,26 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
       </Row>
       <Row className="activityDetailTitle">
         <Col>Titile: </Col>
-        <Col className="activityDetailInfo">
-          <input type="text" defaultValue={item.title} onChange={setNewTitle} />
-        </Col>
-      </Row>
-      <Row className="activityDetailTitle">
-        <Col>Start At: </Col>
-        <Col className="activityDetailInfo">
-          <DatePicker
-            className="chooseActivityDate"
-            selected={newStartTime}
-            showTimeSelect
-            dateFormat="Pp"
-            onChange={(d) => setNewStartTime(d)}
+        <Col className="activityDetailInfoInput">
+          <input
+            type="text"
+            defaultValue={item.title}
+            onChange={(e) => setNewTitle(e.target.value)}
           />
         </Col>
       </Row>
       <Row className="activityDetailTitle">
-        <Col>End At:</Col>
-        <Col className="activityDetailInfo">
-          <DatePicker
-            className="chooseActivityDate"
-            selected={newEndTime}
-            showTimeSelect
-            dateFormat="Pp"
-            onChange={(d) => setNewEndTime(d)}
+        <Col>Description: </Col>
+        <Col className="activityDetailInfoInput">
+          <textarea
+            type="textarea"
+            defaultValue={item.description}
+            onChange={(e) => setNewDescription(e.target.value)}
           />
         </Col>
       </Row>
       <Row>
-        <Button
-          className="updateActivityDetailSubmitButton"
-          onClick={(e) => {
-            handleSubmitChanges(e);
-          }}
-        >
+        <Button className="updateActivityDetailSubmitButton" onClick={handleSubmitChanges}>
           Submit
         </Button>
         <Button className="updateActivityDetailCancelButton" onClick={(e) => toggleUpdateDetail(e)}>
@@ -120,34 +99,34 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
       <Row className="activityDetailTitle">
         <Col>Type: </Col>
         <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
-          {item.type}{' '}
+          {currentActivity.type}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Titile: </Col>
         <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
-          {item.title}{' '}
-        </Col>
-      </Row>
-      <Row className="activityDetailTitle">
-        <Col>Date: </Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
-          {moment(item.start_time).calendar()}{' '}
-        </Col>
-      </Row>
-      <Row className="activityDetailTitle">
-        <Col>Duration:</Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
-          {moment(end).diff(moment(start), 'minutes')} mins
+          {currentActivity.title}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Description:</Col>
         <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)} />
+        {currentActivity.description}
       </Row>
       <Row className="activityDetailTitle">
         Comments:
         <Comments />
+      </Row>
+      <Row>
+        <Button
+          variant="outline-primary"
+          className="activityModalCloseButton"
+          onClick={(e) => {
+            toggleActivityDetailModal(e);
+          }}
+        >
+          Close
+        </Button>
       </Row>
     </Container>
   );
@@ -158,20 +137,14 @@ const ActivityDetailModal = ({ item, openActivityDetailModal }) => {
       centered
       scrollable
       show={isActivityDetailModalOpen}
-      onHide={openActivityDetailModal}
+      onHide={toggleActivityDetailModal}
     >
       <Modal.Header closeButton className="modalCloseButton">
         <Modal.Title> Activity detail</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {/* <div>{displayView()}</div> */}
         {editMode ? <div>{editModeView()}</div> : <div>{displayView()}</div>}
-        {/* <Button
-          variant="outline-primary"
-          className="activityModalCloseButton"
-          onClick={openActivityDetailModal}
-        >
-          Close
-        </Button> */}
       </Modal.Body>
     </Modal>
   );
