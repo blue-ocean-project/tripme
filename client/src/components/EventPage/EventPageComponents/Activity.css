@@ -141,7 +141,7 @@
 
 .addActivityModalCloseButton {
   margin-top: 2rem;
-  margin-left: 11rem;
+  /* margin-left: 11rem; */
   width: 8rem;
   height: 2.5rem;
 }
@@ -163,7 +163,7 @@
 }
 .addActivityModalSubmitButton {
   margin-top: 2rem;
-  margin-left: 8rem;
+  /* margin-left: 8rem; */
   width: 8rem;
   height: 2.5rem;
 }
@@ -187,7 +187,7 @@
 }
 
 .addToCalendarModal {
-  height: 30rem;
+  height: 33rem;
   width: 48rem;
 }
 
@@ -196,17 +196,15 @@
   background-color: Transparent;
   border: 0.5px solid rgb(31, 112, 218);
 }
-.addedToCalendar {
-}
 .addToCalendarButtons {
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 
 .activityDetailTitle {
   margin-bottom: 1rem;
 }
 .activityDetailInfo {
-  color: rgb(61, 85, 112);
+  color: rgb(42, 48, 54);
   font-weight: 200;
 }
 
@@ -222,6 +220,7 @@
 
 .leaveCommentButtonsContainer {
   margin-top: 2rem;
+  margin-left: 3rem;
   justify-items: center;
   align-items: center;
 }
@@ -239,7 +238,7 @@
   overflow-y: auto;
 }
 
-.modal-backdrop.fade {
+/* .modal-backdrop.fade {
   opacity: 0;
   filter: alpha(opacity=0);
 }
@@ -255,4 +254,20 @@
 .modal-backdrop.fade.in {
   opacity: 0.5;
   filter: alpha(opacity=50);
+} */
+
+.validation {
+  color: red;
+}
+
+.commentCounts {
+  padding-left: 0.5rem;
+}
+
+/* .activityDetailInfoInput {
+
+} */
+
+.CommentsSectionOfCommentModal {
+  margin-top: 1rem;
 }

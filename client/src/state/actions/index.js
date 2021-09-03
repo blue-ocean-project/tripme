@@ -1,4 +1,10 @@
 const actions = {
+  storequeryParams: (state) => (dispatch) => {
+    dispatch({
+      type: 'storeParams',
+      payload: state,
+    });
+  },
   changeToDashboard: () => (dispatch) => {
     dispatch({
       type: 'dashboard',
@@ -46,6 +52,18 @@ const actions = {
   logout: (state) => (dispatch) => {
     dispatch({
       type: 'logout',
+      payload: state,
+    });
+  },
+  openVerificationModal: (state) => (dispatch) => {
+    dispatch({
+      type: 'openVerifyModal',
+      payload: state,
+    });
+  },
+  closeVerificationModal: (state) => (dispatch) => {
+    dispatch({
+      type: 'closeVerifyModal',
       payload: state,
     });
   },

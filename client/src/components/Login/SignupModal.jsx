@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable consistent-return */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable object-shorthand */
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -7,11 +10,10 @@ import { bindActionCreators } from 'redux';
 import Server from '../../lib/Server';
 import actions from '../../state/actions';
 
-const SignupModal = () => {
+const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
   const dispatch = useDispatch();
-  const { closeModal, login } = bindActionCreators(actions, dispatch);
-
+  const { closeModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
   const [step, setStep] = useState('step1');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -31,9 +33,9 @@ const SignupModal = () => {
     setRetypePassword('');
     setStatusMessage('');
   };
+
   const nextStepEmail = () => setStep('step2email');
   const nextStepFacebook = () => setStep('step2facebook');
-  const verification = () => setStep('verification');
 
   if (step === 'step1') {
     return (
@@ -49,9 +51,6 @@ const SignupModal = () => {
               Facebook
             </Button>
             <div />
-            <Button className="signup-choices" variant="outline-success">
-              Google
-            </Button>
           </div>
         </Modal.Body>
       </Modal>
@@ -117,6 +116,35 @@ const SignupModal = () => {
               value={retypePassword}
               onChange={(e) => setRetypePassword(e.target.value)}
             />
+            <div>
+              <label>How would you like to verify your account?</label>
+              <br />
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="email"
+                  checked={props.verifyMethod === 'email'}
+                  onChange={(e) => props.setVerifyMethod(e.target.value)}
+                />
+                <label className="form-check-label">Email</label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio2"
+                  value="phone"
+                  checked={props.verifyMethod === 'phone'}
+                  onChange={(e) => props.setVerifyMethod(e.target.value)}
+                  disabled={phoneNumber === ''}
+                />
+                <label className="form-check-label">Text Message</label>
+              </div>
+            </div>
             <div className="signup-status">{statusMessage}</div>
             <Button
               className="login-button"
@@ -132,15 +160,30 @@ const SignupModal = () => {
                   };
                   Server.post('/signup', newUser)
                     .then((result) => {
-                      console.log(result);
+                      login(result.data);
+                      if (
+                        window.localStorage.getItem('tripId') &&
+                        window.localStorage.getItem('key')
+                      ) {
+                        Server.post(
+                          `/invite/${window.localStorage.getItem(
+                            'tripId',
+                          )}?key=${window.localStorage.getItem('key')}`,
+                          {
+                            user_id: result.data.user_id,
+                          },
+                        );
+                        window.localStorage.removeItem('tripId');
+                        window.localStorage.removeItem('key');
+                      }
                       return Server.get('/signup/verify/sendCode', {
-                        params: { user_id: result.data.user_id, method: 'email' },
+                        params: { user_id: result.data.user_id, method: props.verifyMethod },
                       });
                     })
-                    .then((result) => {
-                      console.log(result);
+                    .then(() => {
                       resetStep();
-                      verification();
+                      closeModal();
+                      openVerificationModal();
                     })
                     .catch((err) => {
                       setStatusMessage(err.response.data);
@@ -154,43 +197,6 @@ const SignupModal = () => {
             </Button>
           </div>
         </Modal.Body>
-      </Modal>
-    );
-  }
-  if (step === 'step2facebook') {
-    return (
-      <Modal
-        centered
-        show={viewModal}
-        onHide={() => {
-          resetStep();
-          closeModal();
-        }}
-      >
-        <Modal.Body>
-          <div className="login-step">hi</div>
-          <div className="signup-choices">
-            <Button className="signup-choices" variant="outline-warning">
-              Email
-            </Button>
-          </div>
-        </Modal.Body>
-        <Modal.Footer />
-      </Modal>
-    );
-  }
-  if (step === 'verification') {
-    return (
-      <Modal centered show={viewModal} onHide={closeModal}>
-        <Modal.Body>
-          <div className="login-step">Verification</div>
-          <div className="signup-choices">
-            <Button className="signup-choices" variant="outline-warning">
-              Resend verification email
-            </Button>
-          </div>
-        </Modal.Body>
-        <Modal.Footer />
       </Modal>
     );
   }
