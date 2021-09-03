@@ -51,11 +51,13 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
 
   const handleSubmitChanges = () => {
     updateActivity(activityId, newType.value, newTitle, newDescription);
+    setEditMode(!editMode);
     toggleActivityDetailModal();
   };
 
   const handleCLickToCloseDetailModal = (e) => {
     e.preventDefault();
+    setEditMode(!editMode);
     toggleActivityDetailModal();
   };
 

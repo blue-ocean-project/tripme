@@ -8,7 +8,7 @@ import * as actionCreators from '../../../state/actions/activityActions/activity
 import { bindActionCreators } from 'redux';
 
 const AddActivityForm = () => {
-  const tripId = useSelector((state) => state.getTrip.trip_id);
+  const tripId = useSelector((state) => state.tripId);
   const dispatch = useDispatch();
   const { toggleAddActivityModal, createNewActivity, fetchActivities } = bindActionCreators(
     actionCreators,
@@ -17,8 +17,8 @@ const AddActivityForm = () => {
   const [type, setType] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [startTime, setStarTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  // const [startTime, setStarTime] = useState(new Date());
+  // const [endTime, setEndTime] = useState(new Date());
   // const trip_id = useSelector((state) => { state.trip_id });
   const option = [
     { value: 'shopping', label: 'shopping' },
@@ -42,8 +42,8 @@ const AddActivityForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewActivity(1, type.value, title);
-    fetchActivities(tripId || 1);
+    createNewActivity(tripId, type.value, title, description);
+    fetchActivities(tripId);
     toggleAddActivityModal();
   };
 

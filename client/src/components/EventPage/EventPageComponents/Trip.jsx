@@ -36,17 +36,20 @@ const Trip = () => {
   const [tripDetail, setTripDetail] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [inviteContacts, setInviteContacts] = useState('');
-
-  const [checkBoxOn, setCheckBoxOn] = useState(false);
-  const [isChecked, setIsChecked] = useState([]);
+  const [checkListInput, setCheckListInput] = useState('');
+  const [checkList, setCheckList] = useState([]);
 
   useEffect(() => {
-    console.log('trip id', tripId);
     Server.get(`/trips/${tripId}`)
       .then((res) => {
+        // console.log('res data', res.data);
         setTripDetail(res.data);
+        return Server.get(`/checklists/trip/${tripId}`);
       })
-
+      .then((res) => {
+        console.log('checklist:', res.data);
+        setCheckList(res.data);
+      })
       .catch((err) => console.error(err));
   }, [tripId]);
 
@@ -55,31 +58,50 @@ const Trip = () => {
   };
   const closeModal = function () {
     setModalIsOpen(false);
+    setInviteContacts('');
   };
 
   //send invite trip mate request
 
-  const handleSubmit = function () {
+  const handleSubmit = function (e) {
+    e.preventDefault();
     const transformedContacts = inviteContacts.replace(/\s/g, '').split(',');
-    console.log(transformedContacts);
     Server.post('/invite', {
       first_name: currentUser ? currentUser.first_name : '',
       last_name: currentUser ? currentUser.last_name : '',
       contacts: transformedContacts,
       trip_id: tripId,
     })
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+      .then((res) => {
+        console.log('invite sent: ', res);
+        closeModal();
+      })
+      .catch((err) => {
+        console.error('invite failed: ', err);
+        closeModal();
+      });
+  };
+  const handleCreateChecklist = function () {
+    const newList = {
+      item: checkListInput,
+      checked: false,
+    };
+    // setCheckList({ ...checkList, ...newList });
   };
 
-  // on each checkbox change, send patch to DB
-  const handleCheckBox = function (event) {
-    setCheckBoxOn(!checkBoxOn);
+  const handleSingleCheck = function (event) {
+    Server.patch(`/checklists/${event.target.name}`)
+      .then((res) => {
+        return Server.get(`/checklists/trip/${tripId}`);
+      })
+      .then((res) => {
+        setCheckList(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  // const handleSingleCheck = function (event) {
-  //   setIsChecked({ ...isChecked, [event.target.name]: event.target.checked });
-  // }
   const daysDisplay = function (data) {
     const a = moment(data.end_date);
     const b = moment(data.start_date);
@@ -87,18 +109,14 @@ const Trip = () => {
     return `${day} days ${day - 1} nights`;
   };
 
-  const checkListDisplay = function (checklist) {
-    const ArrayOfCheck = checklist.map((each) => {
-      return each.checked;
-    });
-    const temp = checklist.map((each, index) => {
+  const checkListDisplay = function () {
+    const temp = checkList.map((each, index) => {
       const check = each.checked;
       if (check === true) {
-        // setIsChecked({ ...isChecked, [each.item]: true })
         return (
           <InputGroup className="`${checkbox-each.id}`" key={each.id}>
             <InputGroup.Checkbox
-              checked={ArrayOfCheck[index]}
+              checked={each.checked}
               name={each.id}
               value={each.item}
               onChange={(e) => handleSingleCheck(e)}
@@ -107,11 +125,10 @@ const Trip = () => {
           </InputGroup>
         );
       } else {
-        // setIsChecked({ ...isChecked, [each.item]: false })
         return (
           <InputGroup className="`${checkbox-each.id}`" key={each.id}>
             <InputGroup.Checkbox
-              checked={ArrayOfCheck[index]}
+              checked={each.checked}
               name={each.id}
               value={each.item}
               onChange={(e) => handleSingleCheck(e)}
@@ -121,7 +138,6 @@ const Trip = () => {
         );
       }
     });
-    return temp;
   };
 
   if (tripDetail !== null) {
@@ -158,8 +174,16 @@ const Trip = () => {
               <Row className="participants-container">{participantDisplay(tripDetail.users)}</Row>
             </Col>
             <Col sm={4} className="trip-bot-col-third">
-              <div>Checklist:</div>
-              {checkListDisplay(tripDetail.checklist)}
+              <div>
+                <div>Checklist:</div>
+                {/* <input
+                  type="text"
+                  value={checkListInput}
+                  onChange={(e) => setCheckListInput(e.target.value)}
+                />
+                <Button onClick={() => handleCreateChecklist()}>+</Button> */}
+              </div>
+              {checkListDisplay()}
             </Col>
           </Row>
         </Container>
@@ -182,7 +206,7 @@ const Trip = () => {
                   <Form.Control
                     value={inviteContacts}
                     type="text"
-                    placeholder="e.g. trip@gmail.com, 2138084444"
+                    placeholder="e.g. trip@gmail.com, 2137774444"
                     onChange={(e) => {
                       setInviteContacts(e.target.value);
                     }}
@@ -196,7 +220,7 @@ const Trip = () => {
           </form>
           <p>let them join trip.me and you all can plan your trip together</p>
           <div className="trip-modal-close-btn">
-            <button onClick={() => setModalIsOpen(false)}>Close</button>
+            <button onClick={() => closeModal()}>Close</button>
           </div>
         </Modal>
       </>

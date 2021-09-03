@@ -48,20 +48,20 @@ export const addToCalendarId = (id) => ({
 
 export const addActivityToCalendar =
   (activityIdAddToCalendar, startTime, endTime, title) => async () => {
+    console.log('start time', startTime);
+    console.log('end time', endTime);
     try {
       await Server.patch(`activities/${activityIdAddToCalendar}`, {
         start_time: startTime,
         end_time: endTime,
-        title: title,
+        title,
       });
-      console.log(activityIdAddToCalendar, startTime, endTime, title);
     } catch (e) {
       console.log(e);
     }
   };
 
 export const updateActivity = (activityId, type, title, description) => {
-  console.log(activityId, type, title, description);
   Server.patch(`activities/${activityId}`, {
     type,
     title,
@@ -75,7 +75,6 @@ export const leaveNewComment = (activityId, userId, commentBody) => async () => 
       body: commentBody,
       user_id: userId,
     });
-    console.log(activityId, userId, commentBody);
   } catch (e) {
     console.log(e);
   }

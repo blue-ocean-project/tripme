@@ -1,7 +1,7 @@
 /* eslint-disable object-shorthand */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory, Redirect } from 'react-router-dom';
 import Server from '../lib/Server';
 import NavBar from './NavBar/NavBar.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
@@ -36,25 +36,32 @@ const App = () => {
   return (
     <div className="container-fluid">
       <Switch>
-        <Route exact path="/">
-          <div className="Navbar">
-            <NavBar />
-          </div>
-          {state ? (
-            <div className="Dashboard">
-              <Dashboard />
+        {currentUser ? (
+          <Route exact path="/">
+            <div className="Navbar">
+              <NavBar />
             </div>
-          ) : (
-            <div className="Eventpage">
-              <EventPage />
-            </div>
-          )}
-        </Route>
-        <Route path="/login">
-          <div className="Login">
-            <Login trip={tripId} key={key} />
-          </div>
-        </Route>
+            {state ? (
+              <div className="Dashboard">
+                <Dashboard />
+              </div>
+            ) : (
+              <div className="Eventpage">
+                <EventPage />
+              </div>
+            )}
+          </Route>
+        ) : (
+          <>
+            <Route path="/login">
+              <div className="Login">
+                <Login trip={tripId} key={key} />
+              </div>
+            </Route>
+
+            <Redirect to="/login" />
+          </>
+        )}
       </Switch>
     </div>
   );
