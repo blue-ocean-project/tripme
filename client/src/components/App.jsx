@@ -36,32 +36,25 @@ const App = () => {
   return (
     <div className="container-fluid">
       <Switch>
-        {currentUser ? (
-          <Route exact path="/">
-            <div className="Navbar">
-              <NavBar />
+        <Route exact path="/">
+          <div className="Navbar">
+            <NavBar />
+          </div>
+          {state ? (
+            <div className="Dashboard">
+              <Dashboard />
             </div>
-            {state ? (
-              <div className="Dashboard">
-                <Dashboard />
-              </div>
-            ) : (
-              <div className="Eventpage">
-                <EventPage />
-              </div>
-            )}
-          </Route>
-        ) : (
-          <>
-            <Route path="/login">
-              <div className="Login">
-                <Login trip={tripId} key={key} />
-              </div>
-            </Route>
-
-            <Redirect to="/login" />
-          </>
-        )}
+          ) : (
+            <div className="Eventpage">
+              <EventPage />
+            </div>
+          )}
+        </Route>
+        <Route path="/login">
+          <div className="Login">
+            <Login trip={tripId} key={key} />
+          </div>
+        </Route>
       </Switch>
     </div>
   );
