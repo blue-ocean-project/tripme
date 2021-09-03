@@ -11,10 +11,14 @@ import AddToCalendarModal from './AddToCalendarModal.jsx';
 import LeaveCommentModal from './LeaveCommentModal.jsx';
 
 const Activity = () => {
-  const [tracker, setTracker] = useState('');
-
+  const tripId = useSelector((state) => state.currentActivity.trip_id);
+  const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
+  const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
+  const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
+  const isAddToCalendarModalOpen = useSelector((state) => state.isAddToCalendarModalOpen);
+  const currentActivity = useSelector((state) => state.currentActivity);
+  const activityIdAddToCalendar = useSelector((state) => state.activityIdAddToCalendar);
   const dispatch = useDispatch();
-  const [notifyParent, setNotifyParent] = useState(true);
 
   const activities = useSelector((state) => state.activities)
     .filter((item) => item.start_time === null)
@@ -36,9 +40,15 @@ const Activity = () => {
 
   useEffect(() => {
     fetchActivities(1);
-  }, []);
+  }, [
+    isAddActivityModalOpen,
+    isActivityDetailModalOpen,
+    isLeaveNewCommentModalOpen,
+    isAddToCalendarModalOpen,
+    currentActivity,
+    activityIdAddToCalendar,
+  ]);
 
-  useEffect(() => {}, [activities]);
   return (
     <>
       <div className="activityComponentHeader">Activity</div>
@@ -67,10 +77,7 @@ const Activity = () => {
       </Container>
       <AddActivityModal toggleAddActivityModal={toggleAddActivityModal} />
       <ActivityDetailModal toggleActivityDetailModal={toggleActivityDetailModal} />
-      <AddToCalendarModal
-        toggleAddToCalendarModal={toggleAddToCalendarModal}
-        setNotifyParent={setNotifyParent}
-      />
+      <AddToCalendarModal toggleAddToCalendarModal={toggleAddToCalendarModal} />
       <LeaveCommentModal toggleLeaveCommentModal={toggleLeaveCommentModal} />
     </>
   );

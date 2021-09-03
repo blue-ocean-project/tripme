@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 const AddActivityForm = () => {
   const dispatch = useDispatch();
-  const { toggleAddActivityModal, createNewActivity } = bindActionCreators(
+  const { toggleAddActivityModal, createNewActivity, fetchActivities } = bindActionCreators(
     actionCreators,
     dispatch,
   );
@@ -42,6 +42,7 @@ const AddActivityForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewActivity(1, type.value, title);
+    fetchActivities(1);
     // dispatch({
     //   type: 'CREATE_NEW_ACTIVITY',
     //   payload: {

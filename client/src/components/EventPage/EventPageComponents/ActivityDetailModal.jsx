@@ -31,8 +31,20 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
     { value: 'other', label: 'other' },
   ];
 
-  const findOption = option.filter((op) => op.value === item.type);
-  console.log(findOption);
+  const findOption = [
+    'shopping',
+    'sightseeing',
+    'concert',
+    'movie',
+    'museum',
+    'dining',
+    'workout',
+    'amusement',
+    'self care',
+    'other',
+  ];
+  const indexOfType = findOption.indexOf(item.type);
+  // console.log(indexOfType);
 
   const toggleUpdateDetail = (e) => {
     e.preventDefault();
@@ -60,7 +72,7 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
             value={option.value}
             onChange={setNewType}
             className="activityDetailInfoInput"
-            defaultValue={option}
+            defaultValue={option[indexOfType]}
             label="Single select"
             options={option}
           />
