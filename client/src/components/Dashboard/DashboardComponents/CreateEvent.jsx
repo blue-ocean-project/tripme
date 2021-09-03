@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import { Modal, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import createEvents from '../../../state/actions/createEvent';
 import getTrips from '../../../state/actions/getTrips';
 import { getTrip } from '../../../state/actions/index';
 
 function CreateEvent() {
+  var user = useSelector((states) => states.user);
+
+  if (user !== null) {
+    var user_id = user.user_id;
+  } else {
+    var user_id = 1;
+  }
+
+  // const TEMP_USER_ID = 8;
+
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -76,9 +86,9 @@ function CreateEvent() {
           <button
             type="button"
             onClick={() => {
-              createEvents(6, name, destination, startDate, endDate)
+              createEvents(user_id, name, destination, startDate, endDate)
                 .then(() => {
-                  getTrips(6).then((results) => {
+                  getTrips(user_id).then((results) => {
                     dispatch(getTrip(results.data));
                   });
                 })

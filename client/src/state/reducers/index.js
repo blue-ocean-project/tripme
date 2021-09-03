@@ -17,6 +17,7 @@ import modalStepReducer from './modalStepReducer';
 import currentUserReducer from './currentUserReducer';
 import verificationModalReducer from './verificationModalReducer';
 import getTripReducer from './getTripReducer';
+import changeTripIdReducer from './changeTripIdReducer';
 
 const rootReducer = combineReducers({
   // App Reducers
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
 
   // Dashboard Reducers
   getTrip: getTripReducer,
+  tripId: changeTripIdReducer,
 });
 
 export default rootReducer;

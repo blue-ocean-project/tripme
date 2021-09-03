@@ -10,9 +10,9 @@ const Dashboard = () => (
   <>
     <CreateEvent />
     {/* <Container className="dashboard-container"> */}
-    <Row className="dashboard-title">
+    {/* <Row className="dashboard-title">
       <span className="dashboard-title">Dashboard</span>
-    </Row>
+    </Row> */}
     <Row className="dashboard-Title-text">Upcoming</Row>
     <Row className="dashboard-upcoming">
       <UpcomingTripsList />
