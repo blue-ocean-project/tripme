@@ -1,3 +1,7 @@
+.google-login-button {
+  /* text-align: center; */
+}
+
 .login-email,
 .login-password,
 .login-button {
@@ -15,6 +19,17 @@
   margin-bottom: 20px;
 }
 
+.login-status {
+  margin-bottom: 5px;
+  color: red;
+}
+
+.login-verification-subtext {
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .login-welcome {
   text-align: center;
   font-size: 50px;
@@ -22,9 +37,15 @@
   margin-top: 100px;
 }
 
-.login-errors {
+.signup-resend-email {
   text-align: center;
-  color: red;
+  margin-top: 10px;
+}
+
+.signup-resend-button {
+  margin-left: 50px;
+  width: 250px;
+  margin-bottom: 10px;
 }
 
 .signup-choices {
@@ -39,6 +60,6 @@
 }
 
 .signup-status {
-  color: red;
   margin-bottom: 10px;
+  color: red;
 }

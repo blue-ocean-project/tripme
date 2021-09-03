@@ -74,7 +74,7 @@ const sampleActivityList = [
 
 export const activitiesReducer = (state = sampleActivityList, action) => {
   switch (action.type) {
-    case 'FETCH_ACTIVITY':
+    case 'FETCH_ACTIVITIES':
       return action.payload;
     default:
       return state;
@@ -83,14 +83,14 @@ export const activitiesReducer = (state = sampleActivityList, action) => {
 
 export const isAddActivityModalOpenReducer = (state = false, action) => {
   switch (action.type) {
-    case 'TOGGLE_ACTIVITY_MODAL':
+    case 'TOGGLE_ADD_ACTIVITY_MODAL':
       return !state;
     default:
       return state;
   }
 };
 
-export const createNewActivityReducer = (state = {}, action) => {
+export const newActivityReducer = (state = {}, action) => {
   switch (action.type) {
     case 'CREATE_NEW_ACTIVITY':
       return action.payload;
@@ -102,7 +102,7 @@ export const createNewActivityReducer = (state = {}, action) => {
 export const leaveNewCommentReducer = (state = '', action) => {
   switch (action.type) {
     case 'LEAVE_NEW_COMMENT':
-      return action.payload;
+      return action.commentBody;
     default:
       return state;
   }
@@ -130,6 +130,24 @@ export const isAddToCalendarModalOpenReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_ADD_TO_CALENDAR_MODAL':
       return !state;
+    default:
+      return state;
+  }
+};
+
+export const currentActivityReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_ACTIVITY':
+      return action.item;
+    default:
+      return state;
+  }
+};
+
+export const activityIdAddToCalendarReducer = (state = '', action) => {
+  switch (action.type) {
+    case 'ACTIVITY_ID_ADD_TO_CALENDAR':
+      return action.id;
     default:
       return state;
   }
