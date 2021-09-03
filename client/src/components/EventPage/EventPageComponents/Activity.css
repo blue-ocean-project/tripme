@@ -205,17 +205,19 @@
 }
 .activityDetailInfo {
   color: rgb(42, 48, 54);
-  font-weight: 200;
+  margin-left: 0;
+  border: 1px solid black;
+  font-weight: 150;
 }
 
 .Eachcomment {
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
+  overflow: auto;
 }
 
 .commentBody {
-  color: rgb(61, 85, 112);
+  color: rgb(52, 67, 83);
   font-weight: 200;
-  text-decoration: underline;
 }
 
 .leaveCommentButtonsContainer {
@@ -233,7 +235,7 @@
   margin-top: 1rem;
 }
 .activityDetailModal {
-  width: 30rem;
+  width: 40rem;
   height: 35rem;
   overflow-y: auto;
 }
@@ -270,4 +272,17 @@
 
 .CommentsSectionOfCommentModal {
   margin-top: 1rem;
+}
+
+.modalCommentSection {
+  /* display: flex; */
+  overflow-x: auto;
+  height: 15rem;
+}
+.commentCreatedAt {
+  display: block;
+  font-size: 0.6rem;
+  color: rgb(85, 82, 82);
+  border-bottom: 1px solid rgb(66, 114, 248);
+  font-weight: 100;
 }

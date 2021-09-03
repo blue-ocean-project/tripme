@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import Comments from './Comments.jsx';
-import AddActivityForm from './AddActivityForm.jsx';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
+import Comments from './Comments.jsx';
+import AddActivityForm from './AddActivityForm.jsx';
 import 'react-datepicker/dist/react-datepicker.css';
 import { updateActivity } from '../../../state/actions/activityActions/activityActions.js';
 
@@ -17,9 +17,7 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
   const [newType, setNewType] = useState('');
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
-  const [newStartTime, setNewStartTime] = useState('');
-  const [newEndTime, setNewEndTime] = useState('');
-  const currentActivity = useSelector((state) => state.currentActivity);
+
   const option = [
     { value: 'shopping', label: 'shopping' },
     { value: 'sightseeing', label: 'sightseeing' },
@@ -32,19 +30,24 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
     { value: 'self care', label: 'self care' },
     { value: 'other', label: 'other' },
   ];
+
+  const findOption = option.filter((op) => op.value === item.type);
+  console.log(findOption);
+
   const toggleUpdateDetail = (e) => {
     e.preventDefault();
     setEditMode(!editMode);
   };
 
   const handleSubmitChanges = () => {
-    updateActivity(activityId, newType, newTitle, newDescription);
-    console.log(newTitle, newTitle, newDescription);
+    updateActivity(activityId, newType.value, newTitle, newDescription);
+    console.log(newTitle.value, newTitle, newDescription);
     toggleActivityDetailModal();
   };
 
   const handleCLickToCloseDetailModal = (e) => {
     e.preventDefault();
+    setEditMode(!editMode);
     toggleActivityDetailModal();
   };
 
@@ -52,12 +55,12 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
     <Container>
       <Row className="activityDetailTitle">
         <Col>Type: </Col>
-        <Col className="activityDetailInfo">
+        <Col>
           <Select
             value={option.value}
             onChange={setNewType}
             className="activityDetailInfoInput"
-            defaultValue={option[8]}
+            defaultValue={option}
             label="Single select"
             options={option}
           />
@@ -87,7 +90,10 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
         <Button className="updateActivityDetailSubmitButton" onClick={handleSubmitChanges}>
           Submit
         </Button>
-        <Button className="updateActivityDetailCancelButton" onClick={(e) => toggleUpdateDetail(e)}>
+        <Button
+          className="updateActivityDetailCancelButton"
+          onClick={handleCLickToCloseDetailModal}
+        >
           Cancel
         </Button>
       </Row>
@@ -99,23 +105,26 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
       <Row className="activityDetailTitle">
         <Col>Type: </Col>
         <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
-          {currentActivity.type}
+          {item.type}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Titile: </Col>
         <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
-          {currentActivity.title}
+          {item.title}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Description:</Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)} />
-        {currentActivity.description}
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
+          {item.description}
+        </Col>
       </Row>
       <Row className="activityDetailTitle">
-        Comments:
-        <Comments />
+        <Col>Comments:</Col>
+        <Container className="modalCommentSection">
+          <Comments />
+        </Container>
       </Row>
       <Row>
         <Button

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import './Activity.css';
 import { CardColumns, Container, Row, Col, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,8 +14,12 @@ const Activity = () => {
   const [tracker, setTracker] = useState('');
 
   const dispatch = useDispatch();
+  const [notifyParent, setNotifyParent] = useState(true);
 
-  const activities = useSelector((state) => state.activities).sort((a, b) => b.id - a.id);
+  const activities = useSelector((state) => state.activities)
+    .filter((item) => item.start_time === null)
+    .sort((a, b) => b.id - a.id);
+
   const {
     toggleAddActivityModal,
     toggleActivityDetailModal,
@@ -31,11 +35,10 @@ const Activity = () => {
   };
 
   useEffect(() => {
-    const result = fetchActivities(1);
-    setTracker(result);
-    console.log(tracker);
+    fetchActivities(1);
   }, []);
 
+  useEffect(() => {}, [activities]);
   return (
     <>
       <div className="activityComponentHeader">Activity</div>
@@ -64,7 +67,10 @@ const Activity = () => {
       </Container>
       <AddActivityModal toggleAddActivityModal={toggleAddActivityModal} />
       <ActivityDetailModal toggleActivityDetailModal={toggleActivityDetailModal} />
-      <AddToCalendarModal toggleAddToCalendarModal={toggleAddToCalendarModal} />
+      <AddToCalendarModal
+        toggleAddToCalendarModal={toggleAddToCalendarModal}
+        setNotifyParent={setNotifyParent}
+      />
       <LeaveCommentModal toggleLeaveCommentModal={toggleLeaveCommentModal} />
     </>
   );
