@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Server from '../../lib/Server';
 
 export default (user_id) => {

@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import CloseButton from 'react-bootstrap/CloseButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../../state/actions';
@@ -12,7 +13,6 @@ const EmailVerification = (props) => {
   const currentUser = useSelector((state) => state.user);
 
   const [statusMessage, setStatusMessage] = useState('');
-  const [verifyMethod, setVerifyMethod] = useState('email');
 
   const dispatch = useDispatch();
   const { closeVerificationModal } = bindActionCreators(actions, dispatch);
@@ -21,13 +21,15 @@ const EmailVerification = (props) => {
     <Modal centered show={viewVerificationModal} onHide={closeVerificationModal}>
       <Modal.Body>
         {props.verifyType === 'login' && (
-          <div className="login-step">A verification link has already been sent to your email</div>
+          <div className="login-step">Please verify your account to continue</div>
         )}
         {props.verifyType === 'signup' && (
-          <div className="login-step">A verification email has been sent!</div>
+          <div className="login-step">
+            A verification link has been sent to your {props.verifyMethod}!
+          </div>
         )}
         <div className="login-verification-subtext">
-          Please click the link in your email to activate your account
+          Please click the link in your email/text to activate your account
         </div>
         <div className="signup-choices">
           <Button
@@ -36,12 +38,26 @@ const EmailVerification = (props) => {
             onClick={() => {
               setStatusMessage('Email has been sent!');
               Server.get('/signup/verify/sendCode', {
-                params: { user_id: currentUser.user_id, method: verifyMethod },
+                params: { user_id: currentUser.user_id, method: 'email' },
               });
             }}
           >
-            Resend email
+            Resend Email
           </Button>
+          {currentUser && currentUser.phone && (
+            <Button
+              className="signup-resend-button mt-1"
+              variant="outline-info"
+              onClick={() => {
+                setStatusMessage('Text message has been sent!');
+                Server.get('/signup/verify/sendCode', {
+                  params: { user_id: currentUser.user_id, method: 'phone' },
+                });
+              }}
+            >
+              Resend Text Message
+            </Button>
+          )}
         </div>
         <div className="signup-resend-email">{statusMessage}</div>
       </Modal.Body>

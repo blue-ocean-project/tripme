@@ -1,4 +1,10 @@
 const actions = {
+  storequeryParams: (state) => (dispatch) => {
+    dispatch({
+      type: 'storeParams',
+      payload: state,
+    });
+  },
   changeToDashboard: () => (dispatch) => {
     dispatch({
       type: 'dashboard',
