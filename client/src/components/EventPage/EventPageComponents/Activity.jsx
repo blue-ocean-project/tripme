@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect } from 'react';
 import './Activity.css';
 import { CardColumns, Container, Row, Col, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,11 +11,19 @@ import AddToCalendarModal from './AddToCalendarModal.jsx';
 import LeaveCommentModal from './LeaveCommentModal.jsx';
 
 const Activity = () => {
-  const [tracker, setTracker] = useState('');
-
+  const tripId = useSelector((state) => state.getTrip.trip_id);
+  const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
+  const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
+  const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
+  const isAddToCalendarModalOpen = useSelector((state) => state.isAddToCalendarModalOpen);
+  const currentActivity = useSelector((state) => state.currentActivity);
+  const activityIdAddToCalendar = useSelector((state) => state.activityIdAddToCalendar);
   const dispatch = useDispatch();
 
-  const activities = useSelector((state) => state.activities).sort((a, b) => b.id - a.id);
+  const activities = useSelector((state) => state.activities)
+    .filter((item) => item.start_time === null)
+    .sort((a, b) => b.id - a.id);
+
   const {
     toggleAddActivityModal,
     toggleActivityDetailModal,
@@ -31,10 +39,15 @@ const Activity = () => {
   };
 
   useEffect(() => {
-    const result = fetchActivities(1);
-    setTracker(result);
-    console.log(tracker);
-  }, []);
+    fetchActivities(tripId || 1);
+  }, [
+    isAddActivityModalOpen,
+    isActivityDetailModalOpen,
+    isLeaveNewCommentModalOpen,
+    isAddToCalendarModalOpen,
+    currentActivity,
+    activityIdAddToCalendar,
+  ]);
 
   return (
     <>

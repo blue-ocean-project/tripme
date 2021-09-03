@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import Select from 'react-select';
@@ -8,8 +8,9 @@ import * as actionCreators from '../../../state/actions/activityActions/activity
 import { bindActionCreators } from 'redux';
 
 const AddActivityForm = () => {
+  const tripId = useSelector((state) => state.getTrip.trip_id);
   const dispatch = useDispatch();
-  const { toggleAddActivityModal, createNewActivity } = bindActionCreators(
+  const { toggleAddActivityModal, createNewActivity, fetchActivities } = bindActionCreators(
     actionCreators,
     dispatch,
   );
@@ -42,6 +43,7 @@ const AddActivityForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewActivity(1, type.value, title);
+    fetchActivities(tripId || 1);
     // dispatch({
     //   type: 'CREATE_NEW_ACTIVITY',
     //   payload: {
