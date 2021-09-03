@@ -10,8 +10,8 @@ import logo from './TripMe.png';
 const NavBar = () => {
   const currentUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
   const { logout } = bindActionCreators(actions, dispatch);
+
   return (
     <>
       <Navbar>
@@ -19,7 +19,7 @@ const NavBar = () => {
           <img className="navbar-logo" src={logo} alt="brand logo" />
         </Navbar.Brand>
         <Nav className="navbar-buttons">
-          <Nav.Link onClick={() => console.log(currentUser)}>Dashboard</Nav.Link>
+          <Nav.Link>Dashboard</Nav.Link>
           {currentUser === null && (
             <Nav.Link as={Link} to="/login">
               Login

@@ -8,6 +8,7 @@ import {
   isLeaveNewCommentModalOpenReducer,
   isAddToCalendarModalOpenReducer,
 } from './activitiesReducer';
+import checkqueryParams from './checkqueryParamsReducer';
 import changePageReducer from './changePageReducer';
 import viewModalReducer from './viewModalReducer';
 import modalStepReducer from './modalStepReducer';
@@ -16,6 +17,9 @@ import verificationModalReducer from './verificationModalReducer';
 import getTripReducer from './getTripReducer';
 
 const rootReducer = combineReducers({
+  // App Reducers
+  queryParams: checkqueryParams,
+
   // Activity Reducers
   activities: activitiesReducer,
   isAddActivityModalOpen: isAddActivityModalOpenReducer,
@@ -31,6 +35,7 @@ const rootReducer = combineReducers({
   modalStep: modalStepReducer,
   user: currentUserReducer,
   viewVerificationModal: verificationModalReducer,
+
   // Dashboard Reducers
   getTrip: getTripReducer,
 });

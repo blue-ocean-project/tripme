@@ -14,7 +14,6 @@ const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
   const dispatch = useDispatch();
   const { closeModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
-
   const [step, setStep] = useState('step1');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

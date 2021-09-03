@@ -14,11 +14,8 @@ import EmailVerification from './EmailVerification.jsx';
 import config from '../../../config/config';
 
 const Login = () => {
-  console.log('tripId: ', window.localStorage.getItem('tripId'));
-  console.log('key: ', window.localStorage.getItem('key'));
   const dispatch = useDispatch();
   const { openModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
@@ -105,8 +102,6 @@ const Login = () => {
           onSuccess={onSuccess}
           onFailure={onFailure}
           cookiePolicy={'single_host_origin'}
-          style={{ marginTop: '100px' }}
-          // isSignedIn={true}
         />
         <div />
         <div className="login-status">{statusMessage}</div>
@@ -164,9 +159,9 @@ const Login = () => {
         setVerifyMethod={(method) => setVerifyMethod(method)}
       />
       <EmailVerification
-        verifyMethod={verifyMethod}
-        setVerifyMethod={(method) => setVerifyMethod(method)}
         verifyType={verifyType}
+        verifyMethod={verifyMethod}
+        setVerifyMethod={setVerifyMethod}
       />
     </div>
   );

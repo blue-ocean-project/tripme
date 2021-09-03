@@ -2,12 +2,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import Server from '../lib/Server';
 import NavBar from './NavBar/NavBar.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import EventPage from './EventPage/EventPage.jsx';
 import Login from './Login/Login.jsx';
 import './App.css';
-import Server from '../lib/Server';
 
 const App = () => {
   const currentUser = useSelector((state) => state.user);
@@ -22,7 +22,7 @@ const App = () => {
       params: { key: key },
       user_id: currentUser.user_id,
     })
-      .then((result) => {
+      .then(() => {
         window.localStorage.removeItem('tripId');
         window.localStorage.removeItem('key');
       })
@@ -34,29 +34,31 @@ const App = () => {
   }
 
   return (
-    <div className="container-fluid">
-      <Switch>
-        <Route exact path="/">
-          <div className="Navbar">
-            <NavBar />
-          </div>
-          {state ? (
-            <div className="Dashboard">
-              <Dashboard />
+    <>
+      <div className="container-fluid">
+        <Switch>
+          <Route exact path="/">
+            <div className="Navbar">
+              <NavBar />
             </div>
-          ) : (
-            <div className="Eventpage">
-              <EventPage />
+            {state ? (
+              <div className="Dashboard">
+                <Dashboard />
+              </div>
+            ) : (
+              <div className="Eventpage">
+                <EventPage />
+              </div>
+            )}
+          </Route>
+          <Route path="/login">
+            <div className="Login">
+              <Login trip={tripId} key={key} />
             </div>
-          )}
-        </Route>
-        <Route path="/login">
-          <div className="Login">
-            <Login />
-          </div>
-        </Route>
-      </Switch>
-    </div>
+          </Route>
+        </Switch>
+      </div>
+    </>
   );
 };
 
