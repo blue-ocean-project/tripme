@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import './Activity.css';
 import { CardColumns, Container, Row, Col, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
