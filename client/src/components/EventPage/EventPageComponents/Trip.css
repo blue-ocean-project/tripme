@@ -5,20 +5,20 @@
   max-height: 30px; */
 }
 .eventpage-trip-bottom {
-  height: 75%;
-  max-height: 75%;
+  height: 90%;
+  max-height: 40%;
 }
 
 .eventpage-trip-invite-btn {
   width: 240px;
   border: 1px solid;
-  background-color: rgb(171, 113, 225);
+  background-color: rgb(75, 120, 245);
   cursor: pointer;
   margin: 5px;
   margin-right: 25px;
 }
 .eventpage-trip-invite-btn:hover {
-  background: rgb(89, 41, 131);
+  background: rgb(47, 100, 245);
 }
 
 div[class^='trip-bot-col'] {
@@ -33,11 +33,13 @@ div[class^='trip-bot-col'] {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  height: 80%;
+  max-height: 80%;
 }
 
 .e-trip-calendar {
-  background-color: lightgray;
-  border: 2px solid rgb(171, 113, 225);
+  background-color: rgb(215, 231, 255);
+  border: 2px solid rgb(75, 120, 245);
   width: 70%;
   height: 50%;
   align-items: center;
@@ -49,6 +51,8 @@ div[class^='trip-bot-col'] {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  height: 80%;
+  max-height: 80%;
 }
 
 .participants-container {
@@ -67,20 +71,15 @@ div[class^='trip-bot-col'] {
 .trip-bot-col-third {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  overflow-y: auto;
+  height: 80%;
+  max-height: 80%;
 }
 
 /*///////////////////////MODAL ////////////*/
 
-.event-trip-modal {
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  margin-right: 50%;
-  transform: translate(50%, 50%);
-  z-index: 1000;
-  padding: 80px;
-  background-color: white;
-  opacity: 1;
+.trip-modal-close-btn {
+  display: flex;
+  justify-content: center;
 }
