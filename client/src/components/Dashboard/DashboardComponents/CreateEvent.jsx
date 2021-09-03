@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { Modal, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import createEvents from '../../../state/actions/createEvent';
 import getTrips from '../../../state/actions/getTrips';
 import { getTrip } from '../../../state/actions/index';
 
 function CreateEvent() {
+  // const user_id = useSelector((states) => states.tripId));
+
+  const TEMP_USER_ID = 8;
+
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -76,9 +80,9 @@ function CreateEvent() {
           <button
             type="button"
             onClick={() => {
-              createEvents(8, name, destination, startDate, endDate)
+              createEvents(TEMP_USER_ID, name, destination, startDate, endDate)
                 .then(() => {
-                  getTrips(8).then((results) => {
+                  getTrips(TEMP_USER_ID).then((results) => {
                     dispatch(getTrip(results.data));
                   });
                 })

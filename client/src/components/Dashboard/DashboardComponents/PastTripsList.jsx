@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './Past.css';
 import Data from '../../../../../SampleData/Dashboard.js';
 import getTrips from '../../../state/actions/getTrips.js';
@@ -7,8 +8,12 @@ import PastTrip from './PastTrip.jsx';
 const PastTripList = () => {
   const [past, updateState] = useState([]);
 
+  // const user_id = useSelector((states) => states.tripId));
+
+  const TEMP_USER_ID = 8;
+
   useEffect(() => {
-    getTrips(8)
+    getTrips(TEMP_USER_ID)
       .then((results) => {
         updateState(results.data.past);
       })

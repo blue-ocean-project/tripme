@@ -8,17 +8,21 @@ import UpcomingTrip from './UpcomingTrip.jsx';
 const UpcomingTripsList = () => {
   const localState = useSelector((states) => states.getTrip);
 
+  // const user_id = useSelector((states) => states.user));
+
   const [upcoming, updateState] = useState([]);
 
+  const TEMP_USER_ID = 8;
+
   useEffect(() => {
-    getTrips(8)
+    getTrips(TEMP_USER_ID)
       .then((results) => {
         updateState(results.data.upcoming);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [localState]);
 
   return upcoming.map((trip, index) => {
     const query = `camping+${index}`;
