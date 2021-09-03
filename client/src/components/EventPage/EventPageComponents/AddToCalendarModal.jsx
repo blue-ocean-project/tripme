@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const AddToCalendarModal = ({}) => {
+const AddToCalendarModal = () => {
   const dispatch = useDispatch();
   const { addActivityToCalendar, toggleAddToCalendarModal } = bindActionCreators(
     actionCreators,
@@ -22,7 +22,7 @@ const AddToCalendarModal = ({}) => {
   const handleAddToCalendar = (e) => {
     // e.preventDefault();
     if (moment(startTime).isBefore(endTime)) {
-      const title = 'please work';
+      const title = 'helloooo';
       addActivityToCalendar(activityIdAddToCalendar, startTime, endTime, title);
       toggleAddToCalendarModal();
     } else {
@@ -44,7 +44,7 @@ const AddToCalendarModal = ({}) => {
     >
       {' '}
       <Modal.Header closeButton className="modalCloseButton">
-        <Modal.Title> </Modal.Title>
+        <Modal.Title> Add Date and Time </Modal.Title>
       </Modal.Header>
       <Modal.Body className="addedToCalendar">
         <Form>

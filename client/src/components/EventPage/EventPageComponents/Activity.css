@@ -186,10 +186,10 @@
   padding-bottom: 3px;
 }
 
-/* .addToCalendarModal {
-  height: 30rem;
+.addToCalendarModal {
+  height: 33rem;
   width: 48rem;
-} */
+}
 
 .modalCloseButton button {
   outline: none;
@@ -197,7 +197,7 @@
   border: 0.5px solid rgb(31, 112, 218);
 }
 .addToCalendarButtons {
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 
 .activityDetailTitle {
@@ -220,6 +220,7 @@
 
 .leaveCommentButtonsContainer {
   margin-top: 2rem;
+  margin-left: 3rem;
   justify-items: center;
   align-items: center;
 }
@@ -257,4 +258,16 @@
 
 .validation {
   color: red;
+}
+
+.commentCounts {
+  padding-left: 0.5rem;
+}
+
+/* .activityDetailInfoInput {
+
+} */
+
+.CommentsSectionOfCommentModal {
+  margin-top: 1rem;
 }

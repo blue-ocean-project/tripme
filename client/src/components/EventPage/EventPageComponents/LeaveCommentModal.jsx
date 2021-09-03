@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Comments from './Comments.jsx';
+import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
+import { bindActionCreators } from 'redux';
 
 const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
   const dispatch = useDispatch();
   const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
+  const activityId = useSelector((state) => state.currentActivity).id;
   const [commentBody, setCommentBody] = useState('');
+  const { leaveNewComment } = bindActionCreators(actionCreators, dispatch);
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     toggleLeaveCommentModal(e);
-    dispatch({ type: 'LEAVE_NEW_COMMENT', payload: commentBody });
+    leaveNewComment(activityId, 1, commentBody);
   };
 
   return (
@@ -28,7 +32,7 @@ const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
         <Modal.Body>
           <div>
             <Form className="leaveCommentForm" onSubmit={handleSubmit}>
-              <div>Comment:</div>
+              <Row>Leave Your Comment Here:</Row>
               <Form.Control
                 type="text"
                 placeholder="Leave a Comment"
@@ -36,6 +40,12 @@ const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
                   setCommentBody(e.target.value);
                 }}
               />
+
+              <Row className="CommentsSectionOfCommentModal">Comments:</Row>
+              <Row>
+                <Comments />
+              </Row>
+
               <Container className="leaveCommentButtonsContainer">
                 <Row>
                   <Col>
@@ -47,7 +57,6 @@ const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
                 </Row>
               </Container>
             </Form>
-            <Row>{/* <Comments /> */}</Row>
           </div>
         </Modal.Body>
       </Modal>

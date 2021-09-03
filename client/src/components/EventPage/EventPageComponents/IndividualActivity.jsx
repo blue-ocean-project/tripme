@@ -23,11 +23,6 @@ import LeaveCommentModal from './LeaveCommentModal.jsx';
 import AddToCalendarModal from './AddToCalendarModal.jsx';
 
 const IndividualActivity = ({ item }) => {
-  console.log(item);
-  const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
-  const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
-  const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
-
   const dispatch = useDispatch();
   const {
     toggleActivityDetailModal,
@@ -35,7 +30,6 @@ const IndividualActivity = ({ item }) => {
     toggleLeaveCommentModal,
     setCurrentActivity,
     addToCalendarId,
-    addActivityToCalendar,
   } = bindActionCreators(actionCreators, dispatch);
 
   const handleClickToToggleActivityDetailModal = (e) => {
@@ -47,6 +41,7 @@ const IndividualActivity = ({ item }) => {
   const handleClickToTogglehandleLeaveCommentModal = (e) => {
     e.preventDefault();
     toggleLeaveCommentModal();
+    setCurrentActivity(item);
   };
   const handleClickToToggleAddToCalendarModal = (e) => {
     e.preventDefault();
@@ -142,7 +137,12 @@ const IndividualActivity = ({ item }) => {
               }}
             >
               <SmsIcon fontSize="small" color="primary" />
-              <span className="commentActivity">Comment</span>
+              <span className="commentActivity">
+                Comment
+                <span className="activityListItemText commentCounts">
+                  ({item.comments && item.comments.length})
+                </span>
+              </span>
             </button>
             <button
               type="button"

@@ -102,7 +102,7 @@ export const newActivityReducer = (state = {}, action) => {
 export const leaveNewCommentReducer = (state = '', action) => {
   switch (action.type) {
     case 'LEAVE_NEW_COMMENT':
-      return action.payload;
+      return action.commentBody;
     default:
       return state;
   }

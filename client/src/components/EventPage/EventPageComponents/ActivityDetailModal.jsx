@@ -7,13 +7,16 @@ import AddActivityForm from './AddActivityForm.jsx';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { updateActivity } from '../../../state/actions/activityActions/activityActions.js';
 
 const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
   const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
-
+  const item = useSelector((state) => state.currentActivity);
+  const activityId = useSelector((state) => state.currentActivity.id);
   const [editMode, setEditMode] = useState(false);
   const [newType, setNewType] = useState('');
   const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
   const [newStartTime, setNewStartTime] = useState('');
   const [newEndTime, setNewEndTime] = useState('');
   const currentActivity = useSelector((state) => state.currentActivity);
@@ -29,111 +32,101 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
     { value: 'self care', label: 'self care' },
     { value: 'other', label: 'other' },
   ];
-  // const toggleUpdateDetail = (e) => {
-  //   e.preventDefault();
-  //   setEditMode(!editMode);
-  //   console.log(editMode);
-  // };
+  const toggleUpdateDetail = (e) => {
+    e.preventDefault();
+    setEditMode(!editMode);
+  };
 
-  // const handleSubmitChanges = (e) => {
-  //   e.preventDefault();
-  //   setEditMode(!editMode);
-  //   console.log(editMode);
-  // };
-
-  // const handleUpdateChange = (e) => {
-  //   e.preventDefault();
-  //   console.log(item);
-  // };
+  const handleSubmitChanges = () => {
+    updateActivity(activityId, newType, newTitle, newDescription);
+    console.log(newTitle, newTitle, newDescription);
+    toggleActivityDetailModal();
+  };
 
   const handleCLickToCloseDetailModal = (e) => {
     e.preventDefault();
     toggleActivityDetailModal();
   };
 
-  // const editModeView = () => (
-  //   <Container>
-  //     <Row className="activityDetailTitle">
-  //       <Col>Type: </Col>
-  //       <Col className="activityDetailInfo">
-  //         <Select
-  //           value={option.value}
-  //           onChange={setNewType}
-  //           className="chooseActicityType"
-  //           defaultValue={option[8]}
-  //           label="Single select"
-  //           options={option}
-  //         />
-  //       </Col>
-  //     </Row>
-  //     <Row className="activityDetailTitle">
-  //       <Col>Titile: </Col>
-  //       <Col className="activityDetailInfo">
-  //         <input type="text" defaultValue={item.title} onChange={setNewTitle} />
-  //       </Col>
-  //     </Row>
-  //     <Row className="activityDetailTitle">
-  //       <Col>Start At: </Col>
-  //       <Col className="activityDetailInfo">
-  //         <DatePicker
-  //           className="chooseActivityDate"
-  //           selected={newStartTime}
-  //           showTimeSelect
-  //           dateFormat="Pp"
-  //           onChange={(d) => setNewStartTime(d)}
-  //         />
-  //       </Col>
-  //     </Row>
-  //     <Row className="activityDetailTitle">
-  //       <Col>End At:</Col>
-  //       <Col className="activityDetailInfo">
-  //         <DatePicker
-  //           className="chooseActivityDate"
-  //           selected={newEndTime}
-  //           showTimeSelect
-  //           dateFormat="Pp"
-  //           onChange={(d) => setNewEndTime(d)}
-  //         />
-  //       </Col>
-  //     </Row>
-  //     <Row>
-  //       <Button
-  //         className="updateActivityDetailSubmitButton"
-  //         onClick={(e) => {
-  //           handleSubmitChanges(e);
-  //         }}
-  //       >
-  //         Submit
-  //       </Button>
-  //       <Button className="updateActivityDetailCancelButton" onClick={(e) => toggleUpdateDetail(e)}>
-  //         Cancel
-  //       </Button>
-  //     </Row>
-  //   </Container>
-  // );
+  const editModeView = () => (
+    <Container>
+      <Row className="activityDetailTitle">
+        <Col>Type: </Col>
+        <Col className="activityDetailInfo">
+          <Select
+            value={option.value}
+            onChange={setNewType}
+            className="activityDetailInfoInput"
+            defaultValue={option[8]}
+            label="Single select"
+            options={option}
+          />
+        </Col>
+      </Row>
+      <Row className="activityDetailTitle">
+        <Col>Titile: </Col>
+        <Col className="activityDetailInfoInput">
+          <input
+            type="text"
+            defaultValue={item.title}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row className="activityDetailTitle">
+        <Col>Description: </Col>
+        <Col className="activityDetailInfoInput">
+          <textarea
+            type="textarea"
+            defaultValue={item.description}
+            onChange={(e) => setNewDescription(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Button className="updateActivityDetailSubmitButton" onClick={handleSubmitChanges}>
+          Submit
+        </Button>
+        <Button className="updateActivityDetailCancelButton" onClick={(e) => toggleUpdateDetail(e)}>
+          Cancel
+        </Button>
+      </Row>
+    </Container>
+  );
 
   const displayView = () => (
     <Container>
       <Row className="activityDetailTitle">
         <Col>Type: </Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleActivityDetailModal(e)}>
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
           {currentActivity.type}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Titile: </Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleActivityDetailModal(e)}>
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)}>
           {currentActivity.title}
         </Col>
       </Row>
       <Row className="activityDetailTitle">
         <Col>Description:</Col>
-        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleActivityDetailModal(e)} />
+        <Col className="activityDetailInfo" onDoubleClick={(e) => toggleUpdateDetail(e)} />
         {currentActivity.description}
       </Row>
       <Row className="activityDetailTitle">
         Comments:
         <Comments />
+      </Row>
+      <Row>
+        <Button
+          variant="outline-primary"
+          className="activityModalCloseButton"
+          onClick={(e) => {
+            toggleActivityDetailModal(e);
+          }}
+        >
+          Close
+        </Button>
       </Row>
     </Container>
   );
@@ -150,17 +143,8 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
         <Modal.Title> Activity detail</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div>{displayView()}</div>
-        {/* {editMode ? <div>{editModeView()}</div> : <div>{displayView()}</div>} */}
-        <Button
-          variant="outline-primary"
-          className="activityModalCloseButton"
-          onClick={(e) => {
-            toggleActivityDetailModal(e);
-          }}
-        >
-          Close
-        </Button>
+        {/* <div>{displayView()}</div> */}
+        {editMode ? <div>{editModeView()}</div> : <div>{displayView()}</div>}
       </Modal.Body>
     </Modal>
   );

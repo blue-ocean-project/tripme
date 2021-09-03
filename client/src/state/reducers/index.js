@@ -27,6 +27,7 @@ const rootReducer = combineReducers({
   isLeaveNewCommentModalOpen: isLeaveNewCommentModalOpenReducer,
   isAddToCalendarModalOpen: isAddToCalendarModalOpenReducer,
   newActivity: newActivityReducer,
+
   leaveNewComment: leaveNewCommentReducer,
 
   // Login Reducers

@@ -11,6 +11,8 @@ import AddToCalendarModal from './AddToCalendarModal.jsx';
 import LeaveCommentModal from './LeaveCommentModal.jsx';
 
 const Activity = () => {
+  const [tracker, setTracker] = useState('');
+
   const dispatch = useDispatch();
 
   const activities = useSelector((state) => state.activities).sort((a, b) => b.id - a.id);
@@ -28,7 +30,11 @@ const Activity = () => {
     toggleAddActivityModal();
   };
 
-  useEffect(() => fetchActivities(1), []);
+  useEffect(() => {
+    const result = fetchActivities(1);
+    setTracker(result);
+    console.log(tracker);
+  }, []);
 
   return (
     <>
