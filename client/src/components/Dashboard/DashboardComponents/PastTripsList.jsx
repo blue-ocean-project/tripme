@@ -8,7 +8,13 @@ import PastTrip from './PastTrip.jsx';
 const PastTripList = () => {
   const [past, updateState] = useState([]);
 
-  const user_id = useSelector((states) => states.user);
+  var user = useSelector((states) => states.user);
+
+  if (user !== null) {
+    var user_id = user.user_id;
+  } else {
+    var user_id = 1;
+  }
 
   // const TEMP_USER_ID = 8;
 

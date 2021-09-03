@@ -6,7 +6,13 @@ import getTrips from '../../../state/actions/getTrips';
 import { getTrip } from '../../../state/actions/index';
 
 function CreateEvent() {
-  const user_id = useSelector((states) => states.user);
+  var user = useSelector((states) => states.user);
+
+  if (user !== null) {
+    var user_id = user.user_id;
+  } else {
+    var user_id = 1;
+  }
 
   // const TEMP_USER_ID = 8;
 
