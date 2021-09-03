@@ -44,17 +44,6 @@ const AddActivityForm = () => {
     e.preventDefault();
     createNewActivity(1, type.value, title);
     fetchActivities(tripId || 1);
-    // dispatch({
-    //   type: 'CREATE_NEW_ACTIVITY',
-    //   payload: {
-    //     type: type.value,
-    //     title,
-    //     start_time: startTime,
-    //     end_time: endTime,
-    //     trip_id: tripId,
-    //   },
-    // });
-
     toggleAddActivityModal();
   };
 
@@ -65,7 +54,6 @@ const AddActivityForm = () => {
         value={option.value}
         onChange={setType}
         className="chooseActicityType"
-        defaultValue={option[8]}
         label="Single select"
         options={option}
       />
@@ -91,26 +79,6 @@ const AddActivityForm = () => {
           }}
         />
       </Form.Group>
-      {/* <Form.Group>
-        <div className="addActivityFormInput">Start At: </div>
-        <DatePicker
-          className="chooseActivityDate"
-          selected={startTime}
-          showTimeSelect
-          dateFormat="Pp"
-          onChange={(d) => setStarTime(d)}
-        />
-      </Form.Group>
-      <Form.Group>
-        <div className="addActivityFormInput">End At: </div>
-        <DatePicker
-          className="chooseActivityDate"
-          selected={endTime}
-          showTimeSelect
-          dateFormat="Pp"
-          onChange={(d) => setEndTime(d)}
-        />
-      </Form.Group> */}
       <Row>
         <Col>
           <Button className="addActivityModalSubmitButton" onClick={handleSubmit}>

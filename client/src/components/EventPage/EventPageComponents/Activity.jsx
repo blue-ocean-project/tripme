@@ -11,7 +11,7 @@ import AddToCalendarModal from './AddToCalendarModal.jsx';
 import LeaveCommentModal from './LeaveCommentModal.jsx';
 
 const Activity = () => {
-  const tripId = useSelector((state) => state.getTrip.trip_id);
+  const tripId = useSelector((state) => state.getTrip.trip_id || 1);
   const isAddActivityModalOpen = useSelector((state) => state.isAddActivityModalOpen);
   const isActivityDetailModalOpen = useSelector((state) => state.isActivityDetailModalOpen);
   const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
@@ -39,7 +39,7 @@ const Activity = () => {
   };
 
   useEffect(() => {
-    fetchActivities(tripId || 1);
+    fetchActivities(tripId);
   }, [
     isAddActivityModalOpen,
     isActivityDetailModalOpen,

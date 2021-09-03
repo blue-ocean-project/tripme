@@ -6,6 +6,7 @@ import * as actionCreators from '../../../state/actions/activityActions/activity
 import { bindActionCreators } from 'redux';
 
 const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
+  const userId = useSelector((state) => (state.user ? state.user.user_id : 1));
   const dispatch = useDispatch();
   const isLeaveNewCommentModalOpen = useSelector((state) => state.isLeaveNewCommentModalOpen);
   const activityId = useSelector((state) => state.currentActivity).id;
@@ -14,7 +15,7 @@ const LeaveCommentModal = ({ toggleLeaveCommentModal }) => {
   const handleSubmit = (e) => {
     // e.preventDefault();
     toggleLeaveCommentModal(e);
-    leaveNewComment(activityId, 1, commentBody);
+    leaveNewComment(activityId, userId, commentBody);
   };
 
   return (

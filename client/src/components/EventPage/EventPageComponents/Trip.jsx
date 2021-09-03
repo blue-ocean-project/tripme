@@ -12,12 +12,13 @@ import {
   ListGroup,
   Checkbox,
 } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faUser, faMap } from '@fortawesome/free-solid-svg-icons';
 import './Trip.css';
 import axios from 'axios';
-import Server from '../../../lib/Server.js';
 import moment from 'moment';
+import Server from '../../../lib/Server.js';
 
 const participantDisplay = function (participantsList) {
   return participantsList.map((each, i) => (
@@ -29,15 +30,8 @@ const participantDisplay = function (participantsList) {
 };
 
 const Trip = () => {
-  useEffect(() => {
-    Server.get(`/trips/${1}`)
-      .then((res) => {
-        console.log(res);
-        setTripDetail(res.data);
-      })
-
-      .catch((err) => console.error(err));
-  }, []);
+  const currentUser = useSelector((state) => state.user);
+  const tripId = useSelector((state) => state.tripId || 1);
 
   const [tripDetail, setTripDetail] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -45,6 +39,16 @@ const Trip = () => {
 
   const [checkBoxOn, setCheckBoxOn] = useState(false);
   const [isChecked, setIsChecked] = useState([]);
+
+  useEffect(() => {
+    console.log('trip id', tripId);
+    Server.get(`/trips/${tripId}`)
+      .then((res) => {
+        setTripDetail(res.data);
+      })
+
+      .catch((err) => console.error(err));
+  }, [tripId]);
 
   const openModal = function () {
     setModalIsOpen(true);
@@ -54,13 +58,15 @@ const Trip = () => {
   };
 
   //send invite trip mate request
-  const handleSubmit = function (event) {
-    const tranformedContacts = inviteContacts.replace(/\s/g, '').split(',');
+
+  const handleSubmit = function () {
+    const transformedContacts = inviteContacts.replace(/\s/g, '').split(',');
+    console.log(transformedContacts);
     Server.post('/invite', {
-      first_name: 'Uncle',
-      last_name: 'Jay',
-      contacts: tranformedContacts,
-      trip_id: 1,
+      first_name: currentUser ? currentUser.first_name : '',
+      last_name: currentUser ? currentUser.last_name : '',
+      contacts: transformedContacts,
+      trip_id: tripId,
     })
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
@@ -69,8 +75,6 @@ const Trip = () => {
   // on each checkbox change, send patch to DB
   const handleCheckBox = function (event) {
     setCheckBoxOn(!checkBoxOn);
-    console.log(event.target.value);
-    console.log(tripDetail);
   };
 
   // const handleSingleCheck = function (event) {
@@ -89,7 +93,6 @@ const Trip = () => {
     });
     const temp = checklist.map((each, index) => {
       const check = each.checked;
-      console.log(each.item);
       if (check === true) {
         // setIsChecked({ ...isChecked, [each.item]: true })
         return (
@@ -204,22 +207,3 @@ const Trip = () => {
 };
 
 export default Trip;
-
-// <InputGroup className="mb-3">
-// <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-// <ListGroup.Item>Hello world</ListGroup.Item>
-// </InputGroup>
-
-// <InputGroup className="mb-4">
-// <InputGroup.Checkbox aria-label="Checkbox for following text input2" />
-// <ListGroup.Item>Turn off AC</ListGroup.Item>
-// </InputGroup>
-// <InputGroup className="mb-4">
-// <InputGroup.Checkbox
-//   checked={checkBoxOn}
-//   value="213"
-//   aria-label="Checkbox for following text input "
-
-// />
-// <ListGroup.Item>소새끼야</ListGroup.Item>
-// </InputGroup>

@@ -32,7 +32,7 @@ const UpcomingTrip = (props) => {
         <Button
           onClick={() => {
             dispatch(changeToEventPage(false));
-            dispatch(changeTripId({ tripId: props.trip.id }));
+            dispatch(changeTripId(props.trip.id));
           }}
           variant="primary"
         >
