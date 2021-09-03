@@ -8,6 +8,7 @@ import * as actionCreators from '../../../state/actions/activityActions/activity
 import { bindActionCreators } from 'redux';
 
 const AddActivityForm = () => {
+  const tripId = useSelector((state) => state.getTrip.trip_id);
   const dispatch = useDispatch();
   const { toggleAddActivityModal, createNewActivity, fetchActivities } = bindActionCreators(
     actionCreators,
@@ -42,7 +43,7 @@ const AddActivityForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewActivity(1, type.value, title);
-    fetchActivities(1);
+    fetchActivities(tripId || 1);
     // dispatch({
     //   type: 'CREATE_NEW_ACTIVITY',
     //   payload: {
