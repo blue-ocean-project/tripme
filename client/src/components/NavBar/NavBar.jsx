@@ -36,7 +36,7 @@ const NavBar = () => {
               >
                 Logout
               </Nav.Link>
-              <Navbar.Text className="navbar-signed-in-as ml-5">
+              <Navbar.Text className="navbar-signed-in-as ">
                 Signed in as:{' '}
                 <a href="#login">
                   {currentUser.first_name} {currentUser.last_name}
