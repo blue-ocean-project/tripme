@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import AddActivityForm from './AddActivityForm.jsx';
 import { useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import AddActivityForm from './AddActivityForm.jsx';
 // import * as actionCreators from '../../../state/actions/activityActions/activityActions.js';
 
 const AddActivityModal = ({ toggleActivityModal }) => {
