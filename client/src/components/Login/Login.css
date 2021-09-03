@@ -1,3 +1,8 @@
+.google-login-button {
+  text-align: center;
+  margin-left: 135px;
+}
+
 .login-email,
 .login-password,
 .login-button {
@@ -41,6 +46,7 @@
 .signup-resend-button {
   margin-left: 50px;
   width: 250px;
+  margin-bottom: 10px;
 }
 
 .signup-choices {

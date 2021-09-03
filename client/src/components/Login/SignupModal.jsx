@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable object-shorthand */
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -6,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Server from '../../lib/Server';
 import actions from '../../state/actions';
+import config from '../../../config/config';
+import { GoogleLogin } from 'react-google-login';
 
 const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
@@ -20,7 +23,6 @@ const SignupModal = (props) => {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
-  const [verifyMethod, setVerifyMethod] = useState('email');
 
   const resetStep = () => {
     setStep('step1');
@@ -31,6 +33,14 @@ const SignupModal = (props) => {
     setPassword('');
     setRetypePassword('');
     setStatusMessage('');
+  };
+
+  const onSuccess = (res) => {
+    console.log('[Login Success] currentUser:', res.profileObj);
+  };
+
+  const onFailure = (res) => {
+    console.log('[Login failed] res:', res);
   };
   const nextStepEmail = () => setStep('step2email');
   const nextStepFacebook = () => setStep('step2facebook');
@@ -49,9 +59,16 @@ const SignupModal = (props) => {
               Facebook
             </Button>
             <div />
-            <Button className="signup-choices" variant="outline-success">
-              Google
-            </Button>
+            <GoogleLogin
+              className="google-login-button"
+              clientId={config.GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={'single_host_origin'}
+              style={{ marginTop: '100px' }}
+              isSignedIn={true}
+            />
           </div>
         </Modal.Body>
       </Modal>
@@ -117,6 +134,35 @@ const SignupModal = (props) => {
               value={retypePassword}
               onChange={(e) => setRetypePassword(e.target.value)}
             />
+            <div>
+              <label>How would you like to verify your account?</label>
+              <br />
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="email"
+                  checked={props.verifyMethod === 'email'}
+                  onChange={(e) => props.setVerifyMethod(e.target.value)}
+                />
+                <label className="form-check-label">Email</label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio2"
+                  value="phone"
+                  checked={props.verifyMethod === 'phone'}
+                  onChange={(e) => props.setVerifyMethod(e.target.value)}
+                  disabled={phoneNumber === ''}
+                />
+                <label className="form-check-label">Text Message</label>
+              </div>
+            </div>
             <div className="signup-status">{statusMessage}</div>
             <Button
               className="login-button"
@@ -133,12 +179,12 @@ const SignupModal = (props) => {
                   Server.post('/signup', newUser)
                     .then((result) => {
                       login(result.data);
+
                       return Server.get('/signup/verify/sendCode', {
-                        params: { user_id: result.data.user_id, method: verifyMethod },
+                        params: { user_id: result.data.user_id, method: props.verifyMethod },
                       });
                     })
-                    .then((result) => {
-                      console.log(result.data);
+                    .then(() => {
                       resetStep();
                       closeModal();
                       // if (props.trip && props.inviteCode) {
