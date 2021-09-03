@@ -8,6 +8,9 @@ import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
 import EmailVerification from './EmailVerification.jsx';
+import config from '../../../config/config';
+import { GoogleLogin } from 'react-google-login';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,6 +21,37 @@ const Login = () => {
   const [statusMessage, setStatusMessage] = useState('');
   const [verifyType, setVerifyType] = useState('');
   const [verifyMethod, setVerifyMethod] = useState('email');
+  const history = useHistory();
+
+  const onSuccess = (res) => {
+    console.log('[Login Success] currentUser:', res.profileObj);
+    console.log('console log from onSuccess');
+    Server.post('/auth/login', {
+      email: res.profileObj.email,
+      password: res.profileObj.googleId,
+    })
+      .then((result) => {
+        console.log(result);
+        login(result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        const newUser = {
+          first_name: res.profileObj.givenName,
+          last_name: res.profileObj.familyName,
+          email: res.profileObj.email,
+          password: res.profileObj.googleId,
+          verified: 'verified',
+        };
+        return Server.post('/signup', newUser);
+      })
+      .then((result) => login(result.data))
+      .finally(() => history.push('/'));
+  };
+
+  const onFailure = (res) => {
+    console.log('[Login failed] res:', res);
+  };
 
   return (
     <div>
@@ -38,6 +72,17 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br />
+        <GoogleLogin
+          className="google-login-button"
+          clientId={config.GOOGLE_CLIENT_ID}
+          buttonText="Sign in with Google"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={'single_host_origin'}
+          style={{ marginTop: '100px' }}
+          // isSignedIn={true}
+        />
         <div />
         <div className="login-status">{statusMessage}</div>
         <Button
@@ -55,7 +100,7 @@ const Login = () => {
                 if (result.data.verified === 'pending') {
                   openVerificationModal();
                 } else {
-                  window.location.reload();
+                  history.push('/');
                 }
               })
               .catch((err) => {

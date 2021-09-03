@@ -7,8 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Server from '../../lib/Server';
 import actions from '../../state/actions';
-import config from '../../../config/config';
-import { GoogleLogin } from 'react-google-login';
 
 const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
@@ -35,13 +33,6 @@ const SignupModal = (props) => {
     setStatusMessage('');
   };
 
-  const onSuccess = (res) => {
-    console.log('[Login Success] currentUser:', res.profileObj);
-  };
-
-  const onFailure = (res) => {
-    console.log('[Login failed] res:', res);
-  };
   const nextStepEmail = () => setStep('step2email');
   const nextStepFacebook = () => setStep('step2facebook');
 
@@ -59,16 +50,6 @@ const SignupModal = (props) => {
               Facebook
             </Button>
             <div />
-            <GoogleLogin
-              className="google-login-button"
-              clientId={config.GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={'single_host_origin'}
-              style={{ marginTop: '100px' }}
-              isSignedIn={true}
-            />
           </div>
         </Modal.Body>
       </Modal>
