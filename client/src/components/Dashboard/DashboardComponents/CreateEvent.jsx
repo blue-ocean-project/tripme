@@ -6,9 +6,9 @@ import getTrips from '../../../state/actions/getTrips';
 import { getTrip } from '../../../state/actions/index';
 
 function CreateEvent() {
-  // const user_id = useSelector((states) => states.tripId));
+  const user_id = useSelector((states) => states.user);
 
-  const TEMP_USER_ID = 8;
+  // const TEMP_USER_ID = 8;
 
   const dispatch = useDispatch();
 
@@ -80,9 +80,9 @@ function CreateEvent() {
           <button
             type="button"
             onClick={() => {
-              createEvents(TEMP_USER_ID, name, destination, startDate, endDate)
+              createEvents(user_id, name, destination, startDate, endDate)
                 .then(() => {
-                  getTrips(TEMP_USER_ID).then((results) => {
+                  getTrips(user_id).then((results) => {
                     dispatch(getTrip(results.data));
                   });
                 })

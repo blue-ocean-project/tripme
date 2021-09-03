@@ -8,12 +8,12 @@ import PastTrip from './PastTrip.jsx';
 const PastTripList = () => {
   const [past, updateState] = useState([]);
 
-  // const user_id = useSelector((states) => states.tripId));
+  const user_id = useSelector((states) => states.user);
 
-  const TEMP_USER_ID = 8;
+  // const TEMP_USER_ID = 8;
 
   useEffect(() => {
-    getTrips(TEMP_USER_ID)
+    getTrips(user_id)
       .then((results) => {
         updateState(results.data.past);
       })
