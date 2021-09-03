@@ -1,9 +1,7 @@
-const reducer = (state = null, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
-    case 'login':
+    case 'storeParams':
       return action.payload;
-    case 'logout':
-      return null;
     default:
       return state;
   }
