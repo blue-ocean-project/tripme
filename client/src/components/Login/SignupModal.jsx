@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable object-shorthand */
 import React, { useState } from 'react';
@@ -7,8 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Server from '../../lib/Server';
 import actions from '../../state/actions';
-import config from '../../../config/config';
-import { GoogleLogin } from 'react-google-login';
 
 const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
@@ -35,13 +35,6 @@ const SignupModal = (props) => {
     setStatusMessage('');
   };
 
-  const onSuccess = (res) => {
-    console.log('[Login Success] currentUser:', res.profileObj);
-  };
-
-  const onFailure = (res) => {
-    console.log('[Login failed] res:', res);
-  };
   const nextStepEmail = () => setStep('step2email');
   const nextStepFacebook = () => setStep('step2facebook');
 
@@ -59,16 +52,6 @@ const SignupModal = (props) => {
               Facebook
             </Button>
             <div />
-            <GoogleLogin
-              className="google-login-button"
-              clientId={config.GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={'single_host_origin'}
-              style={{ marginTop: '100px' }}
-              isSignedIn={true}
-            />
           </div>
         </Modal.Body>
       </Modal>
@@ -179,7 +162,21 @@ const SignupModal = (props) => {
                   Server.post('/signup', newUser)
                     .then((result) => {
                       login(result.data);
-
+                      if (
+                        window.localStorage.getItem('tripId') &&
+                        window.localStorage.getItem('key')
+                      ) {
+                        Server.post(
+                          `/invite/${window.localStorage.getItem(
+                            'tripId',
+                          )}?key=${window.localStorage.getItem('key')}`,
+                          {
+                            user_id: result.data.user_id,
+                          },
+                        );
+                        window.localStorage.removeItem('tripId');
+                        window.localStorage.removeItem('key');
+                      }
                       return Server.get('/signup/verify/sendCode', {
                         params: { user_id: result.data.user_id, method: props.verifyMethod },
                       });
@@ -187,9 +184,6 @@ const SignupModal = (props) => {
                     .then(() => {
                       resetStep();
                       closeModal();
-                      // if (props.trip && props.inviteCode) {
-                      //   Server.post(`/invite/${props.trip}`, { params: { key: props.inviteCode } });
-                      // }
                       openVerificationModal();
                     })
                     .catch((err) => {
@@ -204,43 +198,6 @@ const SignupModal = (props) => {
             </Button>
           </div>
         </Modal.Body>
-      </Modal>
-    );
-  }
-  if (step === 'step2facebook') {
-    return (
-      <Modal
-        centered
-        show={viewModal}
-        onHide={() => {
-          resetStep();
-          closeModal();
-        }}
-      >
-        <Modal.Body>
-          <div className="login-step">hi</div>
-          <div className="signup-choices">
-            <Button className="signup-choices" variant="outline-warning">
-              Email
-            </Button>
-          </div>
-        </Modal.Body>
-        <Modal.Footer />
-      </Modal>
-    );
-  }
-  if (step === 'verification') {
-    return (
-      <Modal centered show={viewModal} onHide={closeModal}>
-        <Modal.Body>
-          <div className="login-step">Verification</div>
-          <div className="signup-choices">
-            <Button className="signup-choices" variant="outline-warning">
-              Resend verification email
-            </Button>
-          </div>
-        </Modal.Body>
-        <Modal.Footer />
       </Modal>
     );
   }

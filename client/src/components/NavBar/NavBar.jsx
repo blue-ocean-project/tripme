@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../../state/actions/index';
@@ -8,10 +8,10 @@ import './NavBar.css';
 import logo from './TripMe.png';
 
 const NavBar = () => {
-  const state = useSelector((states) => states.changePage);
+  const currentUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const { changePage } = bindActionCreators(actions, dispatch);
+  const { logout } = bindActionCreators(actions, dispatch);
   return (
     <>
       <Navbar>
@@ -19,13 +19,31 @@ const NavBar = () => {
           <img className="navbar-logo" src={logo} alt="brand logo" />
         </Navbar.Brand>
         <Nav className="navbar-buttons">
-          <Nav.Link>Dashboard</Nav.Link>
-          <Nav.Link as={Link} to="/login">
-            Login
-          </Nav.Link>
-          <Navbar.Text className="navbar-signed-in-as">
-            Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text>
+          <Nav.Link onClick={() => console.log(currentUser)}>Dashboard</Nav.Link>
+          {currentUser === null && (
+            <Nav.Link as={Link} to="/login">
+              Login
+            </Nav.Link>
+          )}
+          {currentUser && (
+            <>
+              <Nav.Link
+                as={Link}
+                to="/login"
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Logout
+              </Nav.Link>
+              <Navbar.Text className="navbar-signed-in-as ">
+                Signed in as:{' '}
+                <a href="#login">
+                  {currentUser.first_name} {currentUser.last_name}
+                </a>
+              </Navbar.Text>
+            </>
+          )}
         </Nav>
       </Navbar>
     </>
