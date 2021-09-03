@@ -1,62 +1,47 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
+/* eslint-disable object-shorthand */
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import Server from '../lib/Server';
 import NavBar from './NavBar/NavBar.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import EventPage from './EventPage/EventPage.jsx';
 import Login from './Login/Login.jsx';
-import Server from '../lib/Server';
-import actions from '../state/actions/index';
 import './App.css';
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { storequeryParams } = bindActionCreators(actions, dispatch);
-  const state = useSelector((states) => states);
+  const currentUser = useSelector((state) => state.user);
+  const state = useSelector((states) => states.changePage);
   const query = new URLSearchParams(useLocation().search);
-  const { user } = state;
   const tripId = query.get('trip');
   const key = query.get('key');
-  let redirectToLogin = false;
+  const history = useHistory();
 
-  // useEffect(() => {
-  //   storequeryParams({
-  //     tripId,
-  //     key,
-  //   });
-  // }, []);
-
-  // console.log('app render');
-  // if (tripId && key && user) {
-  //   Server.post(`/invite/${tripId}`, {
-  //     params: { key },
-  //     user_id: user.user_id,
-  //   })
-  //     .then(() => {
-  //       // clear query params after adding user to trip.
-  //       // storequeryParams({});
-  //       // Possibly retrieve new trips of currently logged in user.
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // } else if (tripId && key && !user) {
-  //   redirectToLogin = true;
-  // }
+  if (tripId && key && currentUser) {
+    Server.post(`/invite/${tripId}`, {
+      params: { key: key },
+      user_id: currentUser.user_id,
+    })
+      .then(() => {
+        window.localStorage.removeItem('tripId');
+        window.localStorage.removeItem('key');
+      })
+      .catch((err) => console.log(err));
+  } else if (tripId && key && !currentUser) {
+    window.localStorage.setItem('tripId', tripId);
+    window.localStorage.setItem('key', key);
+    history.push('/login');
+  }
 
   return (
     <>
-      {/* {redirectToLogin ? (
-        <Redirect to={{ pathname: '/login', state: { trip: tripId, key } }} />
-      ) : ( */}
       <div className="container-fluid">
         <Switch>
           <Route exact path="/">
             <div className="Navbar">
               <NavBar />
             </div>
-            {state.changePage ? (
+            {state ? (
               <div className="Dashboard">
                 <Dashboard />
               </div>
@@ -73,7 +58,6 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-      {/* )} */}
     </>
   );
 };

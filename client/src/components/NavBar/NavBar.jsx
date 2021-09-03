@@ -26,18 +26,24 @@ const NavBar = () => {
             </Nav.Link>
           )}
           {currentUser && (
-            <Nav.Link
-              onClick={() => {
-                logout();
-                console.log(currentUser);
-              }}
-            >
-              Logout
-            </Nav.Link>
+            <>
+              <Nav.Link
+                as={Link}
+                to="/login"
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Logout
+              </Nav.Link>
+              <Navbar.Text className="navbar-signed-in-as ">
+                Signed in as:{' '}
+                <a href="#login">
+                  {currentUser.first_name} {currentUser.last_name}
+                </a>
+              </Navbar.Text>
+            </>
           )}
-          <Navbar.Text className="navbar-signed-in-as">
-            Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text>
         </Nav>
       </Navbar>
     </>

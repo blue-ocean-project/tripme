@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable object-shorthand */
 import React, { useState } from 'react';
@@ -10,7 +12,6 @@ import actions from '../../state/actions';
 
 const SignupModal = (props) => {
   const viewModal = useSelector((state) => state.viewModal);
-  const queryParams = useSelector((state) => state.queryParams);
   const dispatch = useDispatch();
   const { closeModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
   const [step, setStep] = useState('step1');
@@ -21,8 +22,6 @@ const SignupModal = (props) => {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
-
-  console.log(queryParams);
 
   const resetStep = () => {
     setStep('step1');
@@ -162,12 +161,21 @@ const SignupModal = (props) => {
                   Server.post('/signup', newUser)
                     .then((result) => {
                       login(result.data);
-                      Server.post(`/invite/${props.trip}`, {
-                        params: {
-                          key: props.inviteCode,
-                        },
-                        user_id: result.data.user_id,
-                      });
+                      if (
+                        window.localStorage.getItem('tripId') &&
+                        window.localStorage.getItem('key')
+                      ) {
+                        Server.post(
+                          `/invite/${window.localStorage.getItem(
+                            'tripId',
+                          )}?key=${window.localStorage.getItem('key')}`,
+                          {
+                            user_id: result.data.user_id,
+                          },
+                        );
+                        window.localStorage.removeItem('tripId');
+                        window.localStorage.removeItem('key');
+                      }
                       return Server.get('/signup/verify/sendCode', {
                         params: { user_id: result.data.user_id, method: props.verifyMethod },
                       });
@@ -175,9 +183,6 @@ const SignupModal = (props) => {
                     .then(() => {
                       resetStep();
                       closeModal();
-                      // if (props.trip && props.inviteCode) {
-                      //   Server.post(`/invite/${props.trip}`, { params: { key: props.inviteCode } });
-                      // }
                       openVerificationModal();
                     })
                     .catch((err) => {
@@ -192,43 +197,6 @@ const SignupModal = (props) => {
             </Button>
           </div>
         </Modal.Body>
-      </Modal>
-    );
-  }
-  if (step === 'step2facebook') {
-    return (
-      <Modal
-        centered
-        show={viewModal}
-        onHide={() => {
-          resetStep();
-          closeModal();
-        }}
-      >
-        <Modal.Body>
-          <div className="login-step">hi</div>
-          <div className="signup-choices">
-            <Button className="signup-choices" variant="outline-warning">
-              Email
-            </Button>
-          </div>
-        </Modal.Body>
-        <Modal.Footer />
-      </Modal>
-    );
-  }
-  if (step === 'verification') {
-    return (
-      <Modal centered show={viewModal} onHide={closeModal}>
-        <Modal.Body>
-          <div className="login-step">Verification</div>
-          <div className="signup-choices">
-            <Button className="signup-choices" variant="outline-warning">
-              Resend verification email
-            </Button>
-          </div>
-        </Modal.Body>
-        <Modal.Footer />
       </Modal>
     );
   }

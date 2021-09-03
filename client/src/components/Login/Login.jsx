@@ -1,17 +1,19 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable object-shorthand */
 import './Login.css';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
+import { GoogleLogin } from 'react-google-login';
+import { useHistory } from 'react-router-dom';
 import SignupModal from './SignupModal.jsx';
 import actions from '../../state/actions';
 import Server from '../../lib/Server';
 import EmailVerification from './EmailVerification.jsx';
 import config from '../../../config/config';
-import { GoogleLogin } from 'react-google-login';
 
-const Login = (props) => {
+const Login = () => {
   const dispatch = useDispatch();
   const { openModal, openVerificationModal, login } = bindActionCreators(actions, dispatch);
   const [email, setEmail] = useState('');
@@ -19,9 +21,54 @@ const Login = (props) => {
   const [statusMessage, setStatusMessage] = useState('');
   const [verifyType, setVerifyType] = useState('');
   const [verifyMethod, setVerifyMethod] = useState('email');
+  const history = useHistory();
 
   const onSuccess = (res) => {
-    console.log('[Login Success] currentUser:', res.profileObj);
+    Server.post('/auth/login', {
+      email: res.profileObj.email,
+      password: res.profileObj.googleId,
+    })
+      .then((result) => {
+        login(result.data);
+        if (window.localStorage.getItem('tripId') && window.localStorage.getItem('key')) {
+          Server.post(
+            `/invite/${window.localStorage.getItem('tripId')}?key=${window.localStorage.getItem(
+              'key',
+            )}`,
+            {
+              user_id: result.data.user_id,
+            },
+          );
+          window.localStorage.removeItem('tripId');
+          window.localStorage.removeItem('key');
+        }
+      })
+      .catch(() => {
+        const newUser = {
+          first_name: res.profileObj.givenName,
+          last_name: res.profileObj.familyName,
+          email: res.profileObj.email,
+          password: res.profileObj.googleId,
+          verified: 'verified',
+        };
+        return Server.post('/signup', newUser);
+      })
+      .then((result) => {
+        login(result.data);
+        if (window.localStorage.getItem('tripId') && window.localStorage.getItem('key')) {
+          Server.post(
+            `/invite/${window.localStorage.getItem('tripId')}?key=${window.localStorage.getItem(
+              'key',
+            )}`,
+            {
+              user_id: result.data.user_id,
+            },
+          );
+          window.localStorage.removeItem('tripId');
+          window.localStorage.removeItem('key');
+        }
+      })
+      .finally(() => history.push('/'));
   };
 
   const onFailure = (res) => {
@@ -47,6 +94,7 @@ const Login = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br />
         <GoogleLogin
           className="google-login-button"
           clientId={config.GOOGLE_CLIENT_ID}
@@ -54,8 +102,6 @@ const Login = (props) => {
           onSuccess={onSuccess}
           onFailure={onFailure}
           cookiePolicy={'single_host_origin'}
-          style={{ marginTop: '100px' }}
-          isSignedIn={true}
         />
         <div />
         <div className="login-status">{statusMessage}</div>
@@ -71,20 +117,25 @@ const Login = (props) => {
             Server.post('/auth/login', verifyUser)
               .then((result) => {
                 login(result.data);
-                Server.post(`/invite/${trip}`, {
-                  params: {
-                    key: key,
-                  },
-                  user_id: result.data.user_id,
-                });
+                if (window.localStorage.getItem('tripId') && window.localStorage.getItem('key')) {
+                  Server.post(
+                    `/invite/${window.localStorage.getItem(
+                      'tripId',
+                    )}?key=${window.localStorage.getItem('key')}`,
+                    {
+                      user_id: result.data.user_id,
+                    },
+                  );
+                  window.localStorage.removeItem('tripId');
+                  window.localStorage.removeItem('key');
+                }
                 if (result.data.verified === 'pending') {
                   openVerificationModal();
                 } else {
-                  // window.location.reload();
+                  history.push('/');
                 }
               })
               .catch((err) => {
-                // console.log('err: ', err, 'err.response.data: ', err.response.data);
                 setStatusMessage(err.response.data);
               });
           }}
@@ -103,7 +154,10 @@ const Login = (props) => {
           Signup
         </Button>
       </form>
-      <SignupModal verifyMethod={verifyMethod} setVerifyMethod={setVerifyMethod} />
+      <SignupModal
+        verifyMethod={verifyMethod}
+        setVerifyMethod={(method) => setVerifyMethod(method)}
+      />
       <EmailVerification
         verifyType={verifyType}
         verifyMethod={verifyMethod}
