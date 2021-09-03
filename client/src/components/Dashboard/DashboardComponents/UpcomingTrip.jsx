@@ -31,8 +31,8 @@ const UpcomingTrip = (props) => {
         </Card.Text>
         <Button
           onClick={() => {
-            dispatch(changeToEventPage(false));
-            dispatch(changeTripId({ tripId: props.trip.id }));
+            dispatch(changeToEventPage());
+            dispatch(changeTripId(props.trip.id));
           }}
           variant="primary"
         >

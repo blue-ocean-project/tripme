@@ -8,7 +8,7 @@ import * as actionCreators from '../../../state/actions/activityActions/activity
 import { bindActionCreators } from 'redux';
 
 const AddActivityForm = () => {
-  const tripId = useSelector((state) => state.getTrip.trip_id);
+  const tripId = useSelector((state) => state.tripId);
   const dispatch = useDispatch();
   const { toggleAddActivityModal, createNewActivity, fetchActivities } = bindActionCreators(
     actionCreators,
@@ -17,8 +17,8 @@ const AddActivityForm = () => {
   const [type, setType] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [startTime, setStarTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  // const [startTime, setStarTime] = useState(new Date());
+  // const [endTime, setEndTime] = useState(new Date());
   // const trip_id = useSelector((state) => { state.trip_id });
   const option = [
     { value: 'shopping', label: 'shopping' },
@@ -42,19 +42,8 @@ const AddActivityForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewActivity(1, type.value, title);
-    fetchActivities(tripId || 1);
-    // dispatch({
-    //   type: 'CREATE_NEW_ACTIVITY',
-    //   payload: {
-    //     type: type.value,
-    //     title,
-    //     start_time: startTime,
-    //     end_time: endTime,
-    //     trip_id: tripId,
-    //   },
-    // });
-
+    createNewActivity(tripId, type.value, title, description);
+    fetchActivities(tripId);
     toggleAddActivityModal();
   };
 
@@ -65,7 +54,6 @@ const AddActivityForm = () => {
         value={option.value}
         onChange={setType}
         className="chooseActicityType"
-        defaultValue={option[8]}
         label="Single select"
         options={option}
       />
@@ -91,26 +79,6 @@ const AddActivityForm = () => {
           }}
         />
       </Form.Group>
-      {/* <Form.Group>
-        <div className="addActivityFormInput">Start At: </div>
-        <DatePicker
-          className="chooseActivityDate"
-          selected={startTime}
-          showTimeSelect
-          dateFormat="Pp"
-          onChange={(d) => setStarTime(d)}
-        />
-      </Form.Group>
-      <Form.Group>
-        <div className="addActivityFormInput">End At: </div>
-        <DatePicker
-          className="chooseActivityDate"
-          selected={endTime}
-          showTimeSelect
-          dateFormat="Pp"
-          onChange={(d) => setEndTime(d)}
-        />
-      </Form.Group> */}
       <Row>
         <Col>
           <Button className="addActivityModalSubmitButton" onClick={handleSubmit}>

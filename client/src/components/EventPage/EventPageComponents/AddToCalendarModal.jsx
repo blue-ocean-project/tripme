@@ -8,6 +8,8 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const AddToCalendarModal = () => {
+  const currentActivity = useSelector((state) => state.currentActivity);
+  const { title } = currentActivity;
   const dispatch = useDispatch();
   const { addActivityToCalendar, toggleAddToCalendarModal } = bindActionCreators(
     actionCreators,
@@ -22,7 +24,6 @@ const AddToCalendarModal = () => {
   const handleAddToCalendar = (e) => {
     // e.preventDefault();
     if (moment(startTime).isBefore(endTime)) {
-      const title = 'helloooo';
       addActivityToCalendar(activityIdAddToCalendar, startTime, endTime, title);
       toggleAddToCalendarModal();
     } else {
@@ -30,9 +31,9 @@ const AddToCalendarModal = () => {
     }
   };
 
-  const handleCancelButton = (e) => {
-    toggleAddToCalendarModal();
-  };
+  // const handleCancelButton = (e) => {
+  //   toggleAddToCalendarModal();
+  // };
 
   return (
     <Modal
@@ -53,6 +54,7 @@ const AddToCalendarModal = () => {
             <DatePicker
               className="chooseActivityDate"
               selected={startTime}
+              // locale="ws"
               showTimeSelect
               dateFormat="Pp"
               onChange={(d) => setStarTime(d)}

@@ -14,8 +14,6 @@ function CreateEvent() {
     var user_id = 1;
   }
 
-  // const TEMP_USER_ID = 8;
-
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -92,6 +90,7 @@ function CreateEvent() {
                     dispatch(getTrip(results.data));
                   });
                 })
+                .then(handleShow())
                 .catch((error) => console.log(error));
             }}
             className="button"

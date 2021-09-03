@@ -16,7 +16,8 @@
 .eventPage-trip {
   height: 23%;
   margin: 1%;
-  border: 2px dotted grey;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 .eventPage-calendar {

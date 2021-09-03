@@ -283,6 +283,6 @@
   display: block;
   font-size: 0.6rem;
   color: rgb(85, 82, 82);
-  border-bottom: 1px solid rgb(66, 114, 248);
+  border-bottom: 1px solid gray;
   font-weight: 100;
 }

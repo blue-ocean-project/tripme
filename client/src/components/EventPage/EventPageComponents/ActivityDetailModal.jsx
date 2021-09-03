@@ -44,8 +44,6 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
     'other',
   ];
   const indexOfType = findOption.indexOf(item.type);
-  // console.log(indexOfType);
-
   const toggleUpdateDetail = (e) => {
     e.preventDefault();
     setEditMode(!editMode);
@@ -53,7 +51,7 @@ const ActivityDetailModal = ({ toggleActivityDetailModal }) => {
 
   const handleSubmitChanges = () => {
     updateActivity(activityId, newType.value, newTitle, newDescription);
-    console.log(newTitle.value, newTitle, newDescription);
+    setEditMode(!editMode);
     toggleActivityDetailModal();
   };
 
