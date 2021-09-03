@@ -49,6 +49,18 @@ const actions = {
       payload: state,
     });
   },
+  openVerificationModal: (state) => (dispatch) => {
+    dispatch({
+      type: 'openVerifyModal',
+      payload: state,
+    });
+  },
+  closeVerificationModal: (state) => (dispatch) => {
+    dispatch({
+      type: 'closeVerifyModal',
+      payload: state,
+    });
+  },
 
   // Dashboard
   changeTripId: (state) => (dispatch) => {

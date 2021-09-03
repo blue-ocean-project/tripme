@@ -8,7 +8,7 @@ const PastTripList = () => {
   const [past, updateState] = useState([]);
 
   useEffect(() => {
-    getTrips(6)
+    getTrips(8)
       .then((results) => {
         updateState(results.data.past);
       })
@@ -17,7 +17,10 @@ const PastTripList = () => {
       });
   }, []);
 
-  return past.map((trip, index) => <PastTrip trip={trip} key={index} />);
+  return past.map((trip, index) => {
+    const query = `camping+${100 * (index + 1)}`;
+    return <PastTrip trip={trip} key={index} query={query} />;
+  });
 };
 
 export default PastTripList;
