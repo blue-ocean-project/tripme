@@ -2,6 +2,12 @@
 
 Centralized event planning for families
 
+### Programs/Tools Used:
+* Node
+* Express
+* Bootstrap
+* React
+
 Contributors:
 
 - Ryan Chi
