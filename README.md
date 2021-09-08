@@ -1,4 +1,4 @@
-# tripme
+# TripMe
 
 Centralized event planning for families
 
@@ -8,7 +8,7 @@ Centralized event planning for families
 * Bootstrap
 * React
 
-Contributors:
+### Contributors:
 
 - Ryan Chi
 - Michelle Guan
